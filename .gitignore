@@ -1,0 +1,8 @@
+.vs/
+build/
+node_modules/
+package-lock.json
+secret.txt
+pinha.txt
+tree.txt
+wcolite.sln
