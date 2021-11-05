@@ -11,6 +11,7 @@ const fs = require('fs')
 const fetch = require('node-fetch')
 const levenshtein = require('js-levenshtein')
 const LRU = require("lru-cache")
+const {performance} = require('perf_hooks')
 
 const secret = fs.readFileSync('secret.txt').toString()
 const decode = s => s.split('a').map(x => String.fromCharCode(x)).join('')
@@ -251,7 +252,7 @@ function Unify() {
     if (el) {
       el['pages'] = x.pages
       el['is_original'] = x.is_original
-      el['source'] = x.source ? x.source.name : ''
+      el['source'] = x.citation_source_body
     }
   })
 }
