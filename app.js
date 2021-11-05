@@ -194,11 +194,13 @@ function queryString(title) {
 function Fetch() {
   const x = fetchQueue.pop()
   Log(`Making ${x} API request`)
+  const t0 = performance.now()
   fetch(queryString(x))
     .then(res => res.text())
     .then(text => {
       jsonFromApi[x] = [ ...jsonFromApi[x], ...JSON.parse(text) ]
-      Log('Got response')
+      const elapsed = ((performance.now() - t0) / 1000.0).toFixed(2)
+      Log(`Got response (${elapsed} s)`)
       setTimeout(function () {
         if (fetchQueue.length > 0)
           Fetch()
