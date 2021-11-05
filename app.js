@@ -246,7 +246,7 @@ function Unify() {
     if (el) {
       el['pages'] = x.pages
       el['is_original'] = x.is_original
-      el['source'] = x.source.name
+      el['source'] = x.source ? x.source.name : ''
     }
   })
 }
