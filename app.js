@@ -5,6 +5,7 @@ function Initialize() {
   BuildQueryToNode()
 }
 
+const homeComputer = process.env.COMPUTERNAME == 'PINHATA'
 const express = require('express'), app = express()
 const fs = require('fs')
 const fetch = require('node-fetch')
@@ -192,10 +193,12 @@ function queryString(title) {
 
 function Fetch() {
   const x = fetchQueue.pop()
+  Log(`Making ${x} API request`)
   fetch(queryString(x))
     .then(res => res.text())
     .then(text => {
       jsonFromApi[x] = [ ...jsonFromApi[x], ...JSON.parse(text) ]
+      Log('Got response')
       setTimeout(function () {
         if (fetchQueue.length > 0)
           Fetch()
@@ -468,4 +471,9 @@ function Write() {
   fs.writeFileSync('tree.txt', jsonTree)
   fetchPending = false
   setTimeout(() => process.exit(), 1000)
+}
+
+function Log(s) {
+  if (homeComputer) 
+    console.log(s)
 }
