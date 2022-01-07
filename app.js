@@ -32,24 +32,14 @@ const NameLink = s => `<div class="qlink">${s}</div>`
 
 const cache = new LRU(10000)
 let jsonTree
-let jsonFromApi = {
-  taxon_names: [],
-  citations: [],
-  taxon_name_relationships: []
-}
-let unifiedJson = {}, citationMap = {}
+let jsonFromApi = {}, unifiedJson = {}, citationMap = {}, queryToNode = {}, sourceMap = {}
 let fetchQueue
 let fetchPending = false
-let queryToNode = {}
 const queryPage = {
   taxon_names: 0,
   citations: 0,
-  taxon_name_relationships: 0
-}
-const queryPer = {
-  taxon_names: 9500,
-  citations: 9500,
-  taxon_name_relationships: 9500
+  taxon_name_relationships: 0,
+  sources: 0
 }
 
 const kTaxonRootId = '321566', kPageSize = 15
@@ -183,41 +173,49 @@ function queryString(title) {
     title: title,
     params: {
       token: 'W8kIg_iBpBG72j2EZZLhVQ',
-      project_token: 'VVpT9aMPkqtnzmRVUx5jtg',
-      per: queryPer[title],
+      project_id: 10,
+      per: 9500,
       page: ++queryPage[title]
     }
   }
+  if (title == 'sources')
+    options['params']['in_project'] = true
   const paramsString = Object.entries(options.params).map(x => `${x[0]}=${x[1]}`).join('&')
   return `${options.path}${options.title}?${paramsString}`
 }
 
 function Fetch() {
-  const x = fetchQueue.pop()
-  Log(`Making ${x} API request`)
   const t0 = performance.now()
-  fetch(queryString(x))
+  const x = fetchQueue.pop()
+  const reqStr = queryString(x)
+  Log(`Making ${x} API request\n${reqStr}`)
+  fetch(reqStr)
     .then(res => res.text())
     .then(text => {
-      jsonFromApi[x] = [ ...jsonFromApi[x], ...JSON.parse(text) ]
+      const json = JSON.parse(text)
+      jsonFromApi[x] = [ ...jsonFromApi[x], ...json ]
       const elapsed = ((performance.now() - t0) / 1000.0).toFixed(2)
-      Log(`Got response (${elapsed} s)`)
+      Log(`Got ${json.length} elements (${elapsed} s)`)
       setTimeout(function () {
         if (fetchQueue.length > 0)
           Fetch()
         else
           LoadedJson()
-      }, fetchQueue.length > 0 ? 3789 : 667)
+      }, fetchQueue.length > 0 ? 3000 : 300)
     })
 }
 
 function LoadFromApi() {
   fetchQueue = ['taxon_names', 'taxon_names', 'citations', 'citations',
-    'taxon_name_relationships', 'taxon_name_relationships' ]
+    'taxon_name_relationships', 'taxon_name_relationships', 'sources' ]
+  for (x of fetchQueue) 
+    if (jsonFromApi[x] == undefined)
+      jsonFromApi[x] = []
   Fetch()
 }
 
 function LoadedJson() {
+  MakeSourceMap()
   Unify()
   KillGhosts()
   KillProtonymParentheses()
@@ -229,6 +227,12 @@ function LoadedJson() {
   AddChildren()
   jsonTree = JSON.stringify(BuildTree(kTaxonRootId))
   Write()
+}
+
+function MakeSourceMap() {
+  jsonFromApi['sources'].forEach(x => {
+    sourceMap[x.id] = x.cached
+  })
 }
 
 function Unify() {
@@ -252,7 +256,7 @@ function Unify() {
     if (el) {
       el['pages'] = x.pages
       el['is_original'] = x.is_original
-      el['source'] = x.citation_source_body
+      el['source'] = sourceMap[x.source_id]
     }
   })
 }
