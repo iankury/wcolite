@@ -47,9 +47,8 @@ const kTaxonRootId = '321566', kPageSize = 15
 function ShortRefFromObj (x, type) {
   const citationObj = citationMap[x.id]
 
-  if (citationObj && citationObj['source'] && citationObj['source']['name']) {
-    const ref = citationObj['source']['name']
-    return `${NameLink(x.original_html)}${type == 'aponym' ? ':' : ''} ${ShortRefFromSourceName(ref)}: ${citationObj['pages']}`
+  if (citationObj && citationObj['pages']) {
+    return `${NameLink(x.original_html)}${type == 'aponym' ? ':' : ''} ${ShortRefFromSourceName(x.source)}: ${citationObj['pages']}`
   }
   return `${NameAuthorYear(x)} (citation incomplete)`
 }
@@ -256,7 +255,7 @@ function Unify() {
     if (el) {
       el['pages'] = x.pages
       el['is_original'] = x.is_original
-      el['source'] = sourceMap[x.source_id]
+      el['source'] = sourceMap[x.source_id] || ''
     }
   })
 }
