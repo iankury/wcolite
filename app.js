@@ -41,6 +41,8 @@ const queryPage = {
   taxon_name_relationships: 0,
   sources: 0
 }
+let debugging = false
+let t0FullFetch = 0
 
 const kTaxonRootId = '321566', kPageSize = 15
 
@@ -198,13 +200,20 @@ function Fetch() {
       setTimeout(function () {
         if (fetchQueue.length > 0)
           Fetch()
-        else
-          LoadedJson()
+        else { // Finished fetching everything
+          totalElapsed = ((performance.now() - t0FullFetch) / 1000.0).toFixed(2)
+          Log(`Total elapsed time: ${totalElapsed} s`)
+          if (debugging)
+            SaveLoadedJson()
+          else
+            LoadedJson()
+        }
       }, fetchQueue.length > 0 ? 3000 : 300)
     })
 }
 
 function LoadFromApi() {
+  t0FullFetch = performance.now()
   fetchQueue = ['taxon_names', 'taxon_names', 'citations', 'citations',
     'taxon_name_relationships', 'taxon_name_relationships', 'sources' ]
   for (x of fetchQueue) 
@@ -476,10 +485,38 @@ function Write() {
   fs.writeFileSync('pinha.txt', JSON.stringify(unifiedJson))
   fs.writeFileSync('tree.txt', jsonTree)
   fetchPending = false
-  setTimeout(() => process.exit(), 1000)
+  Log('Wrote files pinha.txt & tree.txt')
+  setTimeout(() => process.exit(), 500)
 }
 
 function Log(s) {
   if (homeComputer) 
     console.log(s)
 }
+
+function SaveJsonForDebug() {
+  if (!homeComputer)
+    return
+  debugging = true
+  LoadFromApi()
+}
+
+function SaveLoadedJson() {
+  if (!homeComputer)
+    return
+  fs.writeFileSync('./jsonfromapi.json', JSON.stringify(jsonFromApi))
+  Log('Saved jsonFromApi to file.')
+  setTimeout(() => process.exit(), 500)
+}
+
+// Load raw json from file and process
+function Debug() {
+  if (!homeComputer)
+    return
+  jsonFromApi = JSON.parse(fs.readFileSync('./jsonfromapi.json'))
+  Log('Loaded jsonFromApi from file.')
+  LoadedJson()
+}
+
+// SaveJsonForDebug()
+// Debug()

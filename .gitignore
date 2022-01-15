@@ -1,6 +1,7 @@
 .vs/
 build/
 node_modules/
+jsonfromapi.json
 package-lock.json
 secret.txt
 pinha.txt
