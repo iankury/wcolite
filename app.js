@@ -308,19 +308,59 @@ function MapCitationObjIdToCitation() {
   })
 }
 
+function ResolveTagType(subjectTag) {
+  const relationships = ['replaced by', 'type species', 
+    'synonym', 'classified as', 'homonym']
+  for (x of relationships)
+    if (subjectTag.includes(x))
+      return x
+  return subjectTag
+}
+
+function AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTag) {
+  const juniorObj = unifiedJson[subjectId]
+  const seniorObj = unifiedJson[objectId]
+  const citationObj = citationMap[relationshipId]
+  let ref
+  if (citationObj && citationObj['source_id'])
+    ref = sourceMap[citationObj['source_id']]
+  if (juniorObj && seniorObj && ref) {
+    const shortRef = `${ShortRefFromSourceName(ref)}: ${citationObj['pages']}`
+    let interpolation, receiver
+    switch (tagType) {
+      case 'synonym':
+        interpolation = 'is a junior '
+        receiver = seniorObj
+        break;
+      case 'classified as':
+        interpolation = ''
+        receiver = juniorObj
+        break;
+      case 'homonym':
+        interpolation = 'is a junior '
+        receiver = seniorObj
+        break;
+      case 'replaced by':
+        interpolation = ''
+        receiver = seniorObj
+        break;
+    }
+    const msg = `${NameAuthorYearLink(juniorObj)} ${interpolation}${subjectTag} ${NameAuthorYearLink(seniorObj)} by ${shortRef} <span class=\"relationship_tag\">relationship</span>`
+    receiver['relationships'].push(msg)
+    receiver['references'].add(ref)
+  }
+}
+
 function AddLogonymy() {
+  let otherTagTypes = {}
   jsonFromApi['taxon_name_relationships'].forEach(x => {
-    pinhaString = JSON.stringify(x)
     const relationshipId = x['id']
     const subjectId = x['subject_taxon_name_id']
     const objectId = x['object_taxon_name_id']
     const subjectTag = x['subject_status_tag']
-    if ((x['subject_name'].includes('Lacinius') || 
-        x['object_name'].includes('Lacinius')) &&
-        x['type'].includes('Genus')){
-    }
     if (subjectTag) {
-      if (subjectTag.includes('type species')) {
+      const tagType = ResolveTagType(subjectTag)
+      if (tagType == 'type species') {
         const speciesObj = unifiedJson[subjectId]
         const genusObj = unifiedJson[objectId]
         if (speciesObj && genusObj) {
@@ -328,27 +368,19 @@ function AddLogonymy() {
           genusObj['type_species'] = genusObj['type_species'].charAt(0).toUpperCase() +
             genusObj['type_species'].slice(1)
         }
-      }
-      else if (subjectTag.includes('synonym') || subjectTag.includes('classified as')) {
-        const juniorObj = unifiedJson[subjectId]
-        const seniorObj = unifiedJson[objectId]
-        const citationObj = citationMap[relationshipId]
-        let ref
-        if (citationObj && citationObj['source_id'])
-          ref = sourceMap[citationObj['source_id']]
-        if (juniorObj && seniorObj && ref) {
-          const shortRef = `${ShortRefFromSourceName(ref)}: ${citationObj['pages']}`
-          let synonymMsg, classifiedMsg
-          if (subjectTag.includes('synonym')) 
-            synonymMsg = `${NameAuthorYearLink(juniorObj)} is a junior ${subjectTag} ${NameAuthorYearLink(seniorObj)} by ${shortRef} <span class=\"relationship_tag\">relationship</span>`
-          else
-            classifiedMsg = `${NameAuthorYearLink(juniorObj)} ${subjectTag} ${NameAuthorYearLink(seniorObj)} by ${shortRef} <span class=\"relationship_tag\">relationship</span>`
-          juniorObj['relationships'].push(synonymMsg || classifiedMsg)
-          juniorObj['references'].add(ref)
-        }
+      } else if (tagType == 'synonym' || tagType == 'homonym' || 
+        tagType == 'classified as' || tagType == 'replaced by') {
+        AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTag)
+      } else if (homeComputer) {
+        if (tagType in otherTagTypes)
+          otherTagTypes[tagType]++
+        else
+          otherTagTypes[tagType] = 1
       }
     }
   })
+  Log('Other types:')
+  Log(Object.entries(otherTagTypes))
   Object.values(unifiedJson).forEach(x => {
     if (x['valid']) {
       if (x['type'] == 'Protonym') {
