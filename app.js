@@ -307,7 +307,6 @@ function MapCitationObjIdToCitation() {
     citationMap[key] = x
   })
 }
-
 function AddLogonymy() {
   jsonFromApi['taxon_name_relationships'].forEach(x => {
     const relationshipId = x['id']
@@ -328,15 +327,14 @@ function AddLogonymy() {
         const juniorObj = unifiedJson[subjectId]
         const seniorObj = unifiedJson[objectId]
         const citationObj = citationMap[relationshipId]
-        if (juniorObj && seniorObj && citationObj &&
-            citationObj['source'] && citationObj['source']['name']) {
-          const ref = citationObj['source']['name']
+        let ref
+        if (citationObj && citationObj['source_id'])
+          ref = sourceMap[citationObj['source_id']]
+        if (juniorObj && seniorObj && ref) {
           const shortRef = `${ShortRefFromSourceName(ref)}: ${citationObj['pages']}`
-
           seniorObj['relationships'].push(
             `${NameAuthorYearLink(juniorObj)} is a junior ${subjectTag} ${NameAuthorYearLink(seniorObj)} by ${shortRef} <span class=\"relationship_tag\">relationship</span>`
           )
-
           seniorObj['references'].add(ref)
         }
       }
