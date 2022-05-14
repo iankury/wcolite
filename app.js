@@ -194,7 +194,10 @@ function Fetch() {
     .then(res => res.text())
     .then(text => {
       const json = JSON.parse(text)
-      jsonFromApi[x] = [ ...jsonFromApi[x], ...json ]
+      if (json.length > 0) {
+        jsonFromApi[x] = [ ...jsonFromApi[x], ...json ]
+        fetchQueue.push(x) // Try next page as long as we don't get an empty page
+      }
       const elapsed = ((performance.now() - t0) / 1000.0).toFixed(2)
       Log(`Got ${json.length} elements (${elapsed} s)`)
       setTimeout(function () {
@@ -214,8 +217,7 @@ function Fetch() {
 
 function LoadFromApi() {
   t0FullFetch = performance.now()
-  fetchQueue = ['taxon_names', 'taxon_names', 'citations', 'citations',
-    'taxon_name_relationships', 'taxon_name_relationships', 'sources' ]
+  fetchQueue = ['taxon_names', 'citations', 'taxon_name_relationships', 'sources']
   for (x of fetchQueue) 
     if (jsonFromApi[x] == undefined)
       jsonFromApi[x] = []
