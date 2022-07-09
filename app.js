@@ -46,6 +46,9 @@ let t0FullFetch = 0
 
 const kTaxonRootId = '321566', kPageSize = 15
 
+const supportedRelationships = ['replaced by', 'type species', 
+    'synonym', 'classified as', 'homonym', 'unnecessary replacement for']
+
 function ShortRefFromObj (x, type) {
   const citationObj = citationMap[x.id]
 
@@ -311,9 +314,7 @@ function MapCitationObjIdToCitation() {
 }
 
 function ResolveTagType(subjectTag) {
-  const relationships = ['replaced by', 'type species', 
-    'synonym', 'classified as', 'homonym']
-  for (x of relationships)
+  for (x of supportedRelationships)
     if (subjectTag.includes(x))
       return x
   return subjectTag
@@ -322,9 +323,9 @@ function ResolveTagType(subjectTag) {
 function AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTag) {
   const juniorObj = unifiedJson[subjectId]
   const seniorObj = unifiedJson[objectId]
-  const citationObj = citationMap[relationshipId]
-  let ref
-  if (citationObj && citationObj['source_id'])
+  let citationObj = citationMap[relationshipId] || { pages: 0 }
+  let ref = 'Reference missing'
+  if (citationObj && citationObj['source_id']) 
     ref = sourceMap[citationObj['source_id']]
   if (juniorObj && seniorObj && ref) {
     const shortRef = `${ShortRefFromSourceName(ref)}: ${citationObj['pages']}`
@@ -340,13 +341,19 @@ function AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTa
         break;
       case 'homonym':
         interpolation = 'is a junior '
-        receiver = seniorObj
+        receiver = juniorObj
         break;
       case 'replaced by':
         interpolation = ''
         receiver = seniorObj
         break;
+      case 'unnecessary replacement for':
+        interpolation = 'is an '
+        receiver = seniorObj
+        break;
     }
+    if (!receiver['valid'])
+      receiver = unifiedJson[receiver['valid_taxon_name_id']]
     const msg = `${NameAuthorYearLink(juniorObj)} ${interpolation}${subjectTag} ${NameAuthorYearLink(seniorObj)} by ${shortRef} <span class=\"relationship_tag\">relationship</span>`
     receiver['relationships'].push(msg)
     receiver['references'].add(ref)
@@ -370,8 +377,7 @@ function AddLogonymy() {
           genusObj['type_species'] = genusObj['type_species'].charAt(0).toUpperCase() +
             genusObj['type_species'].slice(1)
         }
-      } else if (tagType == 'synonym' || tagType == 'homonym' || 
-        tagType == 'classified as' || tagType == 'replaced by') {
+      } else if (supportedRelationships.includes(tagType)) {
         AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTag)
       } else if (homeComputer) {
         if (tagType in otherTagTypes)
