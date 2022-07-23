@@ -94,7 +94,7 @@ function AddToTable(key, x) {
 
 function BuildQueryToNode() {
   Object.values(unifiedJson).forEach(x => {
-    if (x['cached'] && x['author_year'] && x['cached'] != 'Root') {
+    if (x['cached'] && x['author_year']) {
       const sciname = x['cached'].toLowerCase()
       AddToTable(sciname, x)
       const authorship = x['author_year'].toLowerCase()
@@ -150,7 +150,7 @@ function SubstringMatch(s) {
   Object.entries(queryToNode).forEach(x => {
     const key = x[0]
     const value = x[1]
-    if (!IsDigitCode(key.charCodeAt(0)) && key.includes(s))
+    if (value && !IsDigitCode(key.charCodeAt(0)) && key.includes(s))
       ans = new Set([...ans, ...value])
   })
   return Array.from(ans)
@@ -250,6 +250,12 @@ function MakeSourceMap() {
 
 function Unify() {
   jsonFromApi['taxon_names'].forEach(x => {
+    if (x['cached'] == 'Root') {
+      for ([key, value] of Object.entries(x)) 
+        if (value == 'Root')
+          x[key] = 'Animalia'
+      x['cached_author_year'] = 'Linnaeus, 1758'
+    }
     unifiedJson[x.id] = {
       id: x.id,
       parent_id: x.parent_id,
@@ -261,7 +267,8 @@ function Unify() {
       type: x.type,
       valid_taxon_name_id: x.cached_valid_taxon_name_id,
       author_year: x.cached_author_year,
-      year: x.year
+      year: x.year,
+      speciesCount: 'Not applicable',
     }
   })
   jsonFromApi['citations'].forEach(x => {
@@ -354,8 +361,8 @@ function AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTa
     }
     if (!receiver['valid'])
       receiver = unifiedJson[receiver['valid_taxon_name_id']]
-    const msg = `${NameAuthorYearLink(juniorObj)} ${interpolation}${subjectTag} ${NameAuthorYearLink(seniorObj)} by ${shortRef} <span class=\"relationship_tag\">relationship</span>`
-    receiver['relationships'].push(msg)
+    const msg = `${NameAuthorYearLink(juniorObj)} ${interpolation}${subjectTag} ${NameAuthorYearLink(seniorObj)} in ${shortRef} <span class=\"relationship_tag\">relationship</span>`
+    receiver['relationships'].push({ id: relationshipId, msg: msg })
     receiver['references'].add(ref)
   }
 }
@@ -374,8 +381,7 @@ function AddLogonymy() {
         const genusObj = unifiedJson[objectId]
         if (speciesObj && genusObj) {
           genusObj['type_species'] = `${subjectTag}: ${NameAuthorYearLink(speciesObj)}`
-          genusObj['type_species'] = genusObj['type_species'].charAt(0).toUpperCase() +
-            genusObj['type_species'].slice(1)
+          genusObj['type_species'] = genusObj['type_species'].charAt(0).toUpperCase() + genusObj['type_species'].slice(1)
         }
       } else if (supportedRelationships.includes(tagType)) {
         AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTag)
@@ -387,31 +393,89 @@ function AddLogonymy() {
       }
     }
   })
-  Log('Other types:')
-  Log(Object.entries(otherTagTypes))
+  // Log('Other types:')
+  // Log(Object.entries(otherTagTypes))
+
   Object.values(unifiedJson).forEach(x => {
     if (x['valid']) {
       if (x['type'] == 'Protonym') {
-        x.protonyms.push(`${ShortRefFromObj(x, 'protonym')} <span class=\"protonym_tag\">protonym</span>`)
+        x.protonyms.push({ id: x['id'], msg: `${ShortRefFromObj(x, 'protonym')} <span class=\"protonym_tag\">protonym</span>` })
         if (x['type_species'])
-          x.protonyms.push(x['type_species'])
+          x.protonyms.push({ id: x['id'], msg: x['type_species'] })
       }
-      else
-        x.aponyms.push(`${ShortRefFromObj(x, 'aponym')} <span class=\"aponym_tag\">aponym</span>`)
+      else{
+        formattedAponym = `${ShortRefFromObj(x, 'aponym')} <span class=\"aponym_tag\">aponym</span>`
+        x.aponyms.push({ id: x['id'], msg: formattedAponym })
+      }
       x['references'].add(x['source'])
     }
     else {
       const ergonym = unifiedJson[x['valid_taxon_name_id']]
       if (x['type'] == 'Protonym') {
-        ergonym.protonyms.push(`${ShortRefFromObj(x, 'protonym')} <span class=\"protonym_tag\">protonym</span>`)
+        ergonym.protonyms.push({ id: x['id'], msg: `${ShortRefFromObj(x, 'protonym')} <span class=\"protonym_tag\">protonym</span>`})
         if (x['type_species'])
-          ergonym.protonyms.push(x['type_species'])
+          ergonym.protonyms.push({ id: x['id'], msg: x['type_species'] })
       }
-      else
-        ergonym.aponyms.push(`${ShortRefFromObj(x, 'aponym')} <span class=\"aponym_tag\">aponym</span>`)
+      else {
+        formattedAponym = `${ShortRefFromObj(x, 'aponym')} <span class=\"aponym_tag\">aponym</span>`
+        ergonym.aponyms.push({ id: x['id'], msg: formattedAponym })
+      }
       ergonym['references'].add(x['source'])
     }
   })
+
+  relationshipMap = {}
+  Object.values(jsonFromApi['taxon_name_relationships']).forEach(x => {
+    subId = x['subject_taxon_name_id']
+    if (subId) {
+      if (!(subId in relationshipMap))
+        relationshipMap[subId] = {}
+      objId = x['object_taxon_name_id'] 
+      if (objId)
+        relationshipMap[subId][objId] = true
+      relId = x['id']
+      if (relId)
+        relationshipMap[subId][relId] = true
+    }
+  })
+  
+  Object.values(unifiedJson).forEach(x => {
+    x['unmatched'] = []
+    if (x['protonyms']) {
+      for (let j = 0; j < x['protonyms'].length; j++) {
+        protoId = x['protonyms'][j]['id']
+        x['protonyms'][j]['aponyms'] = []
+        x['protonyms'][j]['relationships'] = []
+        if (relationshipMap[protoId]) {
+          if (x['aponyms']) {
+            for (let i = 0; i < x['aponyms'].length; i++) {
+              aponym = x['aponyms'][i]
+              if (relationshipMap[protoId][aponym['id']]) {
+                x['protonyms'][j]['aponyms'].push(aponym['msg'])
+                x['aponyms'][i]['id'] = -1
+              }
+            }
+          }
+          if (x['relationships']) {
+            for (let i = 0; i < x['relationships'].length; i++) {
+              relationship = x['relationships'][i]
+              if (relationshipMap[protoId][relationship['id']]) {
+                x['protonyms'][j]['relationships'].push(relationship['msg'])
+                x['relationships'][i]['id'] = -1
+              }
+            }
+          }
+        }
+      }
+    }
+    for (aponym of x['aponyms'])
+      if (aponym['id'] != -1) // -1 means it got linked to a protonym
+        x['unmatched'].push(aponym['msg'])
+    for (relationship of x['relationships'])
+      if (relationship['id'] != -1) // -1 means it got linked to a protonym
+        x['unmatched'].push(relationship['msg'])
+  })
+
   Object.values(unifiedJson).forEach(x => {
     x['references'] = Array.from(x['references']).sort()
   })
@@ -433,8 +497,8 @@ function Ancestree(id, name) {
   if (!unifiedJson[id])
     return []
   const processedName = `<div class="qlink">${name}</div>`
-  if (name == 'Opiliones')
-    return [ processedName ]
+  // if (name == 'Opiliones')
+  //   return [ processedName ]
   const pid = unifiedJson[id].parent_id
   const pname = unifiedJson[id].parent_html
   return [ ...Ancestree(pid, pname), processedName ]
@@ -453,7 +517,7 @@ function AddChildren() {
   Object.entries(unifiedJson).forEach(x => {
     const key = x[0]
     const value = x[1]
-    if (value['parent_id'] && value['cached'] != 'Opiliones' && value['valid']) {
+    if (value['parent_id'] /*&& value['cached'] != 'Opiliones'*/ && value['valid']) {
       const node = unifiedJson[value['parent_id']]
       if (!node['children_ids']) {
         node['children_ids'] = []
@@ -563,6 +627,12 @@ function Debug() {
   jsonFromApi = JSON.parse(fs.readFileSync('./jsonfromapi.json'))
   Log('Loaded jsonFromApi from file.')
   LoadedJson()
+
+  // for (x of Object.values(jsonFromApi['taxon_name_relationships'])) {
+  //   if (x['subject_taxon_name_id'] && x['subject_taxon_name_id'].toString().includes('679327')) {
+  //     console.log(x)
+  //   }
+  // }
 }
 
 // SaveJsonForDebug()

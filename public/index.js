@@ -151,6 +151,8 @@ function currentContainerOnly() {
 const bullets = v => !v || v.length < 1 ? '' :
   `<ul>${v.map(x => `<li>${x || 'Coming soon...'}</li>`).join('')}</ul>`
 
+const indented = s => `<div style="padding-left: 3vw;">${s}</div>`
+
 function displayCard() {
   let node
   for (i = 0; i < data.resultList.length; i++)
@@ -161,7 +163,11 @@ function displayCard() {
   $('.data-card__title').html(`${node.cached_html} ${node.author_year}`)
   $('.data-card__path').html(bullets(node.ancestree))
   $('#valid_species_count').html(node.speciesCount)
-  $('#logonymy').html(bullets(node.protonyms) + bullets(node.aponyms) + bullets(node.relationships))
+  logonymyText = ''
+  for (protonym of node.protonyms) {
+    logonymyText += bullets([protonym['msg']]) + indented(bullets(protonym['aponyms']) + bullets(protonym['relationships']))
+  }
+  $('#logonymy').html(logonymyText + bullets(node['unmatched']))
   $('#references').html(bullets(node.references))
   if (!node.children_names)
     $('#children_container').html('None')
