@@ -250,12 +250,6 @@ function MakeSourceMap() {
 
 function Unify() {
   jsonFromApi['taxon_names'].forEach(x => {
-    if (x['cached'] == 'Root') {
-      for ([key, value] of Object.entries(x)) 
-        if (value == 'Root')
-          x[key] = 'Animalia'
-      x['cached_author_year'] = 'Linnaeus, 1758'
-    }
     unifiedJson[x.id] = {
       id: x.id,
       parent_id: x.parent_id,
@@ -497,8 +491,8 @@ function Ancestree(id, name) {
   if (!unifiedJson[id])
     return []
   const processedName = `<div class="qlink">${name}</div>`
-  // if (name == 'Opiliones')
-  //   return [ processedName ]
+  if (name == 'Animalia')
+    return [ processedName ]
   const pid = unifiedJson[id].parent_id
   const pname = unifiedJson[id].parent_html
   return [ ...Ancestree(pid, pname), processedName ]
