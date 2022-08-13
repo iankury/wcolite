@@ -316,7 +316,8 @@ button.mean__options-yes {
 }
 
 .data-card__path li,
-.qlink {
+.qlink,
+.brown_link {
   font-size: 18px;
   font-family: Rbold;
   color: #8c496a;

@@ -13,6 +13,14 @@ const levenshtein = require('js-levenshtein')
 const LRU = require("lru-cache")
 const {performance} = require('perf_hooks')
 
+const fetchQueue = [
+  'taxon_names', 
+  'citations', 
+  'taxon_name_relationships', 
+  'sources', 
+  'identifiers'
+]
+
 const secret = fs.readFileSync('secret.txt').toString()
 const decode = s => s.split('a').map(x => String.fromCharCode(x)).join('')
 const StripTags = s => s.replace(/(<([^>]+)>)/gi, '')
@@ -33,14 +41,8 @@ const NameLink = s => `<div class="qlink">${s}</div>`
 const cache = new LRU(10000)
 let jsonTree
 let jsonFromApi = {}, unifiedJson = {}, citationMap = {}, queryToNode = {}, sourceMap = {}
-let fetchQueue
 let fetchPending = false
-const queryPage = {
-  taxon_names: 0,
-  citations: 0,
-  taxon_name_relationships: 0,
-  sources: 0
-}
+const queryPage = {}
 let debugging = false
 let t0FullFetch = 0
 
@@ -220,10 +222,11 @@ function Fetch() {
 
 function LoadFromApi() {
   t0FullFetch = performance.now()
-  fetchQueue = ['taxon_names', 'citations', 'taxon_name_relationships', 'sources']
-  for (x of fetchQueue) 
+  for (x of fetchQueue) {
     if (jsonFromApi[x] == undefined)
       jsonFromApi[x] = []
+    queryPage[x] = 0
+  }
   Fetch()
 }
 
@@ -236,6 +239,7 @@ function LoadedJson() {
   MapCitationObjIdToCitation()
   AddLogonymy()
   AddParentHtml()
+  AddLSID()
   AddAncestree()
   AddChildren()
   jsonTree = JSON.stringify(BuildTree(kTaxonRootId))
@@ -485,6 +489,22 @@ function AddParentHtml() {
       }
     }
   })
+}
+
+function urnToZoobank(s) {
+  i = s.indexOf('act:')
+  return 'https://zoobank.org/NomenclaturalActs/' + s.substr(i + 4)
+}
+
+function AddLSID() {
+  for (x of jsonFromApi['identifiers']) 
+    if (x['type'].toLowerCase().includes('lsid') &&
+        x['identifier_object_type'].toLowerCase() == 'taxonname' &&
+        x['identifier_object_id'] &&
+        unifiedJson[x['identifier_object_id']]) {
+          unifiedJson[x['identifier_object_id']]['lsid_url'] = urnToZoobank(x['identifier'])
+          unifiedJson[x['identifier_object_id']]['lsid_urn'] = x['identifier']
+        }
 }
 
 function Ancestree(id, name) {

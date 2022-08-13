@@ -163,6 +163,10 @@ function displayCard() {
   $('.data-card__title').html(`${node.cached_html} ${node.author_year}`)
   $('.data-card__path').html(bullets(node.ancestree))
   $('#valid_species_count').html(node.speciesCount)
+  if (node.lsid_url)
+    $('#lsid_div').html(`<a target="_blank" class="brown_link" href="${node.lsid_url}">${node.lsid_urn}</a>`)
+  else
+    $('#lsid_div').html('Coming soon...')
   logonymyText = ''
   for (protonym of node.protonyms) {
     logonymyText += bullets([protonym['msg']]) + indented(bullets(protonym['aponyms']) + bullets(protonym['relationships']))
