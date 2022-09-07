@@ -412,7 +412,7 @@ function AddLogonymy() {
       if (x['type'] == 'Protonym') {
         ergonym.protonyms.push({ id: x['id'], msg: `${ShortRefFromObj(x, 'protonym')} <span class=\"protonym_tag\">protonym</span>`})
         if (x['type_species'])
-          ergonym.protonyms.push({ id: x['id'], msg: x['type_species'] })
+          ergonym.protonyms.push({ id: x['id'], msg: x['type_species'], type_species: true })
       }
       else {
         formattedAponym = `${ShortRefFromObj(x, 'aponym')} <span class=\"aponym_tag\">aponym</span>`

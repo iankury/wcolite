@@ -169,7 +169,7 @@ function displayCard() {
     $('#lsid_div').html('Coming soon...')
   logonymyText = ''
   for (protonym of node.protonyms) {
-    logonymyText += bullets([protonym['msg']]) + indented(bullets(protonym['aponyms']) + bullets(protonym['relationships']))
+    logonymyText += (protonym['type_species'] ? indented(bullets([protonym['msg']])) : bullets([protonym['msg']])) + indented(bullets(protonym['aponyms']) + bullets(protonym['relationships']))
   }
   $('#logonymy').html(logonymyText + bullets(node['unmatched']))
   $('#references').html(bullets(node.references))
