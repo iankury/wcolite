@@ -14,26 +14,32 @@ const LRU = require("lru-cache")
 const {performance} = require('perf_hooks')
 
 const fetchQueue = [
-  'taxon_names', 
-  'citations', 
-  'taxon_name_relationships', 
-  'sources', 
-  'identifiers'
+  'taxon_names',
+  'citations',
+  'taxon_name_relationships',
+  'sources',
+  'identifiers',
+  'tags'
 ]
 
 const secret = fs.readFileSync('secret.txt').toString()
+const secretList = fs.readFileSync('secret_list.txt').toString()
+const secretCount = fs.readFileSync('secret_count.txt').toString()
+const regionMap = JSON.parse(fs.readFileSync('region_map.txt').toString())
+let secretListToWrite = []
+let secretCountToWrite = []
 const decode = s => s.split('a').map(x => String.fromCharCode(x)).join('')
 const StripTags = s => s.replace(/(<([^>]+)>)/gi, '')
 const StripParentheses = s => s.replace(/[()]/g, '')
 const StripAuthorship = s => s.replace(/[,()&]/g, '')
 const ShortRefFromSourceName = s => s.substr(0, s.indexOf(')') + 1)
 const StripDagger = s => {
-  if (s.charCodeAt(0) == 8224) 
+  if (s.charCodeAt(0) == 8224)
     s = s.substr(1).trim()
   return s
 }
 const IsDigitCode = n => n >= '0'.charCodeAt(0) && n <= '9'.charCodeAt(0)
-const NameAuthorYearLink = x => 
+const NameAuthorYearLink = x =>
   `<div class="qlink">${x.original_html}</div> ${x.stripped_author_year}`
 const NameAuthorYear = x => `${x.original_html} ${x.stripped_author_year}`
 const NameLink = s => `<div class="qlink">${s}</div>`
@@ -48,7 +54,7 @@ let t0FullFetch = 0
 
 const kTaxonRootId = '321566', kPageSize = 15
 
-const supportedRelationships = ['replaced by', 'type species', 
+const supportedRelationships = ['replaced by', 'type species',
     'synonym', 'classified as', 'homonym', 'unnecessary replacement for']
 
 function ShortRefFromObj (x, type) {
@@ -87,6 +93,12 @@ app.get(secret, (req, res) => {
     res.sendFile('public/updating.html', { root: __dirname })
   }
 })
+app.get(secretList, (req, res) => {
+  res.sendFile('list.html', { root: __dirname })
+})
+app.get(secretCount, (req, res) => {
+  res.sendFile('count.html', { root: __dirname })
+})
 
 function AddToTable(key, x) {
   if (!(key in queryToNode))
@@ -107,7 +119,7 @@ function BuildQueryToNode() {
   })
   Object.values(unifiedJson).forEach(x => {
     const s = x['original'].toLowerCase()
-    if (!queryToNode[s]) 
+    if (!queryToNode[s])
       queryToNode[s] = queryToNode[x['cached'].toLowerCase()]
   })
 }
@@ -243,6 +255,7 @@ function LoadedJson() {
   AddAncestree()
   AddChildren()
   jsonTree = JSON.stringify(BuildTree(kTaxonRootId))
+  BuildSecretList()
   Write()
 }
 
@@ -330,7 +343,7 @@ function AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTa
   const seniorObj = unifiedJson[objectId]
   let citationObj = citationMap[relationshipId] || { pages: 0 }
   let ref = 'Reference missing'
-  if (citationObj && citationObj['source_id']) 
+  if (citationObj && citationObj['source_id'])
     ref = sourceMap[citationObj['source_id']]
   if (juniorObj && seniorObj && ref) {
     const shortRef = `${ShortRefFromSourceName(ref)}: ${citationObj['pages']}`
@@ -428,7 +441,7 @@ function AddLogonymy() {
     if (subId) {
       if (!(subId in relationshipMap))
         relationshipMap[subId] = {}
-      objId = x['object_taxon_name_id'] 
+      objId = x['object_taxon_name_id']
       if (objId)
         relationshipMap[subId][objId] = true
       relId = x['id']
@@ -436,7 +449,7 @@ function AddLogonymy() {
         relationshipMap[subId][relId] = true
     }
   })
-  
+
   Object.values(unifiedJson).forEach(x => {
     x['unmatched'] = []
     if (x['protonyms']) {
@@ -497,7 +510,7 @@ function urnToZoobank(s) {
 }
 
 function AddLSID() {
-  for (x of jsonFromApi['identifiers']) 
+  for (x of jsonFromApi['identifiers'])
     if (x['type'].toLowerCase().includes('lsid') &&
         x['identifier_object_type'].toLowerCase() == 'taxonname' &&
         x['identifier_object_id'] &&
@@ -590,7 +603,7 @@ function BuildTree(u) {
 
 function IncertaeSedisAllowed(node) {
   let allowIncertaeSedis = true
-  if (node.rank.includes('genus') || node.rank.includes('species') 
+  if (node.rank.includes('genus') || node.rank.includes('species')
       || node.rank == 'subfamily' || node.rank == 'tribe')
     allowIncertaeSedis = false
   else if (node.rank == 'family') {
@@ -606,16 +619,137 @@ function IncertaeSedisAllowed(node) {
   return allowIncertaeSedis
 }
 
+function BuildSecretList() {
+  taxaGroupedByTag = {}
+
+  for (tag of jsonFromApi['tags']){
+    if (tag['tag_object_type'] == 'TaxonName' &&
+        tag['tag_object_id'] in unifiedJson) {
+      let name = tag['keyword']['name']
+      if (!(name in taxaGroupedByTag)) {
+        taxaGroupedByTag[name] = []
+      }
+      taxaGroupedByTag[name].push(NameAuthorYear(unifiedJson[tag['tag_object_id']]))
+    }
+  }
+
+  taxaGroupedByContinent = {}
+
+  errors = []
+
+  for ([k, v] of Object.entries(taxaGroupedByTag)) {
+    if (!(k in regionMap)) {
+      Log(`${k} not in region map`)
+      continue
+    }
+
+    v.sort()
+
+    continent = regionMap[k]['continent']
+    region = regionMap[k]['name']
+
+    if (!(continent in taxaGroupedByContinent)) {
+      taxaGroupedByContinent[continent] = []
+    }
+
+    taxaGroupedByContinent[continent].push(
+      {
+        'name': region,
+        'taxon_list': v
+      }
+    )
+  }
+
+  sortedEntries = Object.entries(taxaGroupedByContinent)
+  sortedEntries.sort(( a, b ) => {
+    if ( a[0] < b[0] )
+      return -1
+    if ( a[0] > b[0] )
+      return 1
+    return 0
+  })
+
+  tagCountPerTaxon = {}
+
+  for ([k, v] of Object.entries(taxaGroupedByTag)) {
+    for (taxon of v) {
+      if (!(taxon in tagCountPerTaxon)) {
+        tagCountPerTaxon[taxon] = 1
+      } else {
+        ++tagCountPerTaxon[taxon]
+      }
+    }
+  }
+
+  for ([k, v] of sortedEntries) {
+    secretListToWrite.push(`<h1>=== Opiliones of ${k} ===</h1>`)
+    v.sort(( a, b ) => {
+      if ( a.name < b.name )
+        return -1
+      if ( a.name > b.name )
+        return 1
+      return 0
+    })
+    for (x of v) {
+      secretListToWrite.push(`<h2>${x['name']}</h2>`)
+      for (taxon of x['taxon_list']) {
+        secretListToWrite.push(`<p>${taxon}${((tagCountPerTaxon[taxon] == 1) ? '**' : '')}</p>`)
+      }
+    }
+  }
+
+  // Start of countries ranking
+  const countries = {}
+  for ([k, v] of Object.entries(regionMap)) {
+    processedTag = k
+    if (k.includes('-'))
+      processedTag = k.split('-')[0]
+    if (!(processedTag in countries)) {
+      processedName = v['name']
+      if (processedName.includes(':'))
+        processedName = processedName.split(':')[0]
+      countries[processedTag] = {
+        name: processedName,
+        count: 0
+      }
+    }
+  }
+
+  for ([k, v] of Object.entries(taxaGroupedByTag)) {
+    processedTag = k
+    if (k.includes('-'))
+      processedTag = k.split('-')[0]
+    countries[processedTag]['count'] += v.length
+  }
+
+  sortedCountries = Object.entries(countries)
+  // Sort by count, decreasing
+  sortedCountries.sort(( a, b ) => {
+    if ( a[1].count < b[1].count )
+      return 1
+    if ( a[1].count > b[1].count )
+      return -1
+    return 0
+  })
+
+  secretCountToWrite.push('<h1>Ranking by country</h1>')
+  for (x of sortedCountries) {
+    secretCountToWrite.push(`<p>${x[1]['name']} ${x[0]}: ${x[1]['count']}</p>`)
+  }
+}
+
 function Write() {
   fs.writeFileSync('pinha.txt', JSON.stringify(unifiedJson))
   fs.writeFileSync('tree.txt', jsonTree)
+  fs.writeFileSync('list.html', secretListToWrite.join('\n'))
+  fs.writeFileSync('count.html', secretCountToWrite.join('\n'))
   fetchPending = false
-  Log('Wrote files pinha.txt & tree.txt')
+  Log('Wrote files')
   setTimeout(() => process.exit(), 500)
 }
 
 function Log(s) {
-  if (homeComputer) 
+  if (homeComputer)
     console.log(s)
 }
 
