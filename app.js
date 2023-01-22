@@ -625,7 +625,7 @@ function IncertaeSedisAllowed(node) {
 
 function BuildSecretList() {
   taxaGroupedByTag = {}
-
+  const NameAuthorYear2 = x => `${x.cached_html} ${x.stripped_author_year}`
   for (tag of jsonFromApi['tags']){
     if (tag['tag_object_type'] == 'TaxonName' &&
         tag['tag_object_id'] in unifiedJson) {
@@ -633,7 +633,7 @@ function BuildSecretList() {
       if (!(name in taxaGroupedByTag)) {
         taxaGroupedByTag[name] = []
       }
-      taxaGroupedByTag[name].push(NameAuthorYear(unifiedJson[tag['tag_object_id']]))
+      taxaGroupedByTag[name].push(NameAuthorYear2(unifiedJson[tag['tag_object_id']]))
     }
   }
 
