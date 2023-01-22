@@ -138,8 +138,9 @@ function Process(query) {
     ans.resultList = Array.from(queryToNode[query])
   else {
     const fromCache = cache.get(query)
-    if (fromCache)
+    if (fromCache) {
       ans = fromCache
+    }
     else {
       ans.resultList = SubstringMatch(query)
       if (ans.resultList.length == 0) {
@@ -151,9 +152,12 @@ function Process(query) {
   }
 
   if (!ans.approximation) {
-    ans.pages = Math.ceil(ans.resultList.length / kPageSize)
+    const tempString = JSON.stringify(ans)
+    const ansDeepCopy = JSON.parse(tempString)
+    ansDeepCopy.pages = Math.ceil(ansDeepCopy.resultList.length / kPageSize)
     const st = pageNumber * kPageSize
-    ans.resultList = ans.resultList.slice(st, st + kPageSize)
+    ansDeepCopy.resultList = ansDeepCopy.resultList.slice(st, st + kPageSize)
+    return JSON.stringify(ansDeepCopy)
   }
 
   return JSON.stringify(ans)
