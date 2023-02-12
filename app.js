@@ -55,7 +55,8 @@ let t0FullFetch = 0
 const kTaxonRootId = '321566', kPageSize = 15
 
 const supportedRelationships = ['replaced by', 'type species',
-    'synonym', 'classified as', 'homonym', 'unnecessary replacement for']
+    'synonym', 'classified as', 'homonym', 'unnecessary replacement for', 
+    'family-group name original form']
 
 function ShortRefFromObj (x, type) {
   const citationObj = citationMap[x.id]
@@ -382,8 +383,29 @@ function AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTa
   }
 }
 
+function makeProtonymObject(x) {
+  return { 
+    id: x['id'], 
+    msg: `${ShortRefFromObj(x, 'protonym')} <span class=\"protonym_tag\">protonym</span>`
+  }
+}
+
+function DedupeProtonyms(protonyms, idMap) {
+  ans = []
+  for (x of protonyms) {
+    if ((x['id'] in idMap && x['aponyms'] && x['aponyms'].length > 0) || !(x['id'] in idMap)) {
+      tempString = JSON.stringify(x)
+      ans.push(JSON.parse(tempString))
+    }
+  }
+  return ans
+}
+
 function AddLogonymy() {
   let otherTagTypes = {}
+  // aponym id to protonym id
+  let familyGroupOriginalFormMap = {}
+  let familyGroupOriginalFormMapInverted = {}
   jsonFromApi['taxon_name_relationships'].forEach(x => {
     const relationshipId = x['id']
     const subjectId = x['subject_taxon_name_id']
@@ -398,6 +420,10 @@ function AddLogonymy() {
           genusObj['type_species'] = `${subjectTag}: ${NameAuthorYearLink(speciesObj)}`
           genusObj['type_species'] = genusObj['type_species'].charAt(0).toUpperCase() + genusObj['type_species'].slice(1)
         }
+      } else if (tagType == 'family-group name original form') {
+        unifiedJson[objectId]['type'] = 'Aponym'
+        familyGroupOriginalFormMap[objectId] = subjectId
+        familyGroupOriginalFormMapInverted[subjectId] = objectId
       } else if (supportedRelationships.includes(tagType)) {
         AddRelationship(tagType, subjectId, objectId, relationshipId, subjectTag)
       } else if (homeComputer) {
@@ -414,13 +440,18 @@ function AddLogonymy() {
   Object.values(unifiedJson).forEach(x => {
     if (x['valid']) {
       if (x['type'] == 'Protonym') {
-        x.protonyms.push({ id: x['id'], msg: `${ShortRefFromObj(x, 'protonym')} <span class=\"protonym_tag\">protonym</span>` })
+        x.protonyms.push(makeProtonymObject(x))
         if (x['type_species'])
           x.protonyms.push({ id: x['id'], msg: x['type_species'] })
       }
-      else{
+      else {
         formattedAponym = `${ShortRefFromObj(x, 'aponym')} <span class=\"aponym_tag\">aponym</span>`
         x.aponyms.push({ id: x['id'], msg: formattedAponym })
+        originalFormId = familyGroupOriginalFormMap[x['id']]
+        if (originalFormId) {
+          if (!x['protonyms']) x['protonyms'] = []
+          x['protonyms'].push(makeProtonymObject(unifiedJson[originalFormId]))
+        }
       }
       x['references'].add(x['source'])
     }
@@ -489,6 +520,26 @@ function AddLogonymy() {
     for (relationship of x['relationships'])
       if (relationship['id'] != -1) // -1 means it got linked to a protonym
         x['unmatched'].push(relationship['msg'])
+  })
+
+  Object.values(unifiedJson).forEach(x => {
+    if (x['protonyms'] && x['protonyms'].length > 0) {
+      idMap = {}
+      for (protonymObject of x['protonyms']) {
+        protonymId = protonymObject['id']
+        if (protonymId) {
+          if (unifiedJson[protonymId]) {
+            if (protonymId in idMap) {
+              if (protonymId in familyGroupOriginalFormMapInverted) {
+                unifiedJson[x['id']]['protonyms'] = DedupeProtonyms(x['protonyms'], idMap)
+              }
+            } else {
+              idMap[protonymId] = true
+            }
+          }
+        }
+      }
+    }
   })
 
   Object.values(unifiedJson).forEach(x => {
