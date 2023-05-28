@@ -677,7 +677,10 @@ function IncertaeSedisAllowed(node) {
 function BuildSecretList() {
   taxaGroupedByTag = {}
   const NameAuthorYear2 = x => `${x.cached_html} ${x.stripped_author_year}`
+
+  const allTagObjectIds = {}
   for (tag of jsonFromApi['tags']){
+    allTagObjectIds[tag['tag_object_id']] = true
     if (tag['tag_object_type'] == 'TaxonName' &&
         tag['tag_object_id'] in unifiedJson) {
       let name = tag['keyword']['name']
@@ -685,6 +688,16 @@ function BuildSecretList() {
         taxaGroupedByTag[name] = []
       }
       taxaGroupedByTag[name].push(NameAuthorYear2(unifiedJson[tag['tag_object_id']]))
+    }
+  }
+
+  const taxaWithMissingTag = []
+  // Remember what taxa hava no corresponding tag
+  for (id of Object.keys(unifiedJson)) {
+    if (unifiedJson[id]['rank'] == 'species') {
+      if (!(id in allTagObjectIds)) {
+        taxaWithMissingTag.push(unifiedJson[id]['cached_html'])
+      }
     }
   }
 
@@ -799,6 +812,11 @@ function BuildSecretList() {
   secretCountToWrite.push('<h1>Ranking by country</h1>')
   for (x of sortedCountries) {
     secretCountToWrite.push(`<p>${x[1]['name']} ${x[0]}: ${x[1]['count']} (${x[1]['endemicCount']} **)</p>`)
+  }
+
+  taxaWithMissingTag.sort()
+  for (x of taxaWithMissingTag) {
+    secretCountToWrite.push(`${x}, `)
   }
 }
 
