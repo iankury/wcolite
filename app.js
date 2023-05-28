@@ -690,8 +690,6 @@ function BuildSecretList() {
 
   taxaGroupedByContinent = {}
 
-  errors = []
-
   for ([k, v] of Object.entries(taxaGroupedByTag)) {
     if (!(k in regionMap)) {
       Log(`${k} not in region map`)
