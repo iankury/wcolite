@@ -785,7 +785,7 @@ function BuildSecretList() {
   }
 
   sortedCountries = Object.entries(countries)
-  // Sort by count, decreasing
+  // Sort by count, decreasing, and secondarily by endemic count
   sortedCountries.sort(( a, b ) => {
     if ( a[1].count < b[1].count )
       return 1
@@ -794,7 +794,7 @@ function BuildSecretList() {
     if ( a[1].endemicCount < b[1].endemicCount )
       return 1
     if ( a[1].endemicCount > b[1].endemicCount )
-      return 1
+      return -1
     return 0
   })
 
@@ -850,4 +850,4 @@ function Debug() {
 }
 
 // SaveJsonForDebug()
-// Debug()
+Debug()
