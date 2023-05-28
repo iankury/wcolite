@@ -765,7 +765,8 @@ function BuildSecretList() {
         processedName = processedName.split(':')[0]
       countries[processedTag] = {
         name: processedName,
-        count: 0
+        count: 0,
+        endemicCount: 0
       }
     }
   }
@@ -775,6 +776,12 @@ function BuildSecretList() {
     if (k.includes('-'))
       processedTag = k.split('-')[0]
     countries[processedTag]['count'] += v.length
+    countries[processedTag]['endemicCount'] += v.filter(vx => {
+      if (tagCountPerTaxon[vx] == 1) {
+        return true
+      }
+      return false
+    }).length
   }
 
   sortedCountries = Object.entries(countries)
@@ -784,12 +791,16 @@ function BuildSecretList() {
       return 1
     if ( a[1].count > b[1].count )
       return -1
+    if ( a[1].endemicCount < b[1].endemicCount )
+      return 1
+    if ( a[1].endemicCount > b[1].endemicCount )
+      return 1
     return 0
   })
 
   secretCountToWrite.push('<h1>Ranking by country</h1>')
   for (x of sortedCountries) {
-    secretCountToWrite.push(`<p>${x[1]['name']} ${x[0]}: ${x[1]['count']}</p>`)
+    secretCountToWrite.push(`<p>${x[1]['name']} ${x[0]}: ${x[1]['count']} (${x[1]['endemicCount']} **)</p>`)
   }
 }
 
