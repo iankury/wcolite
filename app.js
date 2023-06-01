@@ -195,14 +195,15 @@ function queryString(title) {
     path: 'https://sfg.taxonworks.org/api/v1/',
     title: title,
     params: {
-      token: 'W8kIg_iBpBG72j2EZZLhVQ',
       project_id: 10,
       per: 9500,
       page: ++queryPage[title]
     }
   }
-  if (title == 'sources')
+  if (title == 'sources') 
     options['params']['in_project'] = true
+  else
+    options['params']['token'] = 'W8kIg_iBpBG72j2EZZLhVQ'
   const paramsString = Object.entries(options.params).map(x => `${x[0]}=${x[1]}`).join('&')
   return `${options.path}${options.title}?${paramsString}`
 }
