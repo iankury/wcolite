@@ -787,13 +787,15 @@ function BuildSecretList() {
     processedTag = k
     if (k.includes('-'))
       processedTag = k.split('-')[0]
-    countries[processedTag]['count'] += v.length
-    countries[processedTag]['endemicCount'] += v.filter(vx => {
-      if (tagCountPerTaxon[vx] == 1) {
-        return true
-      }
-      return false
-    }).length
+    if (processedTag in countries) {
+      countries[processedTag]['count'] += v.length
+      countries[processedTag]['endemicCount'] += v.filter(vx => {
+        if (tagCountPerTaxon[vx] == 1) {
+          return true
+        }
+        return false
+      }).length
+    }
   }
 
   sortedCountries = Object.entries(countries)
@@ -867,4 +869,4 @@ function Debug() {
 }
 
 // SaveJsonForDebug()
-// Debug()
+Debug()
