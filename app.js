@@ -1,6 +1,7 @@
 function Initialize() {
   const pinha = fs.readFileSync("pinha.txt");
   unifiedJson = JSON.parse(pinha);
+
   jsonTree = fs.readFileSync("tree.txt");
   BuildQueryToNode();
 }
@@ -264,6 +265,8 @@ function LoadFromApi() {
 }
 
 function LoadedJson() {
+  unifiedJson = {}
+  queryToNode = {}
   MakeSourceMap();
   Unify();
   KillGhosts();
@@ -916,6 +919,7 @@ function Debug() {
   if (!homeComputer) return;
   jsonFromApi = JSON.parse(fs.readFileSync("./jsonfromapi.json"));
   Log("Loaded jsonFromApi from file.");
+
   LoadedJson();
 
   // for (x of Object.values(jsonFromApi['taxon_name_relationships'])) {
