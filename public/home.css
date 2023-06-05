@@ -275,7 +275,7 @@ body.loaded .preloader {
   }
 
   .fixed__container {
-    width: 100%;
+    max-width: 100%;
     margin: 0;
     justify-content: space-between;
   }
@@ -364,6 +364,7 @@ body.loaded .preloader {
 }
 
 
+
 @media (max-width: 1200px) {
   .fixed__header {
     height: auto;
@@ -375,6 +376,8 @@ body.loaded .preloader {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 30px;
+    
   }
     .offer h1{
       font-size: 30px;
@@ -382,6 +385,10 @@ body.loaded .preloader {
   .offer h1,
   .offer p {
     width: 100%; 
+    
+  }
+  .offer p{
+    max-width: 360px;
   }
 }
 
@@ -400,6 +407,26 @@ body.loaded .preloader {
     display: flex;
     flex-direction: column;
   }
+    .info__row {
+      align-items: center;
+      text-align: center;
+    }
+  
+    .info__project {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      width: 100%;
+    }
+  
+    .info__project span {
+      position: relative;
+      padding: 7px 0px 0px 0px;
+    }
+  
+    .info__photo-author {
+      display: none;
+    }
 }
 
 @media (max-width: 400px) {
@@ -423,23 +450,7 @@ body.loaded .preloader {
     text-align: center;
     margin: 0px 0px 10px 0px;
   }
-  .info__row {
-    align-items: center;
-    text-align: center;
-  }
-  .info__project {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: 100%;
-  }
-  .info__project span {
-    position: relative;
-    padding: 7px 0px 0px 0px;
-  }
-  .info__photo-author {
-    display: none;
-  }
+  
 }
 
 .info__row {
@@ -503,6 +514,7 @@ body._dark-mode .content-variable{
   max-width: 500px;
   margin: 0px auto;
   padding: 50px 15px;
+  position: relative;
 }
 
 .dark-mode-button {
@@ -536,7 +548,19 @@ body._dark-mode .dark-mode-button{
 @media (max-width: 1200px) {
   .content-variable {
     margin: 0px;
+    position: relative;
   }
+
+  .dark-mode-button{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100%);
+  }
+    .dark-mode-button._visible{
+      opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+    }
 }
 
 .variable__first-screen {

@@ -27,3 +27,12 @@ $(".arrow._up").click(() => {
 $(".dark-mode-button").click(() => {
   $("body").toggleClass("_dark-mode");
 });
+
+$(window).on("scroll", function () {
+  if (window.scrollY > $(window).height()) {
+    $(".dark-mode-button").addClass("_visible");
+  }
+  if (window.scrollY < $(window).height()) {
+    $(".dark-mode-button").removeClass("_visible");
+  }
+});
