@@ -4,6 +4,8 @@
   border: 0;
 }
 
+
+
 *,
 *:before,
 *:after {
@@ -299,7 +301,8 @@ body.loaded .preloader {
 }
 
 .header__logo span {
-  font-family: PDregular;
+  /* font-family: PDregular; */
+  color:#0076FF;
 }
 
 .header__logo p {

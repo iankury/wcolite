@@ -1,6 +1,7 @@
 @font-face {
   font-family: BenchNine;
   src: url(fonts/BenchNine-Bold.ttf);
+  
 }
 
 * {
@@ -11,7 +12,7 @@
 
 body {
   /*background-color: #f4f1f9;*/
-  background-color: #fdfbff;
+  
   overflow: hidden;
 }
 
@@ -43,8 +44,9 @@ body {
 .sidebar__header a {
   color: #343434;
   transition: 0.2s;
-  font-size: 16px;
+  font-size: 20px;
   font-family: Rbold;
+  letter-spacing: 0;
 }
 
 .sidebar-content {
@@ -116,8 +118,8 @@ body {
 }
 
 .options__item input:checked + label {
-  background: #74b904;
   color: #fff;
+  background-color: #222222;
 }
 
 .query input._lock {
@@ -143,15 +145,16 @@ body {
 .sidebar__search button {
   display: inline-block;
   padding: 12px 40px;
-  background: transparent;
+  background: #01C9FF;
+  background-color: #0076FF;
   border-radius: 30px;
-  border: 2px solid #74b904;
-  color: #74b904;
+  color: #fff;
   font-family: Rbold;
   text-transform: uppercase;
   font-size: 14px;
   transition: 0.4s;
   user-select: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar__search button._lock {
@@ -159,14 +162,9 @@ body {
   pointer-events: none;
 }
 
-.sidebar__search button._lock:hover {
-  background: #fff;
-  color: #74b904;
-}
-
 .sidebar__search button:hover {
-  background-color: #74b904;
   color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 .search__add {
@@ -200,7 +198,7 @@ body {
   justify-content: space-between;
   padding: 0px 30px;
   height: 80px;
-  background-color: #f2ffde;
+  background-color: #fff;
   position: absolute;
   top: 0;
   left: 0;
@@ -215,6 +213,7 @@ body {
 
 #last-query span {
   font-family: Rbold;
+  color:#0076FF;
 }
 
 #last-query._hide {
@@ -270,7 +269,7 @@ body {
   opacity: 0.6;
 }
 button.mean__options-yes {
-  color: #7fb22dbb;
+  color: #0076FF;
 }
 
 #data-tree__container,
@@ -320,7 +319,7 @@ button.mean__options-yes {
 .brown_link {
   font-size: 18px;
   font-family: Rbold;
-  color: #8c496a;
+  color: #222222;
 }
 
 .data-card__path li:last-child:after {
@@ -393,15 +392,19 @@ button.mean__options-yes {
   flex-direction: column;
   color: #343434;
   overflow: auto;
+  top: 90px;
 }
 .data-table__pages {
-  margin-top: 80px;
+  position: absolute;
+  right: 0;
+  width: auto;
+  margin-top: 25px;
   height: auto;
-  background-color: #f2ffde;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 0px 30px 20px 30px;
+  z-index: 1000;
 }
 
 .data-table__pages input {
@@ -417,10 +420,21 @@ button.mean__options-yes {
 .data-table__labels {
   padding: 10px 20px;
   display: flex;
-  background-color: #f2ffde;
   font-family: Rbold;
   font-size: 18px;
+  position: relative;
 }
+
+/* .data-table__labels::after{
+  position: absolute;
+  content: '';
+  height: 0.5px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #dadada;
+} */
 
 .data-table__items {
   padding: 0px 20px;
@@ -445,7 +459,7 @@ button.mean__options-yes {
 }
 
 .data-table__ances ul {
-  display: flex;
+  display: flex;  
   flex-wrap: wrap;
 }
 
@@ -453,8 +467,15 @@ button.mean__options-yes {
 .qlink {
   font-size: 16px;
   font-family: Rbold;
-  color: #8c496a;
+  color: #7e828a;
+  transition: 0.2s;
 }
+
+.data-table__ances li:hover,
+.qlink:hover {
+  color: #0076FF;
+}
+
 
 .data-table__ances li:last-child:after {
   display: none;
@@ -495,7 +516,7 @@ button.mean__options-yes {
 }
 
 .protonym_tag {
-  background-color: #56e08d;
+  background-color: #01C9FF;
 }
 
 .relationship_tag {
@@ -554,7 +575,7 @@ li {
 
   .sidebar__header #search__close svg {
     width: 30px;
-    fill: #a7da57;
+    fill: #0076FF;
     transition: 0.4s;
     border-radius: 100px;
   }
@@ -571,7 +592,7 @@ li {
     display: block;
     width: 30px;
     height: 30px;
-    border: 2px solid #a7da57;
+    border: 2px solid #0076FF;
     border-radius: 100px;
     background-color: #fff;
     z-index: 100;
@@ -584,7 +605,7 @@ li {
     transform: translate(-50%, -50%);
     height: 50%;
     width: auto;
-    fill: #a7da57;
+    fill: #0076FF;
     transition: 0.4s;
   }
 
