@@ -37,7 +37,47 @@
             <div class="header__logo">WCO<span>lite</span>
           </a>
         </div>
+        
       </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar__search-container">
+          <div class="options">
+            <div class="options__item">
+              <input id="options__tree" class="radio_option" type="radio" value="tree" name="options" checked>
+              <label for="options__tree">Tree</label>
+            </div>
+            <div class="options__item">
+              <input id="options__card" class="radio_option" type="radio" value="card" name="options">
+              <label for="options__tree">Card</label>
+            </div>
+            <div class="options__item">
+              <input id="options__table" class="radio_option" type="radio" value="table" name="options">
+              <label for="options__tree">Table</label>
+            </div>
+          </div>
+          <div class="query" id="query__container">
+            <input id="searchbox" type="text" autocomplete="off" placeholder="Enter your query">
+            <button id="sidebar__search-button">Search</button>
+          </div>
+          
+          <!-- <div class="search__add">
+            <div class="search__about-using">
+              <div class="about-using__title">How to use</div>
+              <p id="txt_how_to_use"></p>
+            </div>          
+        </div> -->
+      </div>
+    </div>
+    <div class="sidebar__icons">
+      <div class="dark-mode-button">
+              <svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <title>dark-mode</title>
+                <rect width="48" height="48" fill="none"/>
+                <path d="M14,24A10,10,0,0,0,24,34V14A10,10,0,0,0,14,24Z"/>
+                <path d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2ZM6,24A18.1,18.1,0,0,1,24,6v8a10,10,0,0,1,0,20v8A18.1,18.1,0,0,1,6,24Z"/>
+              </svg>
+            </div>
       <a href="#" id="search__close">
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           x="0px" y="0px" viewBox="0 0 340.8 340.8" style="enable-background:new 0 0 340.8 340.8;" xml:space="preserve">
@@ -56,35 +96,6 @@
         </svg>
       </a>
     </div>
-    <div class="sidebar-content">
-      <div class="sidebar__search">
-        <div class="sidebar__search-container">
-          <div class="options">
-            <div class="options__item">
-              <input id="options__tree" class="radio_option" type="radio" value="tree" name="options" checked>
-              <label for="options__tree">Tree</label>
-            </div>
-            <div class="options__item">
-              <input id="options__card" class="radio_option" type="radio" value="card" name="options">
-              <label for="options__tree">Card</label>
-            </div>
-            <div class="options__item">
-              <input id="options__table" class="radio_option" type="radio" value="table" name="options">
-              <label for="options__tree">Table</label>
-            </div>
-          </div>
-          <div class="query">
-            <input id="searchbox" type="text" autocomplete="off" placeholder="Enter your query">
-          </div>
-          <button id="sidebar__search-button">Show</button>
-          <div class="search__add">
-            <div class="search__about-using">
-              <div class="about-using__title">How to use</div>
-              <p id="txt_how_to_use"></p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
