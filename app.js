@@ -764,16 +764,6 @@ function BuildSecretList() {
     }
   }
 
-  const taxaWithMissingTag = [];
-  // Remember what taxa hava no corresponding tag
-  for (id of Object.keys(unifiedJson)) {
-    if (unifiedJson[id]["rank"] == "species") {
-      if (!(id in allTagObjectIds)) {
-        taxaWithMissingTag.push(unifiedJson[id]["cached_html"]);
-      }
-    }
-  }
-
   taxaGroupedByContinent = {};
 
   for ([k, v] of Object.entries(taxaGroupedByTag)) {
@@ -879,11 +869,6 @@ function BuildSecretList() {
     secretCountToWrite.push(
       `<p>${x[1]["name"]} ${x[0]}: ${x[1]["count"]} (${x[1]["endemicCount"]} **)</p>`
     );
-  }
-
-  taxaWithMissingTag.sort();
-  for (x of taxaWithMissingTag) {
-    secretCountToWrite.push(`${x}, `);
   }
 }
 
