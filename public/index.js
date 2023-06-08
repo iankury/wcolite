@@ -6,6 +6,7 @@ let dragCurX = 0,
   dragRunning = false;
 let lastQuery = "",
   backupQuery = "";
+let colorTheme = "default";
 
 const encode = (s) =>
   s
@@ -16,8 +17,6 @@ const stripTags = (s) => s.replace(/(<([^>]+)>)/gi, "");
 const isItalic = (s) => s.indexOf("<i>") != -1;
 
 $(document).ready(() => {
-  $("body").addClass("loaded_hiding");
-
   setInitialMode();
 
   $.get("/t", (data) => {
@@ -32,15 +31,22 @@ $(document).ready(() => {
 
 function loadedTree() {
   addListeners();
-
   // TO DO: use alternative tree if mobile mode
-
   setTreeDrag();
   currentContainerOnly();
-  $("#data-tree__container").append(Chart()).find("svg").addClass("tree_chart");
+
+  if (colorTheme == "dark") {
+    setDarkMode();
+  } else {
+    $("#data-tree__container")
+      .append(Chart())
+      .find("svg")
+      .addClass("tree_chart");
+  }
 
   addTreeRightClick();
 
+  $("body").addClass("loaded_hiding");
   $("body").addClass("loaded");
   $("body").removeClass("loaded_hiding");
 }
@@ -50,6 +56,8 @@ function setInitialMode() {
   const urlParams = new URLSearchParams(url);
   const defaultMode = window.innerHeight > window.innerWidth ? "card" : "tree";
   const initialMode = urlParams.get("mode") || defaultMode;
+  const theme = urlParams.get("theme") || "default";
+  colorTheme = theme;
   setMode(initialMode);
   updateRadio();
   if (initialMode != "tree") sendPlaceholderPage();
@@ -106,8 +114,27 @@ function addListeners() {
   });
 
   $(".dark-mode-button").click(() => {
-    $("body").toggleClass("_dark-mode");
+    if ($("body").hasClass("_dark-mode")) {
+      offDarkMode();
+    } else {
+      setDarkMode();
+    }
   });
+}
+
+function setDarkMode() {
+  $("body").addClass("_dark-mode");
+  $("#data-tree__container").empty();
+  $("#data-tree__container")
+    .append(Chart("dark"))
+    .find("svg")
+    .addClass("tree_chart");
+}
+
+function offDarkMode() {
+  $("body").removeClass("_dark-mode");
+  $("#data-tree__container").empty();
+  $("#data-tree__container").append(Chart()).find("svg").addClass("tree_chart");
 }
 
 function sendPlaceholderPage() {

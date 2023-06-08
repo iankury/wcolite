@@ -26,6 +26,11 @@ $(".arrow._up").click(() => {
 
 $(".dark-mode-button").click(() => {
   $("body").toggleClass("_dark-mode");
+  if ($("body").hasClass("_dark-mode")) {
+    $(".offer a").attr("href", "index.html?theme=dark");
+  } else {
+    $(".offer a").attr("href", "index.html");
+  }
 });
 
 $(window).on("scroll", function () {

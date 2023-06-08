@@ -265,8 +265,8 @@ function LoadFromApi() {
 }
 
 function LoadedJson() {
-  unifiedJson = {}
-  queryToNode = {}
+  unifiedJson = {};
+  queryToNode = {};
   MakeSourceMap();
   Unify();
   KillGhosts();

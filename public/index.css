@@ -1,6 +1,6 @@
 @font-face {
   font-family: BenchNine;
-  src: url(fonts/BenchNine-Bold.ttf); 
+  src: url(fonts/Raleway/Raleway-Medium.ttf); 
 }
 
 * {
@@ -443,6 +443,11 @@ body._dark-mode .brown_link{
   letter-spacing: 0 !important;
   top: -565vh;
   left: 0px;
+  fill: #222222 !important;
+}
+
+body._dark-mode .tree_chart{
+  fill: #fff !important;
 }
 
 #data-table__container {
