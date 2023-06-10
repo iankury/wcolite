@@ -745,7 +745,7 @@ function IncertaeSedisAllowed(node) {
 
 function BuildSecretList() {
   taxaGroupedByTag = {};
-  const NameAuthorYear2 = (x) => `${x.cached_html} ${x.stripped_author_year}`;
+  const NameAuthorYear2 = (x) => `${x.cached_html} ${x.author_year}`;
 
   const allTagObjectIds = {};
   for (tag of jsonFromApi["tags"]) {
