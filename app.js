@@ -749,7 +749,7 @@ function IncertaeSedisAllowed(node) {
 
 function BuildSecretList() {
   taxaGroupedByTag = {};
-  const NameAuthorYear2 = (x) => `${x.cached_html} ${x.stripped_author_year}`;
+  const NameAuthorYear2 = (x) => `${x.cached_html} ${x.author_year}`;
 
   const allTagObjectIds = {};
   for (tag of jsonFromApi["tags"]) {
@@ -765,16 +765,6 @@ function BuildSecretList() {
       taxaGroupedByTag[name].push(
         NameAuthorYear2(unifiedJson[tag["tag_object_id"]])
       );
-    }
-  }
-
-  const taxaWithMissingTag = [];
-  // Remember what taxa hava no corresponding tag
-  for (id of Object.keys(unifiedJson)) {
-    if (unifiedJson[id]["rank"] == "species") {
-      if (!(id in allTagObjectIds)) {
-        taxaWithMissingTag.push(unifiedJson[id]["cached_html"]);
-      }
     }
   }
 
@@ -883,11 +873,6 @@ function BuildSecretList() {
     secretCountToWrite.push(
       `<p>${x[1]["name"]} ${x[0]}: ${x[1]["count"]} (${x[1]["endemicCount"]} **)</p>`
     );
-  }
-
-  taxaWithMissingTag.sort();
-  for (x of taxaWithMissingTag) {
-    secretCountToWrite.push(`${x}, `);
   }
 }
 
