@@ -71,6 +71,10 @@
     "name": "Eritrea (sep. Ethiopia 1991)",
     "continent": "Africa"
   },
+  "ES-CN*": {
+    "name": "Canary Islands (Spain)",
+    "continent": "Africa"
+  },
   "ETH": {
     "name": "Ethiopia",
     "continent": "Africa"
@@ -143,6 +147,10 @@
     "name": "Mayotte",
     "continent": "Africa"
   },
+  "MAC": {
+    "name": "Macaronesia",
+    "continent": "Africa"
+  },
   "MAR": {
     "name": "Morocco",
     "continent": "Africa"
@@ -161,6 +169,10 @@
   },
   "NGA": {
     "name": "Nigeria",
+    "continent": "Africa"
+  },
+  "PT-30": {
+    "name": "Madeira and Savage Islands (Portugal)",
     "continent": "Africa"
   },
   "REU": {
@@ -371,10 +383,6 @@
     "name": "Lebanon",
     "continent": "Asia"
   },
-  "MAC": {
-    "name": "Macao",
-    "continent": "Asia"
-  },
   "MYS": {
     "name": "Malaysia",
     "continent": "Asia"
@@ -445,7 +453,7 @@
   },
   "TUR": {
     "name": "Turkey",
-    "continent": "Asia"
+    "continent": "Eurasia"
   },
   "TKM": {
     "name": "Turkmenistan",
@@ -469,7 +477,7 @@
   },
   "RUS": {
     "name": "Russian Federation",
-    "continent": "Europe"
+    "continent": "Eurasia"
   },
   "AIA": {
     "name": "Anguilla",
@@ -777,6 +785,10 @@
   },
   "PRT": {
     "name": "Portugal",
+    "continent": "Europe"
+  },
+  "PT-20": {
+    "name": "Azores (Portugal)",
     "continent": "Europe"
   },
   "ROU": {
