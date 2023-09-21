@@ -1,0 +1,290 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+li {
+  list-style-type: none;
+}
+
+@font-face {
+  font-family: Rregular;
+  src: url(fonts/Raleway/Raleway-Medium.ttf);
+}
+
+@font-face {
+  font-family: Rbold;
+  src: url(fonts/Raleway/Raleway-Bold.ttf);
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(fonts/Roboto/Roboto-Medium.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  background: #1f925b;
+  color: #fff;
+}
+
+body {
+  font-family: Rregular;
+  letter-spacing: 2px;
+}
+
+body._lock {
+  overflow: hidden;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+.preloader {
+  position: fixed;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  transition: 0.2s;
+  z-index: 1000;
+}
+
+body._dark-mode .preloader {
+  background-color: #121212;
+}
+
+.lds-default {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  transition: 0.4s;
+}
+
+.lds-default div {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #1f925b;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+  transition: 0.4s;
+}
+
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 37px;
+  left: 66px;
+}
+
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 22px;
+  left: 62px;
+}
+
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 11px;
+  left: 52px;
+}
+
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 7px;
+  left: 37px;
+}
+
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 11px;
+  left: 22px;
+}
+
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 22px;
+  left: 11px;
+}
+
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 37px;
+  left: 7px;
+}
+
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 52px;
+  left: 11px;
+}
+
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 62px;
+  left: 22px;
+}
+
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 66px;
+  left: 37px;
+}
+
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 62px;
+  left: 52px;
+}
+
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 52px;
+  left: 62px;
+}
+
+@keyframes lds-default {
+  0% {
+    opacity: 0.2;
+  }
+
+  0%,
+  20%,
+  80%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+}
+
+body.loaded_hiding .preloader {
+  opacity: 0;
+}
+
+body.loaded .preloader {
+  display: none;
+}
+
+
+/* SCROLLBAR ---------*/
+@media (min-width: 1201px){
+  ::-webkit-scrollbar {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      background-color: #fff;
+      z-index: 110;
+    }
+  
+    ::-webkit-scrollbar-track {
+      position: relative;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 110;
+    }
+  
+    ::-webkit-scrollbar-thumb {
+      position: relative;
+      background: rgb(181, 233, 47);
+      background: linear-gradient(0deg, rgba(181, 233, 47, 1) 0%, rgba(31, 146, 91, 1) 100%);
+      z-index: 110;
+    }
+}

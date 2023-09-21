@@ -21,18 +21,23 @@ $(".arrow._down").click(() => {
 });
 
 $(".arrow._up").click(() => {
-  $(".wrapper")[0].scrollIntoView({ behavior: "smooth" });
+  $(".variable__container")[0].scrollIntoView({ behavior: "smooth" });
 });
 
 $(".dark-mode-button").click(() => {
   $("body").toggleClass("_dark-mode");
+  if ($("body").hasClass("_dark-mode")) {
+    $(".offer a").attr("href", "index.html?theme=dark");
+  } else {
+    $(".offer a").attr("href", "index.html");
+  }
 });
 
-$(window).on("scroll", function () {
-  if (window.scrollY > $(window).height()) {
-    $(".dark-mode-button").addClass("_visible");
-  }
-  if (window.scrollY < $(window).height()) {
-    $(".dark-mode-button").removeClass("_visible");
-  }
-});
+// $(window).on("scroll", function () {
+//   if (window.scrollY > $(window).height()) {
+//     $(".dark-mode-button").addClass("_visible");
+//   }
+//   if (window.scrollY < $(window).height()) {
+//     $(".dark-mode-button").removeClass("_visible");
+//   }
+// });

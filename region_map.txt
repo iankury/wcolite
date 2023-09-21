@@ -127,6 +127,10 @@
     "name": "Madagascar",
     "continent": "Africa"
   },
+  "MAC":{
+    "name": "Macaronesia",
+    "continent": "Africa"
+  },
   "MWI": {
     "name": "Malawi",
     "continent": "Africa"
