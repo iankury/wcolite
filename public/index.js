@@ -7,6 +7,8 @@ let dragCurX = 0,
 let lastQuery = "",
   backupQuery = "";
 let colorTheme = "default";
+let treeLinks = {};
+const helpTree = document.createElement("div");
 
 const encode = (s) =>
   s
@@ -26,14 +28,71 @@ $(document).ready(() => {
     }
     jsonTree = JSON.parse(data);
     loadedTree();
+    loadedBrowse();
   });
 });
+
+function loadedBrowse() {
+  jsonTree.children.forEach((el) => {
+    $(".data-browse__list").append(
+      `<div class="browse__sublist"><div class="browse__list-link"><div class="arrow"></div><span>${el.name}</span></div></div>`
+    );
+    nm = el.name;
+    treeLinks[nm] = [];
+    fillTreeLinks(el);
+  });
+
+  $(".data-browse__list").click((e) => {
+    tg = e.target;
+    if (tg.classList.contains("_opened")) {
+      tg.classList.remove("_opened");
+      p = $(tg).parent();
+      $(p).find(".browse__sublist").remove();
+    } else {
+      tg.classList.add("_opened");
+      elem = e.target.innerHTML;
+
+      treeLinks[elem].forEach((el) => {
+        $(tg)
+          .parent()
+          .append(
+            `<div class="browse__sublist"><div class="browse__list-link">${el.name}</div></div>`
+          );
+      });
+    }
+  });
+}
+
+function fillTreeLinks(prnt) {
+  if (prnt.children != undefined) {
+    prnt.children.forEach((el) => {
+      treeLinks[prnt.name].push(el);
+      nm = el.name;
+      treeLinks[nm] = [];
+      fillTreeLinks(el);
+    });
+  } else return;
+}
+
+function viewChildrenBrowse(el) {}
 
 function loadedTree() {
   addListeners();
   // TO DO: use alternative tree if mobile mode
   setTreeDrag();
   currentContainerOnly();
+
+  helpTree.classList.add("data-help");
+  helpTree.innerHTML = `<div class="help-header"><p>How to use</p>
+        </div>
+        <div class="help-content">
+          <div class="help-content__item">
+            <p><span>Left click </span>to navigate tree</p>
+          </div>
+          <div class="help-content__item">
+            <p><span>Right click </span>to view a taxon's card.</p>
+          </div>
+        </div`;
 
   if (colorTheme == "dark") {
     setDarkMode();
@@ -45,6 +104,7 @@ function loadedTree() {
   }
 
   addTreeRightClick();
+  addBrowseRightClick();
 
   $("body").addClass("loaded_hiding");
   $("body").addClass("loaded");
@@ -69,23 +129,27 @@ function addListeners() {
     if (e.keyCode == 13) {
       extractQuery();
       sendFirstPage();
+      setMode("table");
     }
   });
-  $("#sidebar__search-button").on("click", () => {
+  $("#header__search-button").on("click", () => {
     extractQuery();
     sendFirstPage();
+    setMode("table");
+    closeMenuMobile();
     $(".sidebar").addClass("_closed");
   });
-  $("#options__tree").on("click", () => {
+  $(".to-tree").on("click", () => {
     setMode("tree");
+    closeMenuMobile();
+    $(".to-tree").addClass("_active");
+    $(".to-browse").removeClass("_active");
   });
-  $("#options__card").on("click", () => {
-    setMode("card");
-    sendPlaceholderPage();
-  });
-  $("#options__table").on("click", () => {
-    setMode("table");
-    sendPlaceholderPage();
+  $(".to-browse").on("click", () => {
+    setMode("browse");
+    closeMenuMobile();
+    $(".to-browse").addClass("_active");
+    $(".to-tree").removeClass("_active");
   });
   $(".mean__options-no").on("click", () => {
     setLastQuery(backupQuery);
@@ -95,6 +159,7 @@ function addListeners() {
     $(".data__popup-mean").removeClass("_active");
     setLastQuery(data.didYouMean);
     sendFirstPage();
+    setMode("table");
   });
   $("#page").on("change", () => {
     const mn = +$("#page").attr("min");
@@ -120,6 +185,29 @@ function addListeners() {
       setDarkMode();
     }
   });
+  $(".query input").focus(() => {
+    $(".query").addClass("_focus");
+  });
+  $(".query input").focusout(() => {
+    $(".query").removeClass("_focus");
+  });
+  $(".menu-icon").click(() => {
+    if ($(".header").hasClass("_closed")) {
+      openMenuMobile();
+    } else {
+      closeMenuMobile();
+    }
+  });
+}
+
+function closeMenuMobile() {
+  $(".header").addClass("_closed");
+  $(".menu-icon").removeClass("_opened");
+}
+
+function openMenuMobile() {
+  $(".header").removeClass("_closed");
+  $(".menu-icon").addClass("_opened");
 }
 
 function setDarkMode() {
@@ -127,14 +215,21 @@ function setDarkMode() {
   $("#data-tree__container").empty();
   $("#data-tree__container")
     .append(Chart("dark"))
+    .append(helpTree)
     .find("svg")
     .addClass("tree_chart");
+  addTreeRightClick();
 }
 
 function offDarkMode() {
   $("body").removeClass("_dark-mode");
   $("#data-tree__container").empty();
-  $("#data-tree__container").append(Chart()).find("svg").addClass("tree_chart");
+  $("#data-tree__container")
+    .append(Chart())
+    .append(helpTree)
+    .find("svg")
+    .addClass("tree_chart");
+  addTreeRightClick();
 }
 
 function sendPlaceholderPage() {
@@ -151,9 +246,6 @@ function setMode(s) {
   updateHowTo();
   $("#data").css("overflow", "auto");
   if (s == "tree") {
-    $("#searchbox").addClass("_lock");
-    $("#searchbox").prop("disabled", true);
-    $("#sidebar__search-button").addClass("_lock");
     $("#last-query").addClass("_hide");
     $(".data-header").addClass("_transparent");
 
@@ -162,9 +254,6 @@ function setMode(s) {
       $("#data").css("overflow", "hidden");
     }
   } else {
-    $("#searchbox").removeClass("_lock");
-    $("#searchbox").prop("disabled", false);
-    $("#sidebar__search-button").removeClass("_lock");
     $("#last-query").removeClass("_hide");
     $(".data-header").removeClass("_transparent");
   }
@@ -179,6 +268,8 @@ function currentContainerOnly() {
   $("#data-tree__container").hide();
   $("#data-card__container").hide();
   $("#data-table__container").hide();
+  $("#data-browse__container").hide();
+  $("#data__popup-mean").hide();
   $(`#data-${mode}__container`).css("display", "flex");
 }
 
@@ -238,7 +329,7 @@ function displayTable() {
   for (x of data.resultList) {
     const item = $('<div class="data-table__item"></div>');
 
-    const name = $('<div class="data-table__name data-column"></div>');
+    const name = $('<div class="data-table__name qlink data-column"></div>');
     name.html(x["valid"] ? x["original_html"] : addLinkToValid(x));
 
     const authorship = $(
@@ -318,6 +409,18 @@ function addTreeRightClick() {
   });
 }
 
+function addBrowseRightClick() {
+  // $(".browse__list-link").on("click", (e) => {
+  //   const s = e.target.innerHTML;
+  //   console.log(s);
+  //   if (s != "Incertae Sedis") {
+  //     setLastQuery(e.target.innerHTML);
+  //     sendFirstPage();
+  //   }
+  //   e.preventDefault();
+  // });
+}
+
 function updateRadio() {
   $(".radio_option").removeAttr("checked");
   $(`#options__${mode}`).prop("checked", true);
@@ -341,7 +444,7 @@ function extractQuery() {
 }
 
 function sendFirstPage() {
-  if (mode == "tree") {
+  if (mode == "tree" || mode == "table") {
     setMode("card");
     updateRadio();
   }
@@ -366,13 +469,15 @@ function receiveData(x) {
 
 function didYouMean() {
   $(".data__popup-mean p").html(
-    `Did you mean <span>${data.didYouMean}</span>?`
+    `<p>Nothing was found for your query.</p>
+    <p>Perhaps did you mean <span>${data.didYouMean}</span>?<span class="mean__options-yes"></span></p>`
   );
   $(".data__popup-mean").addClass("_active");
 }
 
 function displayData() {
   if (mode == "table") displayTable();
+  else if (mode == "browse");
   else if (mode == "card") {
     if (data.resultList[0].valid) displayCard();
     else {

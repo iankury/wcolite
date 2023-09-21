@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="general.css">
 </head>
 
 <body>
@@ -25,40 +26,45 @@
     </div>
   </div>
 
-  <div class="wrapper">
-    <div class="content-fixed">     
-      <div class="fixed__container">
-        <div class="fixed__header">
-          <div class="header__row">
-            <div class="header__logo">WCO<span>lite</span>
-              <p>World Catalogue of Opiliones</p>
-            </div>
-            <div class="header__link-tw">Created with <a href="https://taxonworks.org/" target="_blank">TaxonWorks</a>
-            </div>           
-          </div>
+  <div class="header-fixed">
+    <div class="header-fixed__container container">
+        <div class="header__logo">WCO<span>lite</span>
+          <p>World Catalogue of Opiliones</p>
         </div>
-        <div class="offer">
-          <h1>The complete taxonomy of world harvestmen</h1>
-          <p>
-            This project is a catalogue on Opiliones aiming to provide an accurate and up-to-date taxonomic backbone
-            for this order of arachnids.
-          </p>
-          <a href="index.html" class = "toIndex"><button class="start">Start</button></a>
-        </div>
-        <div class="info">
-          <div class="info__row">
-            <div class="info__project">
-              Exhaustive until Dec 2019 <span>WCO-Lite 2.6</span>
-              <div class="info__project__hover-pop-up">This catalogue offers a comprehensive overview of Opiliones species until December 2019. Note that information beyond that period may not be fully up to date.</div>
-            </div>
-            <div class="info__photo-author">Photo by <i>Paul Bertner</i>, Cosmetidae, Ecuador (C) 2018 </div>
-          </div>
-        </div>
-      </div>    
+        <a href="index.html" class="button-start">
+          Catalogue
+        </a>
     </div>
+  </div>
+
+  <div class="content-fixed">      
+    <div class="fixed__container">
+      <div class="fixed__header">
+        <div class="header__row">
+          <div class="header__logo">WCO<span>lite</span>
+            <p>World Catalogue of Opiliones</p>
+          </div>
+          <div class="header__tw-link">Created with <a href="https://taxonworks.org/">TaxonWorks</a></div>
+        </div>
+      </div>
+      <div class="offer">
+        <h1>The complete taxonomy of world harvestmen</h1>
+        <p>
+          This project is a catalogue on Opiliones aiming to provide an accurate and up-to-date taxonomic backbone
+          for this order of arachnids.
+        </p>
+        <div class="offer__links">
+          <a href="index.html" class = "toIndex"><button class="start">catalogue</button></a>
+        </div>
+      </div>
+      <div class="info-foto">
+          <div class="info__photo-author">Photo (c) Joost Thissen, <i>Leiobunum rotundum</i>, The Netherlands,</div>
+        </div>
+      </div>
+    </div>     
 
     <div class="content-variable">
-      <div class="variable__container">
+      <div class="content-variable__sidebar">
         <div class="dark-mode-button">
               <svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <title>dark-mode</title>
@@ -67,12 +73,10 @@
                 <path d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2ZM6,24A18.1,18.1,0,0,1,24,6v8a10,10,0,0,1,0,20v8A18.1,18.1,0,0,1,6,24Z"/>
               </svg>
             </div>
-
-        <section class="variable__first-screen">   
-          <div class="need__help"><span><a
-                href="https://mndi.museunacional.ufrj.br/aracnologia/WCO/Site/WCO-Lite%20hub.html"
-                target="_blank">Scope, completion,</br> terminology and versions</a></span>
-          </div>
+      </div>
+      <div class="variable__container">
+        <section class="variable__first-screen">
+          
           <div class="about">
             <h2 class="about__title">WCO-Lite: a fresh look at the harvest-spiders (Arachnida: Opiliones)</h2>
             <p>
@@ -82,25 +86,20 @@
             </p>
             <a href="#"><button class="about__button">Learn more</button></a>
           </div>
-          <div class="arrow _down">
-            <div class="arrow__item">
-              <svg viewBox="0 0 490.656 490.656">
-                <path d="M487.536,120.445c-4.16-4.16-10.923-4.16-15.083,0L245.339,347.581L18.203,120.467c-4.16-4.16-10.923-4.16-15.083,0
-                            c-4.16,4.16-4.16,10.923,0,15.083l234.667,234.667c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.136l234.667-234.667
-                            C491.696,131.368,491.696,124.605,487.536,120.445z" />
-              </svg>
-            </div>
-            <div class="arrow__item">
-              <svg viewBox="0 0 490.656 490.656">
-                <path d="M487.536,120.445c-4.16-4.16-10.923-4.16-15.083,0L245.339,347.581L18.203,120.467c-4.16-4.16-10.923-4.16-15.083,0
-                            c-4.16,4.16-4.16,10.923,0,15.083l234.667,234.667c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.136l234.667-234.667
-                            C491.696,131.368,491.696,124.605,487.536,120.445z" />
-              </svg>
-            </div>
-          </div>
         </section>
 
-        <section class="modules">
+        <section class="prj-info">
+          <div class="prj-info__title section__title"> Exhaustive until dec 2019</div>
+          <p>This catalogue offers a comprehensive overview of Opiliones species until December 2019. Note that information beyond that period may not be fully up to date.</p>
+        </section>
+
+        <section class="cite">
+          <div class="cite__title section__title">How to cite</div>
+          <div class="cite__text">Kury, A.B., Mendes, A.C., Cardoso, L., Kury, M.S., Granado, A.de A. Giribet, G., Cruz-López J.A., Longhorn, S.J., Medrano, M., Oliveira, A.B.R. de, Kury, I.S. & Souza-Kury, M.A. (2023) World Catalogue of Opiliones. WCO-Lite version 2.6. Online at: <a href="https://wcolite.com/">https://wcolite.com/</a>.</div>
+          <div class="cite__text"> <span>Short citation:</span> Kury, A.B. et al. (2020 onward). WCO-Lite. Available at wcolite.com. (Accessed on [date])</div>
+        </section>
+
+        <!-- <section class="modules">
           <div class="modules__title section__title">Modules of WCO-Lite</div>
           <div class="modules__text">
             There are three ways of showing the information that you can choose from. Tree,
@@ -109,7 +108,7 @@
           <div class="modules__cards">
             <a href="/index.html?mode=tree" class = "toIndex">
               <div class="modules__cards-item">
-                <div class="cards-item__image">
+                <div class="cards-item__image svg-tree">
                   <svg width="54" height="52" viewBox="0 0 54 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M27.6805 11.1678C30.2569 11.1678 32.3454 9.15663 32.3454 6.6757C32.3454 4.19478 30.2569 2.18359 27.6805 2.18359C25.1042 2.18359 23.0156 4.19478 23.0156 6.6757C23.0156 9.15663 25.1042 11.1678 27.6805 11.1678Z"
@@ -167,36 +166,22 @@
                 <div class="cards-item__name">Tree</div>
               </div>
             </a>
-            <a href="/index.html?mode=card" class = "toIndex">
+            <a href="/index.html?mode=browse" class = "toIndex">
               <div class="modules__cards-item">
                 <div class="cards-item__image">
-                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 295.82 295.82" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 295.82 295.82">
-  <g>
-    <g>
-      <path d="m60.904,156.611h78.305c5.22,0 8.701-3.48 8.701-8.701 0-5.22-3.48-8.701-8.701-8.701h-78.305c-5.22,0-8.701,3.48-8.701,8.701 0.001,5.22 3.481,8.701 8.701,8.701z"/>
-      <path d="m60.904,113.108h78.305c5.22,0 8.701-3.48 8.701-8.701 0-5.22-3.48-8.701-8.701-8.701h-78.305c-5.22,0-8.701,3.48-8.701,8.701 0.001,5.22 3.481,8.701 8.701,8.701z"/>
-      <path d="m269.719,43.503h-243.617c-13.921,0-26.102,12.181-26.102,26.102v156.611c0,13.921 12.181,26.102 26.102,26.102h243.617c13.921,0 26.102-12.181 26.102-26.102v-156.611c-0.001-13.921-12.182-26.102-26.102-26.102zm8.7,182.713c0,5.22-3.48,8.701-8.701,8.701h-243.616c-5.22,0-8.701-3.48-8.701-8.701v-156.611c0-5.22 3.48-8.701 8.701-8.701h243.617c5.22,0 8.701,3.48 8.701,8.701v156.611z"/>
-      <path d="m234.916,182.713h-174.012c-5.22,0-8.701,3.48-8.701,8.701s3.48,8.701 8.701,8.701h174.012c5.22,0 8.701-3.48 8.701-8.701s-3.481-8.701-8.701-8.701z"/>
-      <path d="m234.916,92.226h-45.243c-5.22,0-8.701,3.48-8.701,8.701v52.204c0,5.22 3.48,8.701 8.701,8.701h45.243c5.22,0 8.701-3.48 8.701-8.701v-52.204c0-5.22-3.481-8.701-8.701-8.701zm-8.7,52.204h-27.842v-34.802h27.842v34.802z"/>
-    </g>
-  </g>
-</svg>
+                  <svg width="158" height="123" viewBox="0 0 158 123" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="134" height="12" rx="8" />
+                    <rect y="79" width="134" height="12" rx="8" />
+                    <rect y="107" width="134" height="12" rx="8" />
+                    <rect x="44" y="28" width="114" height="12" rx="8" />
+                    <rect x="44" y="52" width="114" height="12" rx="8"/>
+                  </svg>
                 </div>
-                <div class="cards-item__name">Card</div>
-              </div>
-            </a>
-            <a href="/index.html?mode=table" class = "toIndex">
-              <div class="modules__cards-item">
-                <div class="cards-item__image">
-                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-<path  d="M0 1v15h16v-15h-16zM5 15h-4v-2h4v2zM5 12h-4v-2h4v2zM5 9h-4v-2h4v2zM5 6h-4v-2h4v2zM10 15h-4v-2h4v2zM10 12h-4v-2h4v2zM10 9h-4v-2h4v2zM10 6h-4v-2h4v2zM15 15h-4v-2h4v2zM15 12h-4v-2h4v2zM15 9h-4v-2h4v2zM15 6h-4v-2h4v2z"></path>
-</svg>
-                </div>
-                <div class="cards-item__name">Table</div>
+                <div class="cards-item__name">Browse</div>
               </div>
             </a>
           </div>
-        </section>
+        </section> -->
 
         <section class="team">
           <div class="team__title section__title">Our Team</div>
@@ -473,7 +458,7 @@
                 </div>
               </div>
               <div class="team__cards-item">
-                <div class="team__image"><img src="images/TEAM/AnaBeatrizRamosdeOliveira.jpg"></div>
+                <div class="team__image"><img src="images/TEAM/AnaBeatrizRamosdeOliveira.jpeg"></div>
                 <div class="team__name">Ana Beatriz Ramos de Oliveira</div>
                 <div class="team__info">
                   <a href="https://www.researchgate.net/profile/Ana-Beatriz-De-Oliveira-4" class="team__link" target="_blank">
@@ -521,6 +506,7 @@
           </div>
         </section>
 
+        
         <div class="arrow _up">
           <div class="arrow__item">
             <svg viewBox="0 0 490.656 490.656">
@@ -536,10 +522,18 @@
                                     C491.696,131.368,491.696,124.605,487.536,120.445z" />
             </svg>
           </div>
-        </div>
-
+        </div>     
+      
       </div>
-
+      <footer class="footer">
+        <div class="footer-container">
+            <div class="footer__version">WCO-Lite 2.6. </div>
+          <div class="need__help"><span><a
+                href="https://mndi.museunacional.ufrj.br/aracnologia/WCO/Site/WCO-Lite%20hub.html"
+                target="_blank">Scope, completion,</br> terminology and versions</a></span>
+          </div>
+        </div>       
+      </footer>
     </div>
     <div class="popup-about">
       <div class="popup-about__container">

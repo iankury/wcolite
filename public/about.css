@@ -1,0 +1,404 @@
+.container {
+  padding: 50px 15px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.about-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+/* ABOUT MAIN-MENU------------- */
+
+.main-menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+}
+
+.main-menu a {
+  color: #fff;
+  font-size: 70px;
+  font-family: Rbold;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+.main-menu a:hover {
+  color: #0076FF;
+  transition: 0.2s;
+}
+
+.main-menu-link {
+  position: relative;
+  margin: 40px 0px;
+}
+
+.sub-link a {
+  font-size: 40px;
+}
+
+.about .main-menu {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 1;
+}
+
+.about .main-menu a {
+  position: relative;
+  z-index: 2;
+  color: #302E2E;
+}
+
+.about .main-menu a:hover {
+  color: #0076FF;
+}
+
+.about .main-menu a._active {
+  color: #0076FF;
+}
+
+
+
+
+/* ABOUT MENU------------ */
+
+.about__header {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 10;
+  top: 0;
+}
+
+.about__menu {
+  margin: 30px 0px;
+  display: flex;
+}
+
+.about-logo {
+  margin-top: 50px;
+  font-size: 20px;
+  font-family: Rbold;
+  color: #302E2E;
+}
+
+.about-logo a{
+  color: #302E2E;
+}
+
+.about-logo span {
+  color: #0076FF;
+}
+
+.about__menu-link {
+  margin-right: 20px;
+  font-family: Rbold;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.about__menu-link._active {
+  opacity: 1;
+}
+
+.about__menu-link:hover {
+  opacity: 1;
+}
+
+
+
+/* ABOUT CONTENT--------------- */
+
+.about__text {
+  position: relative;
+  font-size: 16px;
+  line-height: 140%;
+  z-index: 2;
+}
+
+.about__introduction {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about__introduction-block {
+  margin: 0px 0px 80px 0px;
+  max-width: 600px;
+}
+
+.about__text h3 {
+  font-family: Rbold;
+  font-size: 19px;
+  text-transform: uppercase;
+  margin: 30px 0px;
+  line-height: 130%;
+}
+
+.about__introduction-block button {
+  margin-top: 30px;
+  border-radius: 30px;
+  color: #0076FF;
+  border: 2px solid #0076FF;
+  padding: 15px 25px;
+  font-size: 18;
+  font-family: Rbold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.about__introduction-block button:hover {
+  background-color: #eeeeee;
+}
+
+
+/* TEAM-------------- */
+
+.team__cards {
+  margin: 40px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.team__cards-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.team__cards-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 30px 35px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: box-shadow 0.4s;
+  margin: 20px;
+  max-width: 250px;
+  min-width: 220px;
+  flex: 1 1;
+}
+
+body._dark-mode .team__cards-item {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+
+.team__cards-item:hover {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.team__cards-item:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: #0076FF;
+  transition: 0.4s;
+}
+
+.team__image {
+  position: relative;
+  height: 135px;
+  width: 135px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.team__image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.team__name {
+  margin: 15px 0px 5px 0px;
+  max-width: 140px;
+  text-align: center;
+  font-family: Rbold;
+  letter-spacing: 1px;
+  font-size: 14px;
+  flex: 1 1;
+
+}
+
+.team__job {
+  font-size: 12px;
+  font-family: Rregular;
+  text-align: center;
+
+}
+
+.team__info {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  margin-top: 5px;
+
+}
+
+.team__link {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin-top: 5px;
+}
+
+.team__link svg {
+  width: 100%;
+  height: 100%;
+  fill: rgba(0, 0, 0, 0.2);
+  transition: 0.4s;
+}
+
+body._dark-mode .team__link svg {
+  fill: rgba(255, 255, 255, 0.4);
+}
+
+.team__link:hover svg {
+  fill: #0076FF;
+}
+
+body._dark-mode .team__link:hover svg {
+  fill: #0076FF;
+}
+
+.arrow._up {
+  transform: translate(0) rotate(180deg);
+}
+
+.team__cards-row._coders {
+  margin: 30px 0px 0px 0px;
+}
+
+
+
+/* ABOUT FOOTER-------------- */
+.about__footer {
+  background-color: #302E2E;
+  width: 100vw;
+  color: #fff;
+  bottom: 0;
+}
+
+
+.popup-about {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+}
+
+.popup-about._active {
+  z-index: 500;
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-about__container {
+  position: relative;
+  padding: 50px;
+  margin: auto;
+  max-width: 800px;
+  background-color: #fff;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  transition: 0.4s;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10%);
+}
+
+body._dark-mode .popup-about__container {
+  background-color: #111111;
+  color: #fff;
+}
+
+.popup-about._active .popup-about__container {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.popup-about__close {
+  align-self: flex-end;
+  display: inline-block;
+  text-align: right;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+}
+
+.popup-about__close svg {
+  width: 30px;
+  fill: #0076FF;
+  transition: 0.4s;
+  border-radius: 100px;
+}
+
+.popup-about__close:hover svg {
+  background: #eeeeee;
+}
+
+body._dark-mode .popup-about__close:hover svg {
+  background: #222222;
+}
+
+.popup-aboout__title {
+  font-family: PDbold;
+  font-size: 20px;
+  margin: 0px 0px 20px 0px;
+}
+
+.popup-about__text {
+  font-size: 14px;
+  line-height: 150%;
+  text-align: justify;
+}
+
+.popup-about__text p {
+  margin: 15px 0px;
+}
+
+.popup-about__text a {
+  color: #0076FF;
+  font-family: Rbold;
+}
+
+.popup-about__text a:visited {
+  opacity: 0.7;
+}
+
+.popup-about__text li {
+  margin: 7px 0px;
+}

@@ -2,14 +2,17 @@ const Chart = (mode = "normal") => {
   wwidth = window.innerWidth;
   wheight = window.innerHeight;
   const mb = wheight > wwidth;
-  const treeFontSize = 0.0015 * wheight;
-  dx = wheight / (mb ? 500 : 340);
-  dy = wwidth / (mb ? 10 : 90);
+  const treeFontSize = 0.0013 * wheight;
+  // dx = wheight / (mb ? 500 : 340);
+  // dy = wwidth / (mb ? 100 : 50);
+  dy = 15;
+  dx = 2;
+
   const vbw = wwidth;
   const vbh = wheight;
   margin = {
     top: "0",
-    left: wwidth / (mb ? 55 : 150),
+    left: wwidth / (mb ? 65 : 130),
     bottom: "auto",
     right: "auto",
   };

@@ -21,7 +21,7 @@ $(".arrow._down").click(() => {
 });
 
 $(".arrow._up").click(() => {
-  $(".wrapper")[0].scrollIntoView({ behavior: "smooth" });
+  $(".variable__container")[0].scrollIntoView({ behavior: "smooth" });
 });
 
 $(".dark-mode-button").click(() => {
@@ -33,11 +33,11 @@ $(".dark-mode-button").click(() => {
   }
 });
 
-$(window).on("scroll", function () {
-  if (window.scrollY > $(window).height()) {
-    $(".dark-mode-button").addClass("_visible");
-  }
-  if (window.scrollY < $(window).height()) {
-    $(".dark-mode-button").removeClass("_visible");
-  }
-});
+// $(window).on("scroll", function () {
+//   if (window.scrollY > $(window).height()) {
+//     $(".dark-mode-button").addClass("_visible");
+//   }
+//   if (window.scrollY < $(window).height()) {
+//     $(".dark-mode-button").removeClass("_visible");
+//   }
+// });
