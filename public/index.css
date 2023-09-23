@@ -227,6 +227,7 @@ body._dark-mode .help-button svg {
 
 .data-header{
   margin-top: 100px;
+  padding-left: 20px;
 }
 
 #data {
@@ -518,8 +519,15 @@ body._dark-mode .data-card__info{
 
 .data-card__info-label{
   font-family: Rbold;
-  width: 150px;
+  min-width: 150px !important;
   margin-right: 15px;
+}
+
+.LSID a{
+  color:#1F925B;
+}
+body._dark-mode .LSID a {
+  color: #B5E92F;
 }
 
 .card__info-row{
@@ -539,6 +547,29 @@ body._dark-mode .data-card__info{
   background-color: #e4e4e4;
   transition: 0.2s;
 }
+
+#logonymy li{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.qlink{
+  cursor: pointer;
+  /* text-decoration: underline; */
+}
+
+
+.qlink:hover{
+  color:#1F925B;
+}
+
+#logonymy li span{
+  position: relative;
+  margin: 0px 5px;
+}
+
 
 body._dark-mode .card__info-row:after{
   background-color: #121212;
@@ -580,12 +611,12 @@ body._dark-mode .data-card__references {
 
 .relationship_tag {
   background-color: #1F925B;
-  color: #222222;
+  color: #fff;
 }
 
 .aponym_tag {
   background-color: #e55050;
-  color: #222222;
+  color: #fff;
 }
 
 li {

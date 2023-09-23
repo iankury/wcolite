@@ -47,9 +47,9 @@ const StripDagger = (s) => {
 };
 const IsDigitCode = (n) => n >= "0".charCodeAt(0) && n <= "9".charCodeAt(0);
 const NameAuthorYearLink = (x) =>
-  `<div class="qlink">${x.original_html}</div> ${x.stripped_author_year}`;
+  `<span class="qlink">${x.original_html}</span> ${x.stripped_author_year}`;
 const NameAuthorYear = (x) => `${x.original_html} ${x.stripped_author_year}`;
-const NameLink = (s) => `<div class="qlink">${s}</div>`;
+const NameLink = (s) => `<span class="qlink">${s}</span>`;
 
 const cache = new LRU(10000);
 let jsonTree;
@@ -915,4 +915,4 @@ function Debug() {
 }
 
 // SaveJsonForDebug();
-// Debug();
+//Debug();

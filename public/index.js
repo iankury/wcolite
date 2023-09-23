@@ -511,3 +511,5 @@ function strUpTo(s, threshold) {
   if (idx >= 0) s = s.substr(0, idx);
   return s;
 }
+
+//Despiroides

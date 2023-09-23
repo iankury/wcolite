@@ -171,12 +171,6 @@
   border-radius: 30px;
   padding: 13px 37px;
   background-color: #96c324;
-  /* background: rgb(181, 233, 47);
-    background: -moz-linear-gradient(77deg, rgba(181, 233, 47, 1) 3%, rgba(31, 146, 91, 1) 100%);
-    background: -webkit-linear-gradient(77deg, rgba(181, 233, 47, 1) 3%, rgba(31, 146, 91, 1) 100%);
-    background: linear-gradient(77deg, rgba(181, 233, 47, 1) 3%, rgba(31, 146, 91, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b5e92f", endColorstr="#1f925b", GradientType=1); */
-
 }
 
 .offer button:hover{
@@ -227,6 +221,18 @@
   .offer p {
     font-size: 12px;
   }
+ 
+}
+
+@media (max-width: 680px){
+  .button-start{
+    font-size: 12px;
+    padding: 15px 18px;
+  }
+  .header__logo {
+    font-size: 17px;
+  }
+
 }
 
 @media (max-width: 400px) {
@@ -247,9 +253,12 @@
     font-size: 15px;
   }
   .header__logo {
-    text-align: center;
     margin: 0px 0px 10px 0px;
+    font-size: 15px;
   }
+    .header__logo p{
+      font-size: 12px;
+    }
   
 }
 
