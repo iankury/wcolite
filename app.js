@@ -74,7 +74,6 @@ const supportedRelationships = [
   "homonym",
   "unnecessary replacement for",
   "family-group name original form",
-  "incertae sedis",
 ];
 
 function ShortRefFromObj(x, type) {
@@ -400,9 +399,6 @@ function AddRelationship(
         interpolation = "is an ";
         receiver = seniorObj;
         break;
-      case "incertae sedis":
-        interpolation = "in ";
-        receiver = seniorObj;
     }
     if (!receiver["valid"])
       receiver = unifiedJson[receiver["valid_taxon_name_id"]];
