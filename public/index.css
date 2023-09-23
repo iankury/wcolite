@@ -557,7 +557,7 @@ body._dark-mode .LSID a {
 
 .qlink{
   cursor: pointer;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 
