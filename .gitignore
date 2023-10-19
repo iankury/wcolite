@@ -4,7 +4,11 @@ build/
 node_modules/
 jsonfromapi.json
 package-lock.json
+count.html
+list.html
 secret.txt
+secret_list.txt
+secret_count.txt
 pinha.txt
 tree.txt
 wcolite.sln

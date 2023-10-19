@@ -1,0 +1,1610 @@
+{
+  "DZA": {
+    "name": "Algeria",
+    "continent": "Africa"
+  },
+  "AGO": {
+    "name": "Angola",
+    "continent": "Africa"
+  },
+  "BEN": {
+    "name": "Benin",
+    "continent": "Africa"
+  },
+  "BWA": {
+    "name": "Botswana",
+    "continent": "Africa"
+  },
+  "BFA": {
+    "name": "Burkina Faso (ren. Upper Volta 1984)",
+    "continent": "Africa"
+  },
+  "BDI": {
+    "name": "Burundi",
+    "continent": "Africa"
+  },
+  "CPV": {
+    "name": "Cabo Verde",
+    "continent": "Africa"
+  },
+  "CMR": {
+    "name": "Cameroon",
+    "continent": "Africa"
+  },
+  "CAF": {
+    "name": "Central African Republic",
+    "continent": "Africa"
+  },
+  "TCD": {
+    "name": "Chad",
+    "continent": "Africa"
+  },
+  "COM": {
+    "name": "Comoros",
+    "continent": "Africa"
+  },
+  "COG": {
+    "name": "Congo",
+    "continent": "Africa"
+  },
+  "COD": {
+    "name": "Congo, the Democratic Republic of the (ren. Zaire 1997)",
+    "continent": "Africa"
+  },
+  "CIV": {
+    "name": "Côte d'Ivoire",
+    "continent": "Africa"
+  },
+  "DJI": {
+    "name": "Djibouti",
+    "continent": "Africa"
+  },
+  "EGY": {
+    "name": "Egypt",
+    "continent": "Africa"
+  },
+  "GNQ": {
+    "name": "Equatorial Guinea",
+    "continent": "Africa"
+  },
+  "ERI": {
+    "name": "Eritrea (sep. Ethiopia 1991)",
+    "continent": "Africa"
+  },
+  "ES-CN*": {
+    "name": "Canary Islands (Spain)",
+    "continent": "Africa"
+  },
+  "ETH": {
+    "name": "Ethiopia",
+    "continent": "Africa"
+  },
+  "GAB": {
+    "name": "Gabon",
+    "continent": "Africa"
+  },
+  "GMB": {
+    "name": "Gambia",
+    "continent": "Africa"
+  },
+  "GHA": {
+    "name": "Ghana",
+    "continent": "Africa"
+  },
+  "GHO": {
+    "name": "Nomina dubia",
+    "continent": "Ghost"
+  },
+  "GIN": {
+    "name": "Guinea",
+    "continent": "Africa"
+  },
+  "GNB": {
+    "name": "Guinea-Bissau",
+    "continent": "Africa"
+  },
+  "KEN": {
+    "name": "Kenya",
+    "continent": "Africa"
+  },
+  "KOS": {
+    "name": "Kosovo (sep. Serbia 2008)",
+    "continent": "Europe"
+  },
+  "LSO": {
+    "name": "Lesotho",
+    "continent": "Africa"
+  },
+  "LBR": {
+    "name": "Liberia",
+    "continent": "Africa"
+  },
+  "LBY": {
+    "name": "Libya",
+    "continent": "Africa"
+  },
+  "MDG": {
+    "name": "Madagascar",
+    "continent": "Africa"
+  },
+  "MAC":{
+    "name": "Macaronesia",
+    "continent": "Africa"
+  },
+  "MWI": {
+    "name": "Malawi",
+    "continent": "Africa"
+  },
+  "MLI": {
+    "name": "Mali",
+    "continent": "Africa"
+  },
+  "MRT": {
+    "name": "Mauritania",
+    "continent": "Africa"
+  },
+  "MUS": {
+    "name": "Mauritius",
+    "continent": "Africa"
+  },
+  "MYT": {
+    "name": "Mayotte",
+    "continent": "Africa"
+  },
+  "MAC": {
+    "name": "Macaronesia",
+    "continent": "Africa"
+  },
+  "MAR": {
+    "name": "Morocco",
+    "continent": "Africa"
+  },
+  "MOZ": {
+    "name": "Mozambique",
+    "continent": "Africa"
+  },
+  "NAM": {
+    "name": "Namibia",
+    "continent": "Africa"
+  },
+  "NER": {
+    "name": "Niger",
+    "continent": "Africa"
+  },
+  "NGA": {
+    "name": "Nigeria",
+    "continent": "Africa"
+  },
+  "PT-30": {
+    "name": "Madeira and Savage Islands (Portugal)",
+    "continent": "Africa"
+  },
+  "REU": {
+    "name": "Réunion",
+    "continent": "Africa"
+  },
+  "RWA": {
+    "name": "Rwanda",
+    "continent": "Africa"
+  },
+  "SHN": {
+    "name": "Saint Helena, Ascension and Tristan da Cunha",
+    "continent": "Africa"
+  },
+  "STP": {
+    "name": "Sao Tome and Principe",
+    "continent": "Africa"
+  },
+  "SEN": {
+    "name": "Senegal",
+    "continent": "Africa"
+  },
+  "SYC": {
+    "name": "Seychelles",
+    "continent": "Africa"
+  },
+  "SLE": {
+    "name": "Sierra Leone",
+    "continent": "Africa"
+  },
+  "SOM": {
+    "name": "Somalia",
+    "continent": "Africa"
+  },
+  "ZAF": {
+    "name": "South Africa",
+    "continent": "Africa"
+  },
+  "SSD": {
+    "name": "South Sudan",
+    "continent": "Africa"
+  },
+  "SDN": {
+    "name": "Sudan",
+    "continent": "Africa"
+  },
+  "SWZ": {
+    "name": "Eswatini (ren. Swaziland 2018)",
+    "continent": "Africa"
+  },
+  "TZA": {
+    "name": "Tanzania, United Republic of",
+    "continent": "Africa"
+  },
+  "TGO": {
+    "name": "Togo",
+    "continent": "Africa"
+  },
+  "TUN": {
+    "name": "Tunisia",
+    "continent": "Africa"
+  },
+  "UGA": {
+    "name": "Uganda",
+    "continent": "Africa"
+  },
+  "ESH": {
+    "name": "Western Sahara",
+    "continent": "Africa"
+  },
+  "ZMB": {
+    "name": "Zambia",
+    "continent": "Africa"
+  },
+  "ZWE": {
+    "name": "Zimbabwe",
+    "continent": "Africa"
+  },
+  "ATA": {
+    "name": "Antarctica",
+    "continent": "Antarctica"
+  },
+  "BVT": {
+    "name": "Bouvet Island",
+    "continent": "Antarctica"
+  },
+  "ATF": {
+    "name": "French Southern Territories",
+    "continent": "Antarctica"
+  },
+  "HMD": {
+    "name": "Heard Island and McDonald Islands",
+    "continent": "Antarctica"
+  },
+  "SGS": {
+    "name": "South Georgia and the South Sandwich Islands",
+    "continent": "Antarctica"
+  },
+  "AFG": {
+    "name": "Afghanistan",
+    "continent": "Asia"
+  },
+  "ARM": {
+    "name": "Armenia",
+    "continent": "Asia"
+  },
+  "AZE": {
+    "name": "Azerbaijan",
+    "continent": "Asia"
+  },
+  "BHR": {
+    "name": "Bahrain",
+    "continent": "Asia"
+  },
+  "BGD": {
+    "name": "Bangladesh",
+    "continent": "Asia"
+  },
+  "BTN": {
+    "name": "Bhutan",
+    "continent": "Asia"
+  },
+  "IOT": {
+    "name": "British Indian Ocean Territory",
+    "continent": "Asia"
+  },
+  "BRN": {
+    "name": "Brunei Darussalam",
+    "continent": "Asia"
+  },
+  "KHM": {
+    "name": "Cambodia",
+    "continent": "Asia"
+  },
+  "CHN": {
+    "name": "China",
+    "continent": "Asia"
+  },
+  "CXR": {
+    "name": "Christmas Island",
+    "continent": "Asia"
+  },
+  "CCK": {
+    "name": "Cocos (Keeling) Islands",
+    "continent": "Asia"
+  },
+  "GEO": {
+    "name": "Georgia",
+    "continent": "Asia"
+  },
+  "HKG": {
+    "name": "Hong Kong",
+    "continent": "Asia"
+  },
+  "IND": {
+    "name": "India",
+    "continent": "Asia"
+  },
+  "IDN": {
+    "name": "Indonesia",
+    "continent": "Asia"
+  },
+  "IRN": {
+    "name": "Iran",
+    "continent": "Asia"
+  },
+  "IRQ": {
+    "name": "Iraq",
+    "continent": "Asia"
+  },
+  "ISR": {
+    "name": "Israel",
+    "continent": "Asia"
+  },
+  "JPN": {
+    "name": "Japan",
+    "continent": "Asia"
+  },
+  "JOR": {
+    "name": "Jordan",
+    "continent": "Asia"
+  },
+  "KAZ": {
+    "name": "Kazakhstan",
+    "continent": "Asia"
+  },
+  "PRK": {
+    "name": "Korea, Democratic People's Republic of [North]",
+    "continent": "Asia"
+  },
+  "KOR": {
+    "name": "Korea, Republic of [South]",
+    "continent": "Asia"
+  },
+  "KWT": {
+    "name": "Kuwait",
+    "continent": "Asia"
+  },
+  "KGZ": {
+    "name": "Kyrgyzstan",
+    "continent": "Asia"
+  },
+  "LAO": {
+    "name": "Lao People's Democratic Republic",
+    "continent": "Asia"
+  },
+  "LBN": {
+    "name": "Lebanon",
+    "continent": "Asia"
+  },
+  "MYS": {
+    "name": "Malaysia",
+    "continent": "Asia"
+  },
+  "MDV": {
+    "name": "Maldives",
+    "continent": "Asia"
+  },
+  "MNG": {
+    "name": "Mongolia",
+    "continent": "Asia"
+  },
+  "MMR": {
+    "name": "Myanmar (ren. Burma 1989)",
+    "continent": "Asia"
+  },
+  "NPL": {
+    "name": "Nepal",
+    "continent": "Asia"
+  },
+  "OMN": {
+    "name": "Oman",
+    "continent": "Asia"
+  },
+  "PAK": {
+    "name": "Pakistan",
+    "continent": "Asia"
+  },
+  "PSE": {
+    "name": "Palestine, State of (sep. Israel 1988, recogn. 2012)",
+    "continent": "Asia"
+  },
+  "PHL": {
+    "name": "Philippines",
+    "continent": "Asia"
+  },
+  "QAT": {
+    "name": "Qatar",
+    "continent": "Asia"
+  },
+  "SAU": {
+    "name": "Saudi Arabia",
+    "continent": "Asia"
+  },
+  "SGP": {
+    "name": "Singapore",
+    "continent": "Asia"
+  },
+  "LKA": {
+    "name": "Sri Lanka",
+    "continent": "Asia"
+  },
+  "SYR": {
+    "name": "Syrian Arab Republic",
+    "continent": "Asia"
+  },
+  "TWN": {
+    "name": "Taiwan",
+    "continent": "Asia"
+  },
+  "TJK": {
+    "name": "Tajikistan",
+    "continent": "Asia"
+  },
+  "THA": {
+    "name": "Thailand",
+    "continent": "Asia"
+  },
+  "TUR": {
+    "name": "Turkey",
+    "continent": "Eurasia"
+  },
+  "TKM": {
+    "name": "Turkmenistan",
+    "continent": "Asia"
+  },
+  "ARE": {
+    "name": "United Arab Emirates",
+    "continent": "Asia"
+  },
+  "UZB": {
+    "name": "Uzbekistan",
+    "continent": "Asia"
+  },
+  "VNM": {
+    "name": "Vietnam",
+    "continent": "Asia"
+  },
+  "YEM": {
+    "name": "Yemen",
+    "continent": "Asia"
+  },
+  "RUS": {
+    "name": "Russian Federation",
+    "continent": "Eurasia"
+  },
+  "AIA": {
+    "name": "Anguilla",
+    "continent": "Central America & West Indies"
+  },
+  "ATG": {
+    "name": "Antigua and Barbuda",
+    "continent": "Central America & West Indies"
+  },
+  "ABW": {
+    "name": "Aruba",
+    "continent": "Central America & West Indies"
+  },
+  "BHS": {
+    "name": "Bahamas",
+    "continent": "Central America & West Indies"
+  },
+  "BRB": {
+    "name": "Barbados",
+    "continent": "Central America & West Indies"
+  },
+  "BLZ": {
+    "name": "Belize",
+    "continent": "Central America & West Indies"
+  },
+  "BMU": {
+    "name": "Bermuda",
+    "continent": "Central America & West Indies"
+  },
+  "BES": {
+    "name": "Bonaire, Sint Eustatius and Saba",
+    "continent": "Central America & West Indies"
+  },
+  "CYM": {
+    "name": "Cayman Islands",
+    "continent": "Central America & West Indies"
+  },
+  "CRI": {
+    "name": "Costa Rica",
+    "continent": "Central America & West Indies"
+  },
+  "CUB": {
+    "name": "Cuba",
+    "continent": "Central America & West Indies"
+  },
+  "CUW": {
+    "name": "Curaçao",
+    "continent": "Central America & West Indies"
+  },
+  "DMA": {
+    "name": "Dominica",
+    "continent": "Central America & West Indies"
+  },
+  "DOM": {
+    "name": "Dominican Republic",
+    "continent": "Central America & West Indies"
+  },
+  "SLV": {
+    "name": "El Salvador",
+    "continent": "Central America & West Indies"
+  },
+  "GRL": {
+    "name": "Greenland (Kalaallit Nunaat)",
+    "continent": "North America"
+  },
+  "GRD": {
+    "name": "Grenada",
+    "continent": "Central America & West Indies"
+  },
+  "GLP": {
+    "name": "Guadeloupe",
+    "continent": "Central America & West Indies"
+  },
+  "GTM": {
+    "name": "Guatemala",
+    "continent": "Central America & West Indies"
+  },
+  "HTI": {
+    "name": "Haiti",
+    "continent": "Central America & West Indies"
+  },
+  "HND": {
+    "name": "Honduras",
+    "continent": "Central America & West Indies"
+  },
+  "JAM": {
+    "name": "Jamaica",
+    "continent": "Central America & West Indies"
+  },
+  "MTQ": {
+    "name": "Martinique",
+    "continent": "Central America & West Indies"
+  },
+  "MSR": {
+    "name": "Montserrat",
+    "continent": "Central America & West Indies"
+  },
+  "NIC": {
+    "name": "Nicaragua",
+    "continent": "Central America & West Indies"
+  },
+  "PAN": {
+    "name": "Panama",
+    "continent": "Central America & West Indies"
+  },
+  "PRI": {
+    "name": "Puerto Rico",
+    "continent": "Central America & West Indies"
+  },
+  "BLM": {
+    "name": "Saint Barthélemy",
+    "continent": "Central America & West Indies"
+  },
+  "KNA": {
+    "name": "Saint Kitts and Nevis",
+    "continent": "Central America & West Indies"
+  },
+  "LCA": {
+    "name": "Saint Lucia",
+    "continent": "Central America & West Indies"
+  },
+  "MAF": {
+    "name": "Saint Martin (French part)",
+    "continent": "Central America & West Indies"
+  },
+  "SPM": {
+    "name": "Saint Pierre and Miquelon",
+    "continent": "Central America & West Indies"
+  },
+  "VCT": {
+    "name": "Saint Vincent and the Grenadines",
+    "continent": "Central America & West Indies"
+  },
+  "SXM": {
+    "name": "Sint Maarten (Dutch part)",
+    "continent": "Central America & West Indies"
+  },
+  "TCA": {
+    "name": "Turks and Caicos Islands",
+    "continent": "Central America & West Indies"
+  },
+  "VGB": {
+    "name": "Virgin Islands, British",
+    "continent": "Central America & West Indies"
+  },
+  "VIR": {
+    "name": "Virgin Islands, U.S.",
+    "continent": "Central America & West Indies"
+  },
+  "ALA": {
+    "name": "Åland Islands (Finland)",
+    "continent": "Europe"
+  },
+  "ALB": {
+    "name": "Albania",
+    "continent": "Europe"
+  },
+  "AND": {
+    "name": "Andorra",
+    "continent": "Europe"
+  },
+  "AUT": {
+    "name": "Austria",
+    "continent": "Europe"
+  },
+  "BLR": {
+    "name": "Belarus",
+    "continent": "Europe"
+  },
+  "BEL": {
+    "name": "Belgium",
+    "continent": "Europe"
+  },
+  "BIH": {
+    "name": "Bosnia and Herzegovina (sep. Yugoslavia 1992)",
+    "continent": "Europe"
+  },
+  "BGR": {
+    "name": "Bulgaria",
+    "continent": "Europe"
+  },
+  "HRV": {
+    "name": "Croatia (sep. Yugoslavia 1991)",
+    "continent": "Europe"
+  },
+  "CYP": {
+    "name": "Cyprus",
+    "continent": "Europe"
+  },
+  "CZE": {
+    "name": "Czechia (sep. Czechoslovakia 1993)",
+    "continent": "Europe"
+  },
+  "DNK": {
+    "name": "Denmark",
+    "continent": "Europe"
+  },
+  "EST": {
+    "name": "Estonia",
+    "continent": "Europe"
+  },
+  "FRO": {
+    "name": "Faroe Islands",
+    "continent": "Europe"
+  },
+  "FIN": {
+    "name": "Finland",
+    "continent": "Europe"
+  },
+  "FRA": {
+    "name": "France",
+    "continent": "Europe"
+  },
+  "DEU": {
+    "name": "Germany",
+    "continent": "Europe"
+  },
+  "GIB": {
+    "name": "Gibraltar",
+    "continent": "Europe"
+  },
+  "GRC": {
+    "name": "Greece",
+    "continent": "Europe"
+  },
+  "GGY": {
+    "name": "Guernsey (UK)",
+    "continent": "Europe"
+  },
+  "VAT": {
+    "name": "Holy See (Vatican City State)",
+    "continent": "Europe"
+  },
+  "HUN": {
+    "name": "Hungary",
+    "continent": "Europe"
+  },
+  "ISL": {
+    "name": "Iceland",
+    "continent": "Europe"
+  },
+  "IRL": {
+    "name": "Ireland",
+    "continent": "Europe"
+  },
+  "IMN": {
+    "name": "Isle of Man",
+    "continent": "Europe"
+  },
+  "ITA": {
+    "name": "Italy",
+    "continent": "Europe"
+  },
+  "JEY": {
+    "name": "Jersey (UK)",
+    "continent": "Europe"
+  },
+  "LVA": {
+    "name": "Latvia",
+    "continent": "Europe"
+  },
+  "LIE": {
+    "name": "Liechtenstein",
+    "continent": "Europe"
+  },
+  "LTU": {
+    "name": "Lithuania",
+    "continent": "Europe"
+  },
+  "LUX": {
+    "name": "Luxembourg",
+    "continent": "Europe"
+  },
+  "MKD": {
+    "name": "North Macedonia (ren. Macedonia 2019)",
+    "continent": "Europe"
+  },
+  "MLT": {
+    "name": "Malta",
+    "continent": "Europe"
+  },
+  "MDA": {
+    "name": "Moldova (sep. USSR 1991)",
+    "continent": "Europe"
+  },
+  "MCO": {
+    "name": "Monaco",
+    "continent": "Europe"
+  },
+  "MNE": {
+    "name": "Montenegro",
+    "continent": "Europe"
+  },
+  "NLD": {
+    "name": "Netherlands",
+    "continent": "Europe"
+  },
+  "NOR": {
+    "name": "Norway",
+    "continent": "Europe"
+  },
+  "POL": {
+    "name": "Poland",
+    "continent": "Europe"
+  },
+  "PRT": {
+    "name": "Portugal",
+    "continent": "Europe"
+  },
+  "PT-20": {
+    "name": "Azores (Portugal)",
+    "continent": "Europe"
+  },
+  "ROU": {
+    "name": "Romania",
+    "continent": "Europe"
+  },
+  "SMR": {
+    "name": "San Marino",
+    "continent": "Europe"
+  },
+  "SRB": {
+    "name": "Serbia",
+    "continent": "Europe"
+  },
+  "SVK": {
+    "name": "Slovakia (sep. Czechoslovakia 1993)",
+    "continent": "Europe"
+  },
+  "SVN": {
+    "name": "Slovenia (sep. Yugoslavia 1991)",
+    "continent": "Europe"
+  },
+  "ESP": {
+    "name": "Spain",
+    "continent": "Europe"
+  },
+  "SJM": {
+    "name": "Svalbard and Jan Mayen (Norway)",
+    "continent": "Europe"
+  },
+  "SWE": {
+    "name": "Sweden",
+    "continent": "Europe"
+  },
+  "CHE": {
+    "name": "Switzerland",
+    "continent": "Europe"
+  },
+  "UKR": {
+    "name": "Ukraine (incl. Crimea)",
+    "continent": "Europe"
+  },
+  "GBR": {
+    "name": "United Kingdom",
+    "continent": "Europe"
+  },
+  "CAN": {
+    "name": "Canada",
+    "continent": "North America"
+  },
+  "MEX": {
+    "name": "Mexico",
+    "continent": "North America"
+  },
+  "USA": {
+    "name": "United States of America",
+    "continent": "North America"
+  },
+  "ASM": {
+    "name": "American Samoa",
+    "continent": "Oceania"
+  },
+  "AUS": {
+    "name": "Australia",
+    "continent": "Oceania"
+  },
+  "COK": {
+    "name": "Cook Islands",
+    "continent": "Oceania"
+  },
+  "FJI": {
+    "name": "Fiji",
+    "continent": "Oceania"
+  },
+  "PYF": {
+    "name": "French Polynesia",
+    "continent": "Oceania"
+  },
+  "GUM": {
+    "name": "Guam",
+    "continent": "Oceania"
+  },
+  "KIR": {
+    "name": "Kiribati",
+    "continent": "Oceania"
+  },
+  "MHL": {
+    "name": "Marshall Islands",
+    "continent": "Oceania"
+  },
+  "FSM": {
+    "name": "Micronesia, Federated States of",
+    "continent": "Oceania"
+  },
+  "NRU": {
+    "name": "Nauru",
+    "continent": "Oceania"
+  },
+  "NCL": {
+    "name": "New Caledonia",
+    "continent": "Oceania"
+  },
+  "NZL": {
+    "name": "New Zealand",
+    "continent": "Oceania"
+  },
+  "NIU": {
+    "name": "Niue",
+    "continent": "Oceania"
+  },
+  "NFK": {
+    "name": "Norfolk Island",
+    "continent": "Oceania"
+  },
+  "MNP": {
+    "name": "Northern Mariana Islands",
+    "continent": "Oceania"
+  },
+  "PLW": {
+    "name": "Palau",
+    "continent": "Oceania"
+  },
+  "PNG": {
+    "name": "Papua New Guinea",
+    "continent": "Oceania"
+  },
+  "PCN": {
+    "name": "Pitcairn",
+    "continent": "Oceania"
+  },
+  "WSM": {
+    "name": "Samoa (ren. Western Samoa 1997)",
+    "continent": "Oceania"
+  },
+  "SLB": {
+    "name": "Solomon Islands",
+    "continent": "Oceania"
+  },
+  "TLS": {
+    "name": "Timor-Leste (sep. Indonesia 2002)",
+    "continent": "Oceania"
+  },
+  "TKL": {
+    "name": "Tokelau",
+    "continent": "Oceania"
+  },
+  "TON": {
+    "name": "Tonga",
+    "continent": "Oceania"
+  },
+  "TUV": {
+    "name": "Tuvalu",
+    "continent": "Oceania"
+  },
+  "UMI": {
+    "name": "United States Minor Outlying Islands",
+    "continent": "Oceania"
+  },
+  "VUT": {
+    "name": "Vanuatu",
+    "continent": "Oceania"
+  },
+  "WLF": {
+    "name": "Wallis and Futuna",
+    "continent": "Oceania"
+  },
+  "ARG": {
+    "name": "Argentina",
+    "continent": "South America"
+  },
+  "BOL": {
+    "name": "Bolivia, Plurinational State of",
+    "continent": "South America"
+  },
+  "BRA": {
+    "name": "Brazil, without further locality data",
+    "continent": "South America"
+  },
+  "CHL": {
+    "name": "Chile",
+    "continent": "South America"
+  },
+  "COL": {
+    "name": "Colombia",
+    "continent": "South America"
+  },
+  "ECU": {
+    "name": "Ecuador",
+    "continent": "South America"
+  },
+  "FLK": {
+    "name": "Falkland Islands (Malvinas)",
+    "continent": "South America"
+  },
+  "GUF": {
+    "name": "French Guiana",
+    "continent": "South America"
+  },
+  "GUY": {
+    "name": "Guyana",
+    "continent": "South America"
+  },
+  "PRY": {
+    "name": "Paraguay",
+    "continent": "South America"
+  },
+  "PER": {
+    "name": "Peru",
+    "continent": "South America"
+  },
+  "SUR": {
+    "name": "Suriname",
+    "continent": "South America"
+  },
+  "TTO": {
+    "name": "Trinidad and Tobago",
+    "continent": "South America"
+  },
+  "URY": {
+    "name": "Uruguay",
+    "continent": "South America"
+  },
+  "VEN": {
+    "name": "Venezuela, Bolivarian Republic of",
+    "continent": "South America"
+  },
+  "BR-AC": {
+    "name": "Brazil:Acre",
+    "continent": "South America"
+  },
+  "BR-AL": {
+    "name": "Brazil:Alagoas",
+    "continent": "South America"
+  },
+  "BR-AP": {
+    "name": "Brazil:Amapá",
+    "continent": "South America"
+  },
+  "BR-AM": {
+    "name": "Brazil:Amazonas",
+    "continent": "South America"
+  },
+  "BR-BA": {
+    "name": "Brazil:Bahia",
+    "continent": "South America"
+  },
+  "BR-CE": {
+    "name": "Brazil:Ceará",
+    "continent": "South America"
+  },
+  "BR-DF": {
+    "name": "Brazil:Distrito Federal",
+    "continent": "South America"
+  },
+  "BR-ES": {
+    "name": "Brazil:Espírito Santo",
+    "continent": "South America"
+  },
+  "BR-GO": {
+    "name": "Brazil:Goiás (incl. Distr. Federal)",
+    "continent": "South America"
+  },
+  "BR-MA": {
+    "name": "Brazil:Maranhão",
+    "continent": "South America"
+  },
+  "BR-MT": {
+    "name": "Brazil:Mato Grosso",
+    "continent": "South America"
+  },
+  "BR-MS": {
+    "name": "Brazil:Mato Grosso do Sul (sep. Mato Grosso 1977)",
+    "continent": "South America"
+  },
+  "BR-MG": {
+    "name": "Brazil:Minas Gerais",
+    "continent": "South America"
+  },
+  "BR-PA": {
+    "name": "Brazil:Pará",
+    "continent": "South America"
+  },
+  "BR-PB": {
+    "name": "Brazil:Paraíba",
+    "continent": "South America"
+  },
+  "BR-PR": {
+    "name": "Brazil:Paraná",
+    "continent": "South America"
+  },
+  "BR-PE": {
+    "name": "Brazil:Pernambuco",
+    "continent": "South America"
+  },
+  "BR-PI": {
+    "name": "Brazil:Piauí",
+    "continent": "South America"
+  },
+  "BR-RJ": {
+    "name": "Brazil:Rio de Janeiro",
+    "continent": "South America"
+  },
+  "BR-RN": {
+    "name": "Brazil:Rio Grande do Norte",
+    "continent": "South America"
+  },
+  "BR-RS": {
+    "name": "Brazil:Rio Grande do Sul",
+    "continent": "South America"
+  },
+  "BR-RO": {
+    "name": "Brazil:Rondônia",
+    "continent": "South America"
+  },
+  "BR-RR": {
+    "name": "Brazil:Roraima",
+    "continent": "South America"
+  },
+  "BR-SC": {
+    "name": "Brazil:Santa Catarina",
+    "continent": "South America"
+  },
+  "BR-SP": {
+    "name": "Brazil:São Paulo",
+    "continent": "South America"
+  },
+  "BR-SE": {
+    "name": "Brazil:Sergipe",
+    "continent": "South America"
+  },
+  "BR-TO": {
+    "name": "Brazil:Tocantins (sep. Goiás 1988)",
+    "continent": "South America"
+  },
+  "VE-AM": {
+    "name": "Venezuela:Amazonas",
+    "continent": "South America"
+  },
+  "VE-AN": {
+    "name": "Venezuela:Anzoátegui",
+    "continent": "South America"
+  },
+  "VE-AP": {
+    "name": "Venezuela:Apure",
+    "continent": "South America"
+  },
+  "VE-AR": {
+    "name": "Venezuela:Aragua",
+    "continent": "South America"
+  },
+  "VE-BA": {
+    "name": "Venezuela:Barinas",
+    "continent": "South America"
+  },
+  "VE-BO": {
+    "name": "Venezuela:Bolívar",
+    "continent": "South America"
+  },
+  "VE-CA": {
+    "name": "Venezuela:Carabobo",
+    "continent": "South America"
+  },
+  "VE-CO": {
+    "name": "Venezuela:Cojedes",
+    "continent": "South America"
+  },
+  "VE-DA": {
+    "name": "Venezuela:Delta Amacuro",
+    "continent": "South America"
+  },
+  "VE-DP": {
+    "name": "Venezuela:Dependencias Federales",
+    "continent": "South America"
+  },
+  "VE-DC": {
+    "name": "Venezuela:Distrito Capital",
+    "continent": "South America"
+  },
+  "VE-FA": {
+    "name": "Venezuela:Falcón",
+    "continent": "South America"
+  },
+  "VE-GR": {
+    "name": "Venezuela:Guárico",
+    "continent": "South America"
+  },
+  "VE-GU": {
+    "name": "Venezuela:La Guaira (ren. Vargas 2019)",
+    "continent": "South America"
+  },
+  "VE-LA": {
+    "name": "Venezuela:Lara",
+    "continent": "South America"
+  },
+  "VE-MI": {
+    "name": "Venezuela:Miranda",
+    "continent": "South America"
+  },
+  "VE-MO": {
+    "name": "Venezuela:Monagas",
+    "continent": "South America"
+  },
+  "VE-ME": {
+    "name": "Venezuela:Mérida",
+    "continent": "South America"
+  },
+  "VE-NE": {
+    "name": "Venezuela:Nueva Esparta",
+    "continent": "South America"
+  },
+  "VE-PO": {
+    "name": "Venezuela:Portuguesa",
+    "continent": "South America"
+  },
+  "VE-SU": {
+    "name": "Venezuela:Sucre",
+    "continent": "South America"
+  },
+  "VE-TR": {
+    "name": "Venezuela:Trujillo",
+    "continent": "South America"
+  },
+  "VE-TA": {
+    "name": "Venezuela:Táchira",
+    "continent": "South America"
+  },
+  "VE-YA": {
+    "name": "Venezuela:Yaracuy",
+    "continent": "South America"
+  },
+  "VE-ZU": {
+    "name": "Venezuela:Zulia",
+    "continent": "South America"
+  },
+  "US-AL": {
+    "name": "USA:Alabama",
+    "continent": "North America"
+  },
+  "US-AK": {
+    "name": "USA:Alaska",
+    "continent": "North America"
+  },
+  "US-AZ": {
+    "name": "USA:Arizona",
+    "continent": "North America"
+  },
+  "US-AR": {
+    "name": "USA:Arkansas",
+    "continent": "North America"
+  },
+  "US-CA": {
+    "name": "USA:California",
+    "continent": "North America"
+  },
+  "US-CO": {
+    "name": "USA:Colorado",
+    "continent": "North America"
+  },
+  "US-CT": {
+    "name": "USA:Connecticut",
+    "continent": "North America"
+  },
+  "US-DE": {
+    "name": "USA:Delaware",
+    "continent": "North America"
+  },
+  "US-FL": {
+    "name": "USA:Florida",
+    "continent": "North America"
+  },
+  "US-GA": {
+    "name": "USA:Georgia",
+    "continent": "North America"
+  },
+  "US-HI": {
+    "name": "USA:Hawaii",
+    "continent": "North America"
+  },
+  "US-ID": {
+    "name": "USA:Idaho",
+    "continent": "North America"
+  },
+  "US-IL": {
+    "name": "USA:Illinois",
+    "continent": "North America"
+  },
+  "US-IN": {
+    "name": "USA:Indiana",
+    "continent": "North America"
+  },
+  "US-IA": {
+    "name": "USA:Iowa",
+    "continent": "North America"
+  },
+  "US-KS": {
+    "name": "USA:Kansas",
+    "continent": "North America"
+  },
+  "US-KY": {
+    "name": "USA:Kentucky",
+    "continent": "North America"
+  },
+  "US-LA": {
+    "name": "USA:Louisiana",
+    "continent": "North America"
+  },
+  "US-ME": {
+    "name": "USA:Maine",
+    "continent": "North America"
+  },
+  "US-MD": {
+    "name": "USA:Maryland",
+    "continent": "North America"
+  },
+  "US-MA": {
+    "name": "USA:Massachusetts",
+    "continent": "North America"
+  },
+  "US-MI": {
+    "name": "USA:Michigan",
+    "continent": "North America"
+  },
+  "US-MN": {
+    "name": "USA:Minnesota",
+    "continent": "North America"
+  },
+  "US-MS": {
+    "name": "USA:Mississippi",
+    "continent": "North America"
+  },
+  "US-MO": {
+    "name": "USA:Missouri",
+    "continent": "North America"
+  },
+  "US-MT": {
+    "name": "USA:Montana",
+    "continent": "North America"
+  },
+  "US-NE": {
+    "name": "USA:Nebraska",
+    "continent": "North America"
+  },
+  "US-NV": {
+    "name": "USA:Nevada",
+    "continent": "North America"
+  },
+  "US-NH": {
+    "name": "USA:New Hampshire",
+    "continent": "North America"
+  },
+  "US-NJ": {
+    "name": "USA:New Jersey",
+    "continent": "North America"
+  },
+  "US-NM": {
+    "name": "USA:New Mexico",
+    "continent": "North America"
+  },
+  "US-NY": {
+    "name": "USA:New York",
+    "continent": "North America"
+  },
+  "US-NC": {
+    "name": "USA:North Carolina",
+    "continent": "North America"
+  },
+  "US-ND": {
+    "name": "USA:North Dakota",
+    "continent": "North America"
+  },
+  "US-OH": {
+    "name": "USA:Ohio",
+    "continent": "North America"
+  },
+  "US-OK": {
+    "name": "USA:Oklahoma",
+    "continent": "North America"
+  },
+  "US-OR": {
+    "name": "USA:Oregon",
+    "continent": "North America"
+  },
+  "US-PA": {
+    "name": "USA:Pennsylvania",
+    "continent": "North America"
+  },
+  "US-RI": {
+    "name": "USA:Rhode Island",
+    "continent": "North America"
+  },
+  "US-SC": {
+    "name": "USA:South Carolina",
+    "continent": "North America"
+  },
+  "US-SD": {
+    "name": "USA:South Dakota",
+    "continent": "North America"
+  },
+  "US-TN": {
+    "name": "USA:Tennessee",
+    "continent": "North America"
+  },
+  "US-TX": {
+    "name": "USA:Texas",
+    "continent": "North America"
+  },
+  "US-UT": {
+    "name": "USA:Utah",
+    "continent": "North America"
+  },
+  "US-VT": {
+    "name": "USA:Vermont",
+    "continent": "North America"
+  },
+  "US-VA": {
+    "name": "USA:Virginia",
+    "continent": "North America"
+  },
+  "US-WA": {
+    "name": "USA:Washington",
+    "continent": "North America"
+  },
+  "US-WV": {
+    "name": "USA:West Virginia",
+    "continent": "North America"
+  },
+  "US-WI": {
+    "name": "USA:Wisconsin",
+    "continent": "North America"
+  },
+  "US-WY": {
+    "name": "USA:Wyoming",
+    "continent": "North America"
+  },
+  "US-DC": {
+    "name": "USA:District of Columbia",
+    "continent": "North America"
+  },
+  "ID-AC": {
+    "name": "Indonesia:Aceh",
+    "continent": "Asia"
+  },
+  "ID-BA": {
+    "name": "Indonesia:Bali",
+    "continent": "Asia"
+  },
+  "ID-BT*": {
+    "name": "Indonesia:Banten",
+    "continent": "Asia"
+  },
+  "ID-BE": {
+    "name": "Indonesia:Bengkulu",
+    "continent": "Asia"
+  },
+  "ID-GO": {
+    "name": "Indonesia:Gorontalo (sep. North Sulawesi 2000)",
+    "continent": "Asia"
+  },
+  "ID-JK": {
+    "name": "Indonesia:Jakarta Raya",
+    "continent": "Asia"
+  },
+  "ID-JA": {
+    "name": "Indonesia:Jambi",
+    "continent": "Asia"
+  },
+  "ID-JW*": {
+    "name": "Indonesia:Java, without further locality data",
+    "continent": "Asia"
+  },
+  "ID-JB": {
+    "name": "Indonesia:Jawa Barat (West Java)",
+    "continent": "Asia"
+  },
+  "ID-JT": {
+    "name": "Indonesia:Jawa Tengah (Central Java)",
+    "continent": "Asia"
+  },
+  "ID-JI": {
+    "name": "Indonesia:Jawa Timur (East Java)",
+    "continent": "Asia"
+  },
+  "ID-KA*": {
+    "name": "Borneo, without further locality data",
+    "continent": "Asia"
+  },
+  "ID-KB": {
+    "name": "Indonesia:Kalimantan Barat (West Kalimantan)",
+    "continent": "Asia"
+  },
+  "ID-KS": {
+    "name": "Indonesia:Kalimantan Selatan (South Kalimantan)",
+    "continent": "Asia"
+  },
+  "ID-KT": {
+    "name": "Indonesia:Kalimantan Tengah (Central Kalimantan)",
+    "continent": "Asia"
+  },
+  "ID-KI": {
+    "name": "Indonesia:Kalimantan Timur (East Kalimantan)",
+    "continent": "Asia"
+  },
+  "ID-KU": {
+    "name": "Indonesia:Kalimantan Utara (North Kalimantan; sep. E Kalimantan 2012)",
+    "continent": "Asia"
+  },
+  "ID-BB*": {
+    "name": "Indonesia:Kepulauan Bangka Belitung",
+    "continent": "Asia"
+  },
+  "ID-KR": {
+    "name": "Indonesia:Kepulauan Riau (Riau Islands; sep. Riau 2002)",
+    "continent": "Asia"
+  },
+  "ID-LA": {
+    "name": "Indonesia:Lampung",
+    "continent": "Asia"
+  },
+  "ID-ML*": {
+    "name": "Indonesia:Maluku (Molucas), without further locality data",
+    "continent": "Asia"
+  },
+  "ID-MA": {
+    "name": "Indonesia:Maluku (province)",
+    "continent": "Asia"
+  },
+  "ID-MU": {
+    "name": "Indonesia:Maluku Utara (North Maluku)",
+    "continent": "Asia"
+  },
+  "ID-NU*": {
+    "name": "Indonesia:Nusa Tenggara",
+    "continent": "Asia"
+  },
+  "ID-NB": {
+    "name": "Indonesia:Nusa Tenggara Barat (West Nusa Tenggara)",
+    "continent": "Asia"
+  },
+  "ID-NT": {
+    "name": "Indonesia:Nusa Tenggara Timur (East Nusa Tenggara)",
+    "continent": "Asia"
+  },
+  "ID-PP*": {
+    "name": "Indonesia:Papua, without further locality data",
+    "continent": "Asia"
+  },
+  "ID-PA": {
+    "name": "Indonesia:Papua (province)",
+    "continent": "Asia"
+  },
+  "ID-PS": {
+    "name": "Indonesia:Papua Selatan (South Papua; sep. Papua 2022)",
+    "continent": "Asia"
+  },
+  "ID-PT": {
+    "name": "Indonesia:Papua Tengah (Central Papua; sep. Papua 2022)",
+    "continent": "Asia"
+  },
+  "ID-HP": {
+    "name": "Indonesia:Papua Pegunungan (Highland Papua; sep. Papua 2022)",
+    "continent": "Asia"
+  },
+  "ID-PB": {
+    "name": "Indonesia:Papua Barat (West Papua)",
+    "continent": "Asia"
+  },
+  "ID-RI": {
+    "name": "Indonesia:Riau",
+    "continent": "Asia"
+  },
+  "ID-SL*": {
+    "name": "Indonesia:Sulawesi (Celebes), without further locality data",
+    "continent": "Asia"
+  },
+  "ID-SR": {
+    "name": "Indonesia:Sulawesi Barat (West Sulawesi; sep S Sulawesi 2004)",
+    "continent": "Asia"
+  },
+  "ID-SN": {
+    "name": "Indonesia:Sulawesi Selatan (South Sulawesi)",
+    "continent": "Asia"
+  },
+  "ID-ST": {
+    "name": "Indonesia:Sulawesi Tengah (Central Sulawesi)",
+    "continent": "Asia"
+  },
+  "ID-SG": {
+    "name": "Indonesia:Sulawesi Tenggara (Southeast Sulawesi)",
+    "continent": "Asia"
+  },
+  "ID-SA": {
+    "name": "Indonesia:Sulawesi Utara (North Sulawesi)",
+    "continent": "Asia"
+  },
+  "ID-SM*": {
+    "name": "Indonesia:Sumatra, without further locality data",
+    "continent": "Asia"
+  },
+  "ID-SB": {
+    "name": "Indonesia:Sumatera Barat (West Sumatra)",
+    "continent": "Asia"
+  },
+  "ID-SS": {
+    "name": "Indonesia:Sumatera Selatan (South Sumatra)",
+    "continent": "Asia"
+  },
+  "ID-SU": {
+    "name": "Indonesia:Sumatera Utara (North Sumatra)",
+    "continent": "Asia"
+  },
+  "ID-YO": {
+    "name": "Indonesia:Yogyakarta",
+    "continent": "Asia"
+  }
+}

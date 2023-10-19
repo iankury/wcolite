@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width = device-width" />
   <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="general.css">
 
 </head>
 
@@ -29,114 +29,116 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="sidebar">
-      <div class="sidebar__header">
-        <div class="sidebar__logo">
-          <a href="/">
-            <div class="header__logo">WCO<span> Lite</span>
-          </a>
+  <div class="header">
+      <div class="header__container container">
+        <div class="header__logo">
+          <a href="/">WCO<span>lite</span></a>
         </div>
-      </div>
-      <a href="#" id="search__close">
-        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px" y="0px" viewBox="0 0 340.8 340.8" style="enable-background:new 0 0 340.8 340.8;" xml:space="preserve">
-          <path
-            d="M170.4,0C76.4,0,0,76.4,0,170.4s76.4,170.4,170.4,170.4s170.4-76.4,170.4-170.4S264.4,0,170.4,0z M170.4,323.6
-                          c-84.4,0-153.2-68.8-153.2-153.2S86,17.2,170.4,17.2S323.6,86,323.6,170.4S254.8,323.6,170.4,323.6z" />
-
-
-
-          <path d="M182.4,169.6l50-50c3.2-3.2,3.2-8.8,0-12c-3.2-3.2-8.8-3.2-12,0l-50,50l-50-50c-3.2-3.2-8.8-3.2-12,0
-                          c-3.2,3.2-3.2,8.8,0,12l50,50l-50,49.6c-3.2,3.2-3.2,8.8,0,12c1.6,1.6,4,2.4,6,2.4s4.4-0.8,6-2.4l50-50l50,50c1.6,1.6,4,2.4,6,2.4
-                          s4.4-0.8,6-2.4c3.2-3.2,3.2-8.8,0-12L182.4,169.6z" />
-
-
-
-        </svg>
-      </a>
-    </div>
-    <div class="sidebar-content">
-      <div class="sidebar__search">
-        <div class="sidebar__search-container">
-          <div class="options">
-            <div class="options__item">
-              <input id="options__tree" class="radio_option" type="radio" value="tree" name="options" checked>
-              <label for="options__tree">Tree</label>
+        <div class="header__menu">
+          <div class="header__menu-container">
+            <div class="header__menu-links">
+              <a href="home.html" class="menu-link to-home">Home</a>
+              <a href="#" class="menu-link _active to-tree">Tree</a>
+              <!-- <a href="#" class="menu-link to-browse">Browse</a> -->
             </div>
-            <div class="options__item">
-              <input id="options__card" class="radio_option" type="radio" value="card" name="options">
-              <label for="options__tree">Card</label>
+            <div class="query" id="query__container">
+              <input
+                id="searchbox"
+                type="text"
+                autocomplete="off"
+                placeholder="Search"
+              />
+              <div class="query-icon">
+                <svg id="header__search-button" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z"
+                />
+              </svg>
+              </div>
+              
             </div>
-            <div class="options__item">
-              <input id="options__table" class="radio_option" type="radio" value="table" name="options">
-              <label for="options__tree">Table</label>
-            </div>
+            
           </div>
-          <div class="query">
-            <input id="searchbox" type="text" autocomplete="off" placeholder="Enter your query">
-          </div>
-          <button id="sidebar__search-button">Show</button>
-          <div class="search__add">
-            <div class="search__about-using">
-              <div class="about-using__title">How to use</div>
-              <p id="txt_how_to_use"></p>
-            </div>
-          </div>
+        </div>
+        <div class="header__icons">
+          <div class="dark-mode-button header__icons__item">
+            <svg viewBox="0 0 48 48">
+              <title>dark-mode</title>
+              <rect width="48" height="48" fill="none" />
+              <path d="M14,24A10,10,0,0,0,24,34V14A10,10,0,0,0,14,24Z" />
+              <path
+                d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2ZM6,24A18.1,18.1,0,0,1,24,6v8a10,10,0,0,1,0,20v8A18.1,18.1,0,0,1,6,24Z"
+              />
+            </svg>
+          </div>     
         </div>
       </div>
     </div>
-  </div>
 
   <div id="data">
-    <div class="data-header">
+    <div class="data-header container">
       <div id="last-query">Showing results for: <span>kury</span></div>
-      <div id="search__open">
-        <svg viewBox="0 0 512.005 512.005">
-          <path
-            d="M505.749,475.587l-145.6-145.6c28.203-34.837,45.184-79.104,45.184-127.317c0-111.744-90.923-202.667-202.667-202.667
-      			S0,90.925,0,202.669s90.923,202.667,202.667,202.667c48.213,0,92.48-16.981,127.317-45.184l145.6,145.6
-      			c4.16,4.16,9.621,6.251,15.083,6.251s10.923-2.091,15.083-6.251C514.091,497.411,514.091,483.928,505.749,475.587z
-      			 M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z" />
-        </svg>
+      <div class="menu-icon _opened">
+          <span class ="line"id="top-line"></span>
+          <span class ="line" id="middle-line"></span>
+          <span class ="line" id="bottom-line"></span>
       </div>
     </div>
 
+
     <div class="data__popup-mean">
-      <p>Did you mean <span></span></p>
+      <p></p>
       <div class="data__popup-mean_options">
         <button class="mean__options-no">NO</button>
         <button class="mean__options-yes">YES</button>
       </div>
     </div>
-    <div id="data-tree__container"></div>
+    
+    <div id="data-tree__container">
+      <div class="data-help">
+        <div class="help-header"><p>How to use</p>
+        </div>
+        <div class="help-content">
+          <div class="help-content__item">
+            <p><span>Left click </span>to navigate tree.</p>
+          </div>
+          <div class="help-content__item">
+            <p><span>Right click </span>to view a taxon's card.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div id="data-card__container">
-      <div class="data-card__title"></div>
+    <div id="data-card__container" class="container">
       <div class="data-card__path"></div>
-      <div class="data-card__info valid-species">
+      <div class="data-card__title"></div>
+      
+      <div class="data-card__info">
+        <div class="card__info-row valid-species">
         <div class="data-card__info-label">Valid species</div>
         <div id="valid_species_count" class="data-card__info-value"></div>
-      </div>
-      <div class="data-card__info children">
-        <div class="data-card__info-label">Children</div>
-        <div id="children_container" class="data-card__info-value"></div>
-      </div>
-      <div class="data-card__info LSID">
-        <div class="data-card__info-label">ZooBank LSID</div>
-        <div id="lsid_div" class="data-card__info-value">Coming soon...</div>
-      </div>
-      <div class="data-card__info Logonymy">
-        <div class="data-card__info-label">Logonymy</div>
-        <div id="logonymy" class="data-card__info-value"></div>
-      </div>
+        </div>
+        <div class="card__info-row children">
+          <div class="data-card__info-label">Children</div>
+          <div id="children_container" class="data-card__info-value"></div>
+        </div>
+        <div class="card__info-row LSID">
+          <div class="data-card__info-label">ZooBank LSID</div>
+          <div id="lsid_div" class="data-card__info-value">Coming soon...</div>
+        </div>
+        <div class="card__info-row Logonymy">
+          <div class="data-card__info-label">Logonymy</div>
+          <div id="logonymy" class="data-card__info-value"></div>
+        </div>
+      </div> 
       <div class="data-card__references">
         <div class="data-card__references-label">References</div>
         <div id="references" class="data-card__references-value"></div>
       </div>
     </div>
 
-    <div id="data-table__container">
+    <div id="data-table__container" class="container">
       <div class="data-table__pages">
         <label for="page">Page:</label>
         <input type="number" id="page" name="page" value="1" min="1" max="1" step="1" autocomplete="off">
@@ -150,6 +152,15 @@
       </div>
       <div class="data-table__items">
 
+      </div>
+    </div>
+
+    <div id="data-browse__container" class="container">
+      <div class="data-browse-content">
+        <h3>Opiliones</h3>
+        <div class="data-browse__list">
+        </div>
+        
       </div>
     </div>
   </div>
