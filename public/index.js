@@ -325,7 +325,6 @@ function displayTable() {
 
   $(".data-table__items").empty();
   for (x of data.resultList) {
-    console.log(x);
     const item = $('<div class="data-table__item"></div>');
 
     let name = $(
@@ -336,6 +335,11 @@ function displayTable() {
       name = $('<div class="data-table__name data-column"></div>');
     }
     name.html(x["valid"] ? x["original_html"] : addLinkToValid(x));
+
+    // if (x["rank"] == "species" || x["rank"] == "subspecies") {
+    //   if (x["validName"] != "" && x["validName"] != indefined) {
+    //   }
+    // }
     const authorship = $(
       '<div class="data-table__authorship data-column"></div>'
     );
@@ -358,9 +362,17 @@ function displayTable() {
 
 function addLinkToValid(x) {
   const processedName = `<p class="qlink _valid">${x.validName}</p>`;
-
+  if (x.type == "Combination") {
+    return `${x.original_html}<div class ="valid-name-table">(protonym: ${processedName})</div>`;
+  }
   return `${x.original_html}<div class ="valid-name-table">(valid: ${processedName})</div>`;
 }
+
+// function addValidName(x) {
+//   const processedName = `<p class="qlink _valid">${x.validName}</p>`;
+
+//   return `${x.original_html}<div class ="valid-name-table">(valid: ${processedName})</div>`;
+// }
 
 function moveByDelta(dX, dY) {
   dragCurX += dX;

@@ -344,10 +344,15 @@ function AddValid() {
     value["aponyms"] = [];
     value["references"] = new Set();
     value["relationships"] = [];
-    if (!value["valid"]) {
+    if (!value["valid"])
       value["validName"] =
         unifiedJson[value["valid_taxon_name_id"]]["original_html"];
-    }
+
+    // if (value["rank"] == "species" || value["rank"] == "subspecies") {
+    //   if (value["cached"] != value["original"]) {
+    //     value["validName"] = value["cached_html"];
+    //   }
+    // }
   });
 }
 
@@ -904,25 +909,28 @@ function SaveLoadedJson() {
 function Debug() {
   if (!homeComputer) return;
   jsonFromApi = JSON.parse(fs.readFileSync("./jsonfromapi.json"));
-  Log("Loaded jsonFromApi from file.");
-  jsonFromApi["taxon_names"].forEach((x) => {
-    if (x.cached == "Krateromaspis lata") {
-      console.log(x);
-    }
-  });
+  // Log("Loaded jsonFromApi from file.");
+  // jsonFromApi["taxon_name_relationships"].forEach((x) => {
+  //   if (x.cached == "Krateromaspis lata") {
+  //     console.log(x);
+  //   }
+  // });
   LoadedJson();
   Log("Console infiedJson");
   Object.values(unifiedJson).forEach((x) => {
-    if (x["cached"] == "Krateromaspis lata") {
+    if (x["cached"] == "Mitopus morio") {
       console.log(x);
     }
   });
 
-  // for (x of Object.values(jsonFromApi['taxon_name_relationships'])) {
-  //   if (x['subject_taxon_name_id'] && x['subject_taxon_name_id'].toString().includes('679327')) {
-  //     console.log(x)
-  //   }
-  // }
+  for (x of Object.values(jsonFromApi["taxon_name_relationships"])) {
+    if (
+      x["subject_taxon_name_id"] &&
+      x["subject_taxon_name_id"].toString().includes("679327")
+    ) {
+      console.log(x);
+    }
+  }
 }
 
 //SaveJsonForDebug();
