@@ -9,10 +9,7 @@ let lastQuery = "",
 let colorTheme = "default";
 let treeLinks = {};
 const helpTree = document.createElement("div");
-<<<<<<< HEAD
-=======
 
->>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
 const encode = (s) =>
   s
     .split("")
@@ -140,10 +137,7 @@ function addListeners() {
     sendFirstPage();
     setMode("table");
     closeMenuMobile();
-<<<<<<< HEAD
-=======
     $(".sidebar").addClass("_closed");
->>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
   });
   $(".to-tree").on("click", () => {
     setMode("tree");
@@ -335,7 +329,7 @@ function displayTable() {
   for (x of data.resultList) {
     const item = $('<div class="data-table__item"></div>');
 
-<<<<<<< HEAD
+
     let name = $(
       '<div class="data-table__name qlink _valid data-column"></div>'
     );
@@ -345,10 +339,6 @@ function displayTable() {
     }
     name.html(x["valid"] ? x["original_html"] : addLinkToValid(x));
 
-    // if (x["rank"] == "species" || x["rank"] == "subspecies") {
-    //   if (x["validName"] != "" && x["validName"] != indefined) {
-    //   }
-    // }
     const authorship = $(
       '<div class="data-table__authorship data-column"></div>'
     );
@@ -365,42 +355,17 @@ function displayTable() {
     item.append(rank);
     item.append(ancestree);
 
-=======
-    const name = $('<div class="data-table__name qlink data-column"></div>');
-    name.html(x["valid"] ? x["original_html"] : addLinkToValid(x));
-
-    const authorship = $(
-      '<div class="data-table__authorship data-column"></div>'
-    );
-    authorship.html(x["author_year"]);
-
-    const rank = $('<div class="data-table__rank data-column"></div>');
-    rank.html(x["rank"]);
-
-    const ancestree = $('<div class="data-table__ances data-column"></div>');
-    ancestree.html(bullets(x["ancestree"]));
-
-    item.append(name);
-    item.append(authorship);
-    item.append(rank);
-    item.append(ancestree);
-
->>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
     $(".data-table__items").append(item);
   }
 }
 
 function addLinkToValid(x) {
-<<<<<<< HEAD
   const processedName = `<p class="qlink _valid">${x.validName}</p>`;
   if (x.type == "Combination") {
     return `${x.original_html}<div class ="valid-name-table">(protonym: ${processedName})</div>`;
   }
   return `${x.original_html}<div class ="valid-name-table">(valid: ${processedName})</div>`;
-=======
-  const processedName = `<p class="qlink">${x.validName}</p>`;
-  return `${x.original_html} (valid: ${processedName})`;
->>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
+
 }
 
 // function addValidName(x) {
