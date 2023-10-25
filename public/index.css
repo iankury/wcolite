@@ -503,6 +503,7 @@ body._dark-mode #children_container p:hover {
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 }
 
+<<<<<<< HEAD
 .data-card__info .qlink{
   margin-right: 7px;
 }
@@ -510,6 +511,8 @@ body._dark-mode #children_container p:hover {
   display: flex;
 }
 
+=======
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
 #children_container{
   display: flex;
   flex-wrap: wrap;
@@ -562,12 +565,21 @@ body._dark-mode .LSID a {
   margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
 .qlink._valid{
+=======
+.qlink{
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
   cursor: pointer;
   /* text-decoration: underline; */
 }
 
+<<<<<<< HEAD
 .qlink._valid:hover{
+=======
+
+.qlink:hover{
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
   color:#1F925B;
 }
 
@@ -728,6 +740,7 @@ body._dark-mode .data-table__ances li:after{
 .data-table__name{
   flex: 0 0 250px;
   font-family: Rbold;
+<<<<<<< HEAD
   display: flex;
   flex-wrap: wrap;
 }
@@ -737,6 +750,17 @@ body._dark-mode .data-table__ances li:after{
 }
 
 
+=======
+}
+
+.data-table__items .data-table__name{
+  cursor: pointer;
+}
+
+.data-table__items .data-table__name:hover{
+  color:#1F925B;
+}
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
 body._dark-mode .data-table__items .data-table__name:hover{
   color:#A6E011
 }

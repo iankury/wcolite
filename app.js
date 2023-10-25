@@ -47,9 +47,15 @@ const StripDagger = (s) => {
 };
 const IsDigitCode = (n) => n >= "0".charCodeAt(0) && n <= "9".charCodeAt(0);
 const NameAuthorYearLink = (x) =>
+<<<<<<< HEAD
   `<div class="qlink">${x.original_html}</div> ${x.stripped_author_year}`;
 const NameAuthorYear = (x) => `${x.original_html} ${x.stripped_author_year}`;
 const NameLink = (s) => `<div class="qlink">${s}</div>`;
+=======
+  `<span class="qlink">${x.original_html}</span> ${x.stripped_author_year}`;
+const NameAuthorYear = (x) => `${x.original_html} ${x.stripped_author_year}`;
+const NameLink = (s) => `<span class="qlink">${s}</span>`;
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
 
 const cache = new LRU(10000);
 let jsonTree;
@@ -347,12 +353,15 @@ function AddValid() {
     if (!value["valid"])
       value["validName"] =
         unifiedJson[value["valid_taxon_name_id"]]["original_html"];
+<<<<<<< HEAD
 
     // if (value["rank"] == "species" || value["rank"] == "subspecies") {
     //   if (value["cached"] != value["original"]) {
     //     value["validName"] = value["cached_html"];
     //   }
     // }
+=======
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
   });
 }
 
@@ -909,10 +918,20 @@ function SaveLoadedJson() {
 function Debug() {
   if (!homeComputer) return;
   jsonFromApi = JSON.parse(fs.readFileSync("./jsonfromapi.json"));
+<<<<<<< HEAD
   // Log("Loaded jsonFromApi from file.");
   // jsonFromApi["taxon_name_relationships"].forEach((x) => {
   //   if (x.cached == "Krateromaspis lata") {
   //     console.log(x);
+=======
+  Log("Loaded jsonFromApi from file.");
+
+  LoadedJson();
+
+  // for (x of Object.values(jsonFromApi['taxon_name_relationships'])) {
+  //   if (x['subject_taxon_name_id'] && x['subject_taxon_name_id'].toString().includes('679327')) {
+  //     console.log(x)
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
   //   }
   // });
   LoadedJson();
@@ -933,5 +952,9 @@ function Debug() {
   }
 }
 
+<<<<<<< HEAD
 //SaveJsonForDebug();
+=======
+// SaveJsonForDebug();
+>>>>>>> 52c207c4cbe60366975e21720375b9bc054ca8f6
 //Debug();
