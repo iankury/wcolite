@@ -38,7 +38,7 @@
           <div class="header__menu-container">
             <div class="header__menu-links">
               <a href="home.html" class="menu-link to-home">Home</a>
-              <a href="#" class="menu-link _active to-tree">Tree</a>
+              <a href="#" class="menu-link _active to-tree">Tree</a>        
               <!-- <a href="#" class="menu-link to-browse">Browse</a> -->
             </div>
             <div class="query" id="query__container">
@@ -77,8 +77,7 @@
     </div>
 
   <div id="data">
-    <div class="data-header container">
-      <div id="last-query">Showing results for: <span>kury</span></div>
+    <div class="data-header container"> 
       <div class="menu-icon _opened">
           <span class ="line"id="top-line"></span>
           <span class ="line" id="middle-line"></span>
@@ -101,6 +100,9 @@
         </div>
         <div class="help-content">
           <div class="help-content__item">
+            <p>The tree is draggable.</p>
+          </div>
+          <div class="help-content__item">
             <p><span>Left click </span>to navigate tree.</p>
           </div>
           <div class="help-content__item">
@@ -111,6 +113,25 @@
     </div>
 
     <div id="data-card__container" class="container">
+      <a href="#" class="to-table">
+        <div class="arrow-back">
+          <div class="arrow__item">
+            <svg viewBox="0 0 490.656 490.656">
+              <path d="M487.536,120.445c-4.16-4.16-10.923-4.16-15.083,0L245.339,347.581L18.203,120.467c-4.16-4.16-10.923-4.16-15.083,0
+              c-4.16,4.16-4.16,10.923,0,15.083l234.667,234.667c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.136l234.667-234.667
+              C491.696,131.368,491.696,124.605,487.536,120.445z" />
+            </svg>
+          </div>
+          <div class="arrow__item">
+            <svg viewBox="0 0 490.656 490.656">
+              <path d="M487.536,120.445c-4.16-4.16-10.923-4.16-15.083,0L245.339,347.581L18.203,120.467c-4.16-4.16-10.923-4.16-15.083,0
+              c-4.16,4.16-4.16,10.923,0,15.083l234.667,234.667c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.136l234.667-234.667
+              C491.696,131.368,491.696,124.605,487.536,120.445z" />
+            </svg>
+          </div>
+        </div>
+        <span>Back to results</span>
+      </a>
       <div class="data-card__path"></div>
       <div class="data-card__title"></div>
       
@@ -139,6 +160,7 @@
     </div>
 
     <div id="data-table__container" class="container">
+      <div id="last-query">Showing results for: <span>kury</span></div>
       <div class="data-table__pages">
         <label for="page">Page:</label>
         <input type="number" id="page" name="page" value="1" min="1" max="1" step="1" autocomplete="off">

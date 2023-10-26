@@ -415,6 +415,7 @@ function AddRelationship(
 function makeProtonymObject(x) {
   return {
     id: x["id"],
+
     msg: `${ShortRefFromObj(
       x,
       "protonym"
@@ -918,21 +919,21 @@ function Debug() {
   //   }
   // });
   LoadedJson();
-  Log("Console infiedJson");
-  Object.values(unifiedJson).forEach((x) => {
-    if (x["cached"] == "Mitopus morio") {
-      console.log(x);
-    }
-  });
+  // Log("Console infiedJson");
+  // Object.values(unifiedJson).forEach((x) => {
+  //   if (x["cached"] == "Mitopus morio") {
+  //     console.log(x);
+  //   }
+  // });
 
-  for (x of Object.values(jsonFromApi["taxon_name_relationships"])) {
-    if (
-      x["subject_taxon_name_id"] &&
-      x["subject_taxon_name_id"].toString().includes("679327")
-    ) {
-      console.log(x);
-    }
-  }
+  // for (x of Object.values(jsonFromApi["taxon_name_relationships"])) {
+  //   if (
+  //     x["subject_taxon_name_id"] &&
+  //     x["subject_taxon_name_id"].toString().includes("679327")
+  //   ) {
+  //     console.log(x);
+  //   }
+  // }
 }
 
 //SaveJsonForDebug();

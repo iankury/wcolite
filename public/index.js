@@ -5,7 +5,8 @@ let dragCurX = 0,
   dragCurY = 0,
   dragRunning = false;
 let lastQuery = "",
-  backupQuery = "";
+  backupQuery = "",
+  queryTable = "";
 let colorTheme = "default";
 let treeLinks = {};
 const helpTree = document.createElement("div");
@@ -145,6 +146,10 @@ function addListeners() {
     $(".to-tree").addClass("_active");
     $(".to-browse").removeClass("_active");
   });
+  $(".to-table").on("click", () => {
+    setMode("table");
+    closeMenuMobile();
+  });
   $(".to-browse").on("click", () => {
     setMode("browse");
     closeMenuMobile();
@@ -261,7 +266,8 @@ function setMode(s) {
 
 function setLastQuery(s) {
   lastQuery = s;
-  $("#last-query span").html(lastQuery);
+
+  $("#last-query span").html(queryTable);
 }
 
 function currentContainerOnly() {
@@ -329,7 +335,6 @@ function displayTable() {
   for (x of data.resultList) {
     const item = $('<div class="data-table__item"></div>');
 
-
     let name = $(
       '<div class="data-table__name qlink _valid data-column"></div>'
     );
@@ -365,7 +370,6 @@ function addLinkToValid(x) {
     return `${x.original_html}<div class ="valid-name-table">(protonym: ${processedName})</div>`;
   }
   return `${x.original_html}<div class ="valid-name-table">(valid: ${processedName})</div>`;
-
 }
 
 // function addValidName(x) {
@@ -457,6 +461,8 @@ function updateHowTo() {
 function extractQuery() {
   backupQuery = lastQuery;
   setLastQuery($("#searchbox").val());
+  queryTable = $("#searchbox").val();
+  $("#last-query span").html(queryTable);
   $("#searchbox").val("");
 }
 

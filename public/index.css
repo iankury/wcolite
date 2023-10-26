@@ -226,8 +226,8 @@ body._dark-mode .help-button svg {
 /* -------------------------------------------------------------------------------- */
 
 .data-header{
-  margin-top: 100px;
   padding-left: 20px;
+  display: none;
 }
 
 #data {
@@ -249,7 +249,6 @@ body._dark-mode #data{
 
 #last-query span {
   font-family: Rbold;
-  color: #1F925B;
 }
 
 #last-query._hide {
@@ -333,12 +332,14 @@ body._dark-mode .mean__options-yes{
 #data-table__container {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   transition: 0.2s;
+  
 }
 
 #data-tree__container{
   overflow: hidden;
+  height: auto;
 }
 
 #data-card__container, #data-table__container, #data-browse__container {
@@ -346,7 +347,7 @@ body._dark-mode .mean__options-yes{
   transition: 0.2s;
   border-radius: 5px;
   padding: 30px;
-  
+  padding-top: 120px;
 }
 
 
@@ -442,7 +443,38 @@ body._dark-mode .tree_chart {
   line-height: 130%;
   transition: 0.2s;
 }
+.to-table{
+  display: flex;
+  align-items: center;
+}
 
+.to-table *{
+  color: #121212;
+  fill: #121212;
+}
+body._dark-mode .to-table *{
+  color: #fff;
+  fill: #fff;
+}
+
+.arrow-back{
+  height: 15px;
+  width: 15px;
+  transform: rotate(90deg);
+}
+.arrow__item:last-child{
+  transform: translateY(-10px);
+  transition: 0.2s;
+}
+.to-table span{
+  position: relative;
+  left: 10px;
+}
+
+
+.to-table:hover .arrow__item:last-child{
+  transform: translate(0);
+}
 
 body._dark-mode #data-card__container {
   color: #fff;
@@ -450,6 +482,7 @@ body._dark-mode #data-card__container {
 }
 
 .data-card__path ul{
+  padding-top: 40px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -1035,6 +1068,7 @@ body._dark-mode .help-content__item span {
     }
     .data-header{
       margin-top: 15px;
+      display: block;
     }
     .help-content{
       display: flex;
