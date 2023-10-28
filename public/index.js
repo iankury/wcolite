@@ -97,6 +97,7 @@ function loadedTree() {
 
   if (colorTheme == "dark") {
     setDarkMode();
+    $(".header__logo a").attr("href", "home.html?theme=dark");
   } else {
     $("#data-tree__container")
       .append(Chart())
@@ -186,10 +187,13 @@ function addListeners() {
   $(".dark-mode-button").click(() => {
     if ($("body").hasClass("_dark-mode")) {
       offDarkMode();
+      $(".header__logo a").attr("href", "home.html");
     } else {
       setDarkMode();
+      $(".header__logo a").attr("href", "home.html?theme=dark");
     }
   });
+
   $(".query input").focus(() => {
     $(".query").addClass("_focus");
   });
