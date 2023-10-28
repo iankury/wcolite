@@ -10,11 +10,8 @@
 }
 
 body {
-  /* background-color: #f8f7f7; */
-  /* overflow: hidden; */
   color: #121212;
   min-height: 100vh;
-  /* min-height: 100vw; */
   position: relative;
   
 }
@@ -537,8 +534,10 @@ body._dark-mode #children_container p:hover {
 }
 
 .data-card__info .qlink{
-  margin-right: 7px;
+  position: relative;
+  margin: 0px 7px;
 }
+
 .qlink._valid{
   display: flex;
 }
