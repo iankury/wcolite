@@ -84,16 +84,25 @@ function loadedTree() {
   currentContainerOnly();
 
   helpTree.classList.add("data-help");
-  helpTree.innerHTML = `<div class="help-header"><p>How to use</p>
+  helpTree.innerHTML = `<div class="help-header">
+          <p>How to use</p>
+          <div class="help-close">
+            <svg x="0px" y="0px" viewBox="0 0 24 24">
+              <path d="M 4.9902344 3.9902344 A 1.0001 1.0001 0 0 0 4.2929688 5.7070312 L 10.585938 12 L 4.2929688 18.292969 A 1.0001 1.0001 0 1 0 5.7070312 19.707031 L 12 13.414062 L 18.292969 19.707031 A 1.0001 1.0001 0 1 0 19.707031 18.292969 L 13.414062 12 L 19.707031 5.7070312 A 1.0001 1.0001 0 0 0 18.980469 3.9902344 A 1.0001 1.0001 0 0 0 18.292969 4.2929688 L 12 10.585938 L 5.7070312 4.2929688 A 1.0001 1.0001 0 0 0 4.9902344 3.9902344 z"></path>
+            </svg>
+          </div>
         </div>
         <div class="help-content">
           <div class="help-content__item">
-            <p><span>Left click </span>to navigate tree</p>
+            <p>The tree is draggable.</p>
+          </div>
+          <div class="help-content__item">
+            <p><span>Left click </span>to navigate tree.</p>
           </div>
           <div class="help-content__item">
             <p><span>Right click </span>to view a taxon's card.</p>
           </div>
-        </div`;
+        </div>`;
 
   if (colorTheme == "dark") {
     setDarkMode();
@@ -103,6 +112,7 @@ function loadedTree() {
       .append(Chart())
       .find("svg")
       .addClass("tree_chart");
+    $(".data-help").find("svg").removeClass("tree_chart");
   }
 
   addTreeRightClick();
@@ -207,6 +217,9 @@ function addListeners() {
       closeMenuMobile();
     }
   });
+  $(".data-help").click(() => {
+    $(".data-help").addClass("_closed");
+  });
 }
 
 function closeMenuMobile() {
@@ -227,6 +240,7 @@ function setDarkMode() {
     .append(helpTree)
     .find("svg")
     .addClass("tree_chart");
+  $(".data-help").find("svg").removeClass("tree_chart");
   addTreeRightClick();
 }
 
@@ -238,6 +252,7 @@ function offDarkMode() {
     .append(helpTree)
     .find("svg")
     .addClass("tree_chart");
+  $(".data-help").find("svg").removeClass("tree_chart");
   addTreeRightClick();
 }
 
