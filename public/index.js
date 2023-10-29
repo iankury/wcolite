@@ -242,6 +242,9 @@ function setDarkMode() {
     .addClass("tree_chart");
   $(".data-help").find("svg").removeClass("tree_chart");
   addTreeRightClick();
+  $(".data-help").click(() => {
+    $(".data-help").addClass("_closed");
+  });
 }
 
 function offDarkMode() {
@@ -254,6 +257,9 @@ function offDarkMode() {
     .addClass("tree_chart");
   $(".data-help").find("svg").removeClass("tree_chart");
   addTreeRightClick();
+  $(".data-help").click(() => {
+    $(".data-help").addClass("_closed");
+  });
 }
 
 function sendPlaceholderPage() {
