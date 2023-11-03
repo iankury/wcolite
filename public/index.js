@@ -327,6 +327,11 @@ function displayCard() {
     );
   else $("#lsid_div").html("Coming soon...");
   logonymyText = "";
+
+  node.protonyms.sort((a, b) => {
+    return a.year - b.year;
+  });
+
   for (protonym of node.protonyms) {
     logonymyText +=
       (protonym["type_species"]

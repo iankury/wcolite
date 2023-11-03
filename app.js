@@ -402,12 +402,16 @@ function AddRelationship(
     }
     if (!receiver["valid"])
       receiver = unifiedJson[receiver["valid_taxon_name_id"]];
-    const msg = `${NameAuthorYearLink(
+    const msg = `<span class=\"relationship_tag\">relationship</span> ${NameAuthorYearLink(
       juniorObj
     )} ${interpolation}${subjectTag} ${NameAuthorYearLink(
       seniorObj
-    )} in ${shortRef} <span class=\"relationship_tag\">relationship</span>`;
-    receiver["relationships"].push({ id: relationshipId, msg: msg });
+    )} in ${shortRef} `;
+    receiver["relationships"].push({
+      id: relationshipId,
+      msg: msg,
+      year: receiver.year,
+    });
     receiver["references"].add(ref);
   }
 }
@@ -416,10 +420,12 @@ function makeProtonymObject(x) {
   return {
     id: x["id"],
 
-    msg: `${ShortRefFromObj(
+    msg: `<span class=\"protonym_tag\">protonym</span> ${ShortRefFromObj(
       x,
       "protonym"
-    )} <span class=\"protonym_tag\">protonym</span>`,
+    )} `,
+
+    year: x["year"],
   };
 }
 
@@ -488,10 +494,10 @@ function AddLogonymy() {
         if (x["type_species"])
           x.protonyms.push({ id: x["id"], msg: x["type_species"] });
       } else {
-        formattedAponym = `${ShortRefFromObj(
+        formattedAponym = `<span class=\"aponym_tag\">aponym</span> ${ShortRefFromObj(
           x,
           "aponym"
-        )} <span class=\"aponym_tag\">aponym</span>`;
+        )} `;
         x.aponyms.push({ id: x["id"], msg: formattedAponym });
         originalFormId = familyGroupOriginalFormMap[x["id"]];
         if (originalFormId) {
@@ -505,10 +511,11 @@ function AddLogonymy() {
       if (x["type"] == "Protonym") {
         ergonym.protonyms.push({
           id: x["id"],
-          msg: `${ShortRefFromObj(
+          msg: `<span class=\"protonym_tag\">protonym</span> ${ShortRefFromObj(
             x,
             "protonym"
-          )} <span class=\"protonym_tag\">protonym</span>`,
+          )} `,
+          year: x["year"],
         });
         if (x["type_species"])
           ergonym.protonyms.push({
@@ -517,10 +524,10 @@ function AddLogonymy() {
             type_species: true,
           });
       } else {
-        formattedAponym = `${ShortRefFromObj(
+        formattedAponym = ` <span class=\"aponym_tag\">aponym</span>${ShortRefFromObj(
           x,
           "aponym"
-        )} <span class=\"aponym_tag\">aponym</span>`;
+        )} `;
         ergonym.aponyms.push({ id: x["id"], msg: formattedAponym });
       }
       ergonym["references"].add(x["source"]);
@@ -904,36 +911,23 @@ function SaveLoadedJson() {
 function Debug() {
   if (!homeComputer) return;
   jsonFromApi = JSON.parse(fs.readFileSync("./jsonfromapi.json"));
-  // Log("Loaded jsonFromApi from file.");
-  // jsonFromApi["taxon_name_relationships"].forEach((x) => {
-  //   if (x.cached == "Krateromaspis lata") {
-  //     console.log(x);
-
   Log("Loaded jsonFromApi from file.");
-
-  LoadedJson();
-
-  // for (x of Object.values(jsonFromApi['taxon_name_relationships'])) {
-  //   if (x['subject_taxon_name_id'] && x['subject_taxon_name_id'].toString().includes('679327')) {
-  //     console.log(x)
-  //   }
-  // });
-  LoadedJson();
-  // Log("Console infiedJson");
-  // Object.values(unifiedJson).forEach((x) => {
-  //   if (x["cached"] == "Mitopus morio") {
-  //     console.log(x);
-  //   }
-  // });
 
   // for (x of Object.values(jsonFromApi["taxon_name_relationships"])) {
   //   if (
   //     x["subject_taxon_name_id"] &&
-  //     x["subject_taxon_name_id"].toString().includes("679327")
+  //     x["subject_taxon_name_id"].toString().includes("322506")
   //   ) {
   //     console.log(x);
   //   }
   // }
+  LoadedJson();
+  Log("Console infiedJson");
+  Object.values(unifiedJson).forEach((x) => {
+    if (x["cached"] == "Mitopus morio") {
+      console.log(x[relationships]);
+    }
+  });
 }
 
 //SaveJsonForDebug();
