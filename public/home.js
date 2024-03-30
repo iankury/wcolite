@@ -1,4 +1,13 @@
 $(document).ready(() => {
+  const url = window.location.search;
+  const urlParams = new URLSearchParams(url);
+  const theme = urlParams.get("theme") || "default";
+
+  if (theme == "dark") {
+    $("body").addClass("_dark-mode");
+    $(".offer a").attr("href", "index.html?theme=dark");
+  }
+
   $("body").addClass("loaded_hiding");
   setTimeout(() => {
     $("body").addClass("loaded");

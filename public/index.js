@@ -5,7 +5,8 @@ let dragCurX = 0,
   dragCurY = 0,
   dragRunning = false;
 let lastQuery = "",
-  backupQuery = "";
+  backupQuery = "",
+  queryTable = "";
 let colorTheme = "default";
 let treeLinks = {};
 const helpTree = document.createElement("div");
@@ -83,24 +84,35 @@ function loadedTree() {
   currentContainerOnly();
 
   helpTree.classList.add("data-help");
-  helpTree.innerHTML = `<div class="help-header"><p>How to use</p>
+  helpTree.innerHTML = `<div class="help-header">
+          <p>How to use</p>
+          <div class="help-close">
+            <svg x="0px" y="0px" viewBox="0 0 24 24">
+              <path d="M 4.9902344 3.9902344 A 1.0001 1.0001 0 0 0 4.2929688 5.7070312 L 10.585938 12 L 4.2929688 18.292969 A 1.0001 1.0001 0 1 0 5.7070312 19.707031 L 12 13.414062 L 18.292969 19.707031 A 1.0001 1.0001 0 1 0 19.707031 18.292969 L 13.414062 12 L 19.707031 5.7070312 A 1.0001 1.0001 0 0 0 18.980469 3.9902344 A 1.0001 1.0001 0 0 0 18.292969 4.2929688 L 12 10.585938 L 5.7070312 4.2929688 A 1.0001 1.0001 0 0 0 4.9902344 3.9902344 z"></path>
+            </svg>
+          </div>
         </div>
         <div class="help-content">
           <div class="help-content__item">
-            <p><span>Left click </span>to navigate tree</p>
+            <p>The tree is draggable.</p>
+          </div>
+          <div class="help-content__item">
+            <p><span>Left click </span>to navigate tree.</p>
           </div>
           <div class="help-content__item">
             <p><span>Right click </span>to view a taxon's card.</p>
           </div>
-        </div`;
+        </div>`;
 
   if (colorTheme == "dark") {
     setDarkMode();
+    $(".header__logo a").attr("href", "home.html?theme=dark");
   } else {
     $("#data-tree__container")
       .append(Chart())
       .find("svg")
       .addClass("tree_chart");
+    $(".data-help").find("svg").removeClass("tree_chart");
   }
 
   addTreeRightClick();
@@ -145,6 +157,10 @@ function addListeners() {
     $(".to-tree").addClass("_active");
     $(".to-browse").removeClass("_active");
   });
+  $(".to-table").on("click", () => {
+    setMode("table");
+    closeMenuMobile();
+  });
   $(".to-browse").on("click", () => {
     setMode("browse");
     closeMenuMobile();
@@ -181,10 +197,13 @@ function addListeners() {
   $(".dark-mode-button").click(() => {
     if ($("body").hasClass("_dark-mode")) {
       offDarkMode();
+      $(".header__logo a").attr("href", "home.html");
     } else {
       setDarkMode();
+      $(".header__logo a").attr("href", "home.html?theme=dark");
     }
   });
+
   $(".query input").focus(() => {
     $(".query").addClass("_focus");
   });
@@ -197,6 +216,9 @@ function addListeners() {
     } else {
       closeMenuMobile();
     }
+  });
+  $(".data-help").click(() => {
+    $(".data-help").addClass("_closed");
   });
 }
 
@@ -218,7 +240,11 @@ function setDarkMode() {
     .append(helpTree)
     .find("svg")
     .addClass("tree_chart");
+  $(".data-help").find("svg").removeClass("tree_chart");
   addTreeRightClick();
+  $(".data-help").click(() => {
+    $(".data-help").addClass("_closed");
+  });
 }
 
 function offDarkMode() {
@@ -229,7 +255,11 @@ function offDarkMode() {
     .append(helpTree)
     .find("svg")
     .addClass("tree_chart");
+  $(".data-help").find("svg").removeClass("tree_chart");
   addTreeRightClick();
+  $(".data-help").click(() => {
+    $(".data-help").addClass("_closed");
+  });
 }
 
 function sendPlaceholderPage() {
@@ -261,7 +291,8 @@ function setMode(s) {
 
 function setLastQuery(s) {
   lastQuery = s;
-  $("#last-query span").html(lastQuery);
+
+  $("#last-query span").html(queryTable);
 }
 
 function currentContainerOnly() {
@@ -295,7 +326,16 @@ function displayCard() {
       `<a target="_blank" class="brown_link" href="${node.lsid_url}">${node.lsid_urn}</a>`
     );
   else $("#lsid_div").html("Coming soon...");
+
+  if (node.asserted_distributions) {
+    console.log(node.asserted_distributions);
+  }
   logonymyText = "";
+
+  node.protonyms.sort((a, b) => {
+    return a.year - b.year;
+  });
+
   for (protonym of node.protonyms) {
     logonymyText +=
       (protonym["type_species"]
@@ -319,9 +359,12 @@ function displayCard() {
     }
     $("#children_container").html(tempChildren);
   }
+
+  console.log(node);
 }
 
 function displayTable() {
+  console.log(data);
   $("#out_of_pages").html(data.pages);
   $("#page").attr("max", data.pages);
 
@@ -329,7 +372,13 @@ function displayTable() {
   for (x of data.resultList) {
     const item = $('<div class="data-table__item"></div>');
 
-    const name = $('<div class="data-table__name qlink data-column"></div>');
+    let name = $(
+      '<div class="data-table__name qlink _valid data-column"></div>'
+    );
+
+    if (!x["valid"]) {
+      name = $('<div class="data-table__name data-column"></div>');
+    }
     name.html(x["valid"] ? x["original_html"] : addLinkToValid(x));
 
     const authorship = $(
@@ -353,9 +402,18 @@ function displayTable() {
 }
 
 function addLinkToValid(x) {
-  const processedName = `<p class="qlink">${x.validName}</p>`;
-  return `${x.original_html} (valid: ${processedName})`;
+  const processedName = `<p class="qlink _valid">${x.validName}</p>`;
+  if (x.type == "Combination") {
+    return `${x.original_html}<div class ="valid-name-table">(protonym: ${processedName})</div>`;
+  }
+  return `${x.original_html}<div class ="valid-name-table">(valid: ${processedName})</div>`;
 }
+
+// function addValidName(x) {
+//   const processedName = `<p class="qlink _valid">${x.validName}</p>`;
+
+//   return `${x.original_html}<div class ="valid-name-table">(valid: ${processedName})</div>`;
+// }
 
 function moveByDelta(dX, dY) {
   dragCurX += dX;
@@ -440,6 +498,8 @@ function updateHowTo() {
 function extractQuery() {
   backupQuery = lastQuery;
   setLastQuery($("#searchbox").val());
+  queryTable = $("#searchbox").val();
+  $("#last-query span").html(queryTable);
   $("#searchbox").val("");
 }
 
@@ -487,6 +547,7 @@ function displayData() {
     }
   }
   currentContainerOnly();
+  console.log(data);
 }
 
 function addLinkHandler() {

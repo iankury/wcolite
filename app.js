@@ -24,6 +24,8 @@ const fetchQueue = [
   "sources",
   "identifiers",
   "tags",
+  "depictions",
+  "asserted_distributions",
 ];
 
 const secret = fs.readFileSync("secret.txt").toString();
@@ -47,9 +49,9 @@ const StripDagger = (s) => {
 };
 const IsDigitCode = (n) => n >= "0".charCodeAt(0) && n <= "9".charCodeAt(0);
 const NameAuthorYearLink = (x) =>
-  `<span class="qlink">${x.original_html}</span> ${x.stripped_author_year}`;
+  `<div class="qlink">${x.original_html}</div> ${x.stripped_author_year}`;
 const NameAuthorYear = (x) => `${x.original_html} ${x.stripped_author_year}`;
-const NameLink = (s) => `<span class="qlink">${s}</span>`;
+const NameLink = (s) => `<div class="qlink">${s}</div>`;
 
 const cache = new LRU(10000);
 let jsonTree;
@@ -210,7 +212,8 @@ function queryString(title) {
     title: title,
     params: {
       project_id: 10,
-      per: 9500,
+      per:
+        title == "asserted_distributions" || title == "depictions" ? 99 : 990,
       page: ++queryPage[title],
     },
   };
@@ -278,6 +281,8 @@ function LoadedJson() {
   AddLSID();
   AddAncestree();
   AddChildren();
+  AddAssertedDistributions();
+  AddDepictions();
   jsonTree = JSON.stringify(BuildTree(kTaxonRootId));
   BuildSecretList();
   Write();
@@ -344,6 +349,8 @@ function AddValid() {
     value["aponyms"] = [];
     value["references"] = new Set();
     value["relationships"] = [];
+    value["asserted_distributions"] = [];
+    value["depictions"] = [];
     if (!value["valid"])
       value["validName"] =
         unifiedJson[value["valid_taxon_name_id"]]["original_html"];
@@ -402,12 +409,16 @@ function AddRelationship(
     }
     if (!receiver["valid"])
       receiver = unifiedJson[receiver["valid_taxon_name_id"]];
-    const msg = `${NameAuthorYearLink(
+    const msg = `<span class=\"relationship_tag\">relationship</span> ${NameAuthorYearLink(
       juniorObj
     )} ${interpolation}${subjectTag} ${NameAuthorYearLink(
       seniorObj
-    )} in ${shortRef} <span class=\"relationship_tag\">relationship</span>`;
-    receiver["relationships"].push({ id: relationshipId, msg: msg });
+    )} in ${shortRef} `;
+    receiver["relationships"].push({
+      id: relationshipId,
+      msg: msg,
+      year: receiver.year,
+    });
     receiver["references"].add(ref);
   }
 }
@@ -415,10 +426,13 @@ function AddRelationship(
 function makeProtonymObject(x) {
   return {
     id: x["id"],
-    msg: `${ShortRefFromObj(
+
+    msg: `<span class=\"protonym_tag\">protonym</span> ${ShortRefFromObj(
       x,
       "protonym"
-    )} <span class=\"protonym_tag\">protonym</span>`,
+    )} `,
+
+    year: x["year"],
   };
 }
 
@@ -477,8 +491,6 @@ function AddLogonymy() {
       }
     }
   });
-  // Log('Other types:')
-  // Log(Object.entries(otherTagTypes))
 
   Object.values(unifiedJson).forEach((x) => {
     if (x["valid"]) {
@@ -487,10 +499,10 @@ function AddLogonymy() {
         if (x["type_species"])
           x.protonyms.push({ id: x["id"], msg: x["type_species"] });
       } else {
-        formattedAponym = `${ShortRefFromObj(
+        formattedAponym = `<span class=\"aponym_tag\">aponym</span> ${ShortRefFromObj(
           x,
           "aponym"
-        )} <span class=\"aponym_tag\">aponym</span>`;
+        )} `;
         x.aponyms.push({ id: x["id"], msg: formattedAponym });
         originalFormId = familyGroupOriginalFormMap[x["id"]];
         if (originalFormId) {
@@ -504,10 +516,11 @@ function AddLogonymy() {
       if (x["type"] == "Protonym") {
         ergonym.protonyms.push({
           id: x["id"],
-          msg: `${ShortRefFromObj(
+          msg: `<span class=\"protonym_tag\">protonym</span> ${ShortRefFromObj(
             x,
             "protonym"
-          )} <span class=\"protonym_tag\">protonym</span>`,
+          )} `,
+          year: x["year"],
         });
         if (x["type_species"])
           ergonym.protonyms.push({
@@ -516,10 +529,10 @@ function AddLogonymy() {
             type_species: true,
           });
       } else {
-        formattedAponym = `${ShortRefFromObj(
+        formattedAponym = ` <span class=\"aponym_tag\">aponym</span>${ShortRefFromObj(
           x,
           "aponym"
-        )} <span class=\"aponym_tag\">aponym</span>`;
+        )} `;
         ergonym.aponyms.push({ id: x["id"], msg: formattedAponym });
       }
       ergonym["references"].add(x["source"]);
@@ -635,6 +648,26 @@ function AddLSID() {
       );
       unifiedJson[x["identifier_object_id"]]["lsid_urn"] = x["identifier"];
     }
+}
+
+function AddAssertedDistributions() {
+  for (x of jsonFromApi["asserted_distributions"]) {
+    const id = x["otu"]["taxon_name_id"];
+    if (unifiedJson[id]) {
+      const el = unifiedJson[id];
+      el.asserted_distributions.push(x["geographic_area"]);
+    }
+  }
+}
+
+function AddDepictions() {
+  for (x of jsonFromApi["depictions"]) {
+    const id = x["depiction_object_id"];
+    if (unifiedJson[id]) {
+      const el = unifiedJson[id];
+      el["depictions"].push(x);
+    }
+  }
 }
 
 function Ancestree(id, name) {
@@ -905,13 +938,21 @@ function Debug() {
   jsonFromApi = JSON.parse(fs.readFileSync("./jsonfromapi.json"));
   Log("Loaded jsonFromApi from file.");
 
-  LoadedJson();
+  for (x of jsonFromApi["asserted_distributions"]) {
+    const id = x["otu"]["taxon_name_id"];
+    if (unifiedJson[id]) {
+      console.log(unifiedJson[id]);
+      break;
+    }
+  }
 
-  // for (x of Object.values(jsonFromApi['taxon_name_relationships'])) {
-  //   if (x['subject_taxon_name_id'] && x['subject_taxon_name_id'].toString().includes('679327')) {
-  //     console.log(x)
-  //   }
-  // }
+  for (x of jsonFromApi["depictions"]) {
+    const id = x["depiction_object_id"];
+    if (unifiedJson[id]) {
+      console.log(unifiedJson[id]);
+      break;
+    }
+  }
 }
 
 // SaveJsonForDebug();
