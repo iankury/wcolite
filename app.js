@@ -945,21 +945,7 @@ function Debug() {
   jsonFromApi = JSON.parse(fs.readFileSync("./jsonfromapi.json"));
   Log("Loaded jsonFromApi from file.");
 
-  for (x of jsonFromApi["asserted_distributions"]) {
-    const id = x["otu"]["taxon_name_id"];
-    if (unifiedJson[id]) {
-      console.log(unifiedJson[id]);
-      break;
-    }
-  }
-
-  for (x of jsonFromApi["depictions"]) {
-    const id = x["depiction_object_id"];
-    if (unifiedJson[id]) {
-      console.log(unifiedJson[id]);
-      break;
-    }
-  }
+  LoadedJson();
 }
 
 // SaveJsonForDebug();
