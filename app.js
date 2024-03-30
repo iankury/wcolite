@@ -281,8 +281,7 @@ function LoadedJson() {
   AddLSID();
   AddAncestree();
   AddChildren();
-  AddAssertedDistributions();
-  AddDepictions();
+
   jsonTree = JSON.stringify(BuildTree(kTaxonRootId));
   BuildSecretList();
   Write();
@@ -294,7 +293,7 @@ function MakeSourceMap() {
   });
 }
 
-function Unify() {
+function UnifyTaxonNames() {
   jsonFromApi["taxon_names"].forEach((x) => {
     unifiedJson[x.id] = {
       id: x.id,
@@ -311,6 +310,9 @@ function Unify() {
       speciesCount: "Not applicable",
     };
   });
+}
+
+function UnifyCitations() {
   jsonFromApi["citations"].forEach((x) => {
     const el = unifiedJson[x.citation_object_id];
     if (el) {
@@ -319,6 +321,33 @@ function Unify() {
       el["source"] = sourceMap[x.source_id] || "";
     }
   });
+}
+
+function UnifyAssertedDistributions() {
+  for (x of jsonFromApi["asserted_distributions"]) {
+    const id = x["otu"]["taxon_name_id"];
+    if (unifiedJson[id]) {
+      const el = unifiedJson[id];
+      el.asserted_distributions.push(x["geographic_area"]);
+    }
+  }
+}
+
+function UnifyDepictions() {
+  for (x of jsonFromApi["depictions"]) {
+    const id = x["depiction_object_id"];
+    if (unifiedJson[id]) {
+      const el = unifiedJson[id];
+      el["depictions"].push(x);
+    }
+  }
+}
+
+function Unify() {
+  UnifyTaxonNames();
+  UnifyCitations();
+  UnifyAssertedDistributions();
+  UnifyDepictions();
 }
 
 function KillGhosts() {
@@ -349,8 +378,6 @@ function AddValid() {
     value["aponyms"] = [];
     value["references"] = new Set();
     value["relationships"] = [];
-    value["asserted_distributions"] = [];
-    value["depictions"] = [];
     if (!value["valid"])
       value["validName"] =
         unifiedJson[value["valid_taxon_name_id"]]["original_html"];
@@ -648,26 +675,6 @@ function AddLSID() {
       );
       unifiedJson[x["identifier_object_id"]]["lsid_urn"] = x["identifier"];
     }
-}
-
-function AddAssertedDistributions() {
-  for (x of jsonFromApi["asserted_distributions"]) {
-    const id = x["otu"]["taxon_name_id"];
-    if (unifiedJson[id]) {
-      const el = unifiedJson[id];
-      el.asserted_distributions.push(x["geographic_area"]);
-    }
-  }
-}
-
-function AddDepictions() {
-  for (x of jsonFromApi["depictions"]) {
-    const id = x["depiction_object_id"];
-    if (unifiedJson[id]) {
-      const el = unifiedJson[id];
-      el["depictions"].push(x);
-    }
-  }
 }
 
 function Ancestree(id, name) {
