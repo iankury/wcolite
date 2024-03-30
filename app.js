@@ -24,6 +24,7 @@ const fetchQueue = [
   "sources",
   "identifiers",
   "tags",
+  "images",
   "depictions",
   "asserted_distributions",
 ];
@@ -328,17 +329,38 @@ function UnifyAssertedDistributions() {
     const id = x["otu"]["taxon_name_id"];
     if (unifiedJson[id]) {
       const el = unifiedJson[id];
-      el.asserted_distributions.push(x["geographic_area"]);
+      if (!el["asserted_distributions"]) el["asserted_distributions"] = [];
+      else el["asserted_distributions"].push(x["geographic_area"]);
     }
   }
 }
 
+function mapOfImages() {
+  imgs = new Map();
+
+  for (x of jsonFromApi["images"]) {
+    imgs[x["id"]] = {
+      original: x["original"],
+      thumb: x["thumb"],
+    };
+  }
+
+  return imgs;
+}
+
 function UnifyDepictions() {
+  imgs = mapOfImages();
+  // console.log(imgs);
   for (x of jsonFromApi["depictions"]) {
     const id = x["depiction_object_id"];
     if (unifiedJson[id]) {
       const el = unifiedJson[id];
-      el["depictions"].push(x);
+
+      if (!el["depictions"]) el["depictions"] = [];
+      else {
+        imgId = x["image_id"];
+        el["depictions"].push(imgs[imgId]);
+      }
     }
   }
 }
@@ -946,7 +968,12 @@ function Debug() {
   Log("Loaded jsonFromApi from file.");
 
   LoadedJson();
+
+  for (x of jsonFromApi["depictions"]) {
+    const id = x["depiction_object_id"];
+    console.log(unifiedJson[id]);
+  }
 }
 
 // SaveJsonForDebug();
-// Debug();
+//Debug();

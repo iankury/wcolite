@@ -360,11 +360,22 @@ function displayCard() {
     $("#children_container").html(tempChildren);
   }
 
-  console.log(node);
+  if (node.depictions) {
+    $("#card__imgs").empty();
+    for (img of node.depictions) {
+      var $html = $(`<img src=${img.thumb} class="card-img__item"/>`).appendTo(
+        "#card__imgs"
+      );
+    }
+  }
 }
 
+// Cryptolasma aberrante
+// Gagrella crassitarsis
+// Giljarovia rossica
+// Giljarovia rossica
+
 function displayTable() {
-  console.log(data);
   $("#out_of_pages").html(data.pages);
   $("#page").attr("max", data.pages);
 
@@ -547,7 +558,6 @@ function displayData() {
     }
   }
   currentContainerOnly();
-  console.log(data);
 }
 
 function addLinkHandler() {
