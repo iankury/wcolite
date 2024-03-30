@@ -326,6 +326,10 @@ function displayCard() {
       `<a target="_blank" class="brown_link" href="${node.lsid_url}">${node.lsid_urn}</a>`
     );
   else $("#lsid_div").html("Coming soon...");
+
+  if (node.asserted_distributions) {
+    console.log(node.asserted_distributions);
+  }
   logonymyText = "";
 
   node.protonyms.sort((a, b) => {
@@ -355,9 +359,12 @@ function displayCard() {
     }
     $("#children_container").html(tempChildren);
   }
+
+  console.log(node);
 }
 
 function displayTable() {
+  console.log(data);
   $("#out_of_pages").html(data.pages);
   $("#page").attr("max", data.pages);
 
@@ -540,6 +547,7 @@ function displayData() {
     }
   }
   currentContainerOnly();
+  console.log(data);
 }
 
 function addLinkHandler() {

@@ -24,6 +24,8 @@ const fetchQueue = [
   "sources",
   "identifiers",
   "tags",
+  "depictions",
+  "asserted_distributions",
 ];
 
 const secret = fs.readFileSync("secret.txt").toString();
@@ -210,7 +212,8 @@ function queryString(title) {
     title: title,
     params: {
       project_id: 10,
-      per: 9500,
+      per:
+        title == "asserted_distributions" || title == "depictions" ? 99 : 990,
       page: ++queryPage[title],
     },
   };
@@ -278,6 +281,8 @@ function LoadedJson() {
   AddLSID();
   AddAncestree();
   AddChildren();
+  AddAssertedDistributions();
+  AddDepictions();
   jsonTree = JSON.stringify(BuildTree(kTaxonRootId));
   BuildSecretList();
   Write();
@@ -344,6 +349,8 @@ function AddValid() {
     value["aponyms"] = [];
     value["references"] = new Set();
     value["relationships"] = [];
+    value["asserted_distributions"] = [];
+    value["depictions"] = [];
     if (!value["valid"])
       value["validName"] =
         unifiedJson[value["valid_taxon_name_id"]]["original_html"];
@@ -484,8 +491,6 @@ function AddLogonymy() {
       }
     }
   });
-  // Log('Other types:')
-  // Log(Object.entries(otherTagTypes))
 
   Object.values(unifiedJson).forEach((x) => {
     if (x["valid"]) {
@@ -643,6 +648,26 @@ function AddLSID() {
       );
       unifiedJson[x["identifier_object_id"]]["lsid_urn"] = x["identifier"];
     }
+}
+
+function AddAssertedDistributions() {
+  for (x of jsonFromApi["asserted_distributions"]) {
+    const id = x["otu"]["taxon_name_id"];
+    if (unifiedJson[id]) {
+      const el = unifiedJson[id];
+      el.asserted_distributions.push(x["geographic_area"]);
+    }
+  }
+}
+
+function AddDepictions() {
+  for (x of jsonFromApi["depictions"]) {
+    const id = x["depiction_object_id"];
+    if (unifiedJson[id]) {
+      const el = unifiedJson[id];
+      el["depictions"].push(x);
+    }
+  }
 }
 
 function Ancestree(id, name) {
@@ -913,21 +938,21 @@ function Debug() {
   jsonFromApi = JSON.parse(fs.readFileSync("./jsonfromapi.json"));
   Log("Loaded jsonFromApi from file.");
 
-  // for (x of Object.values(jsonFromApi["taxon_name_relationships"])) {
-  //   if (
-  //     x["subject_taxon_name_id"] &&
-  //     x["subject_taxon_name_id"].toString().includes("322506")
-  //   ) {
-  //     console.log(x);
-  //   }
-  // }
-  LoadedJson();
-  Log("Console infiedJson");
-  Object.values(unifiedJson).forEach((x) => {
-    if (x["cached"] == "Mitopus morio") {
-      console.log(x[relationships]);
+  for (x of jsonFromApi["asserted_distributions"]) {
+    const id = x["otu"]["taxon_name_id"];
+    if (unifiedJson[id]) {
+      console.log(unifiedJson[id]);
+      break;
     }
-  });
+  }
+
+  for (x of jsonFromApi["depictions"]) {
+    const id = x["depiction_object_id"];
+    if (unifiedJson[id]) {
+      console.log(unifiedJson[id]);
+      break;
+    }
+  }
 }
 
 //SaveJsonForDebug();

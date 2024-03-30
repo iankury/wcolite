@@ -793,7 +793,7 @@
   },
   "PT-20": {
     "name": "Azores (Portugal)",
-    "continent": "Europe"
+    "continent": "Africa"
   },
   "ROU": {
     "name": "Romania",
