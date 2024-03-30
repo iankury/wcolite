@@ -312,6 +312,7 @@ const bullets = (v) =>
 const indented = (s) => `<div style="padding-left: 3vw;">${s}</div>`;
 
 function displayCard() {
+  $("#card__imgs").empty();
   let node;
   for (i = 0; i < data.resultList.length; i++)
     if (data.resultList[i].valid) {
@@ -361,18 +362,24 @@ function displayCard() {
   }
 
   if (node.depictions) {
-    $("#card__imgs").empty();
+    let i = 0;
     for (img of node.depictions) {
-      var $html = $(`<img src=${img.thumb} class="card-img__item"/>`).appendTo(
-        "#card__imgs"
-      );
+      const $html = $(
+        `<img src=${img.thumb} class="card-img__item" data-id=${i}/>`
+      ).appendTo("#card__imgs");
+
+      $html.on("click", (e) => {
+        $(
+          `<img src=${node.depictions[i]} class="card-img__item-big" data-id=${i}/>`
+        ).appendTo("#card__imgs-big");
+      });
+      i++;
     }
   }
 }
 
 // Cryptolasma aberrante
 // Gagrella crassitarsis
-// Giljarovia rossica
 // Giljarovia rossica
 
 function displayTable() {
@@ -582,5 +589,3 @@ function strUpTo(s, threshold) {
   if (idx >= 0) s = s.substr(0, idx);
   return s;
 }
-
-//Despiroides

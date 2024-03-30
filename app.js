@@ -341,6 +341,7 @@ function mapOfImages() {
   for (x of jsonFromApi["images"]) {
     imgs[x["id"]] = {
       original: x["original"],
+      medium: x["medium"],
       thumb: x["thumb"],
     };
   }
@@ -976,4 +977,4 @@ function Debug() {
 }
 
 // SaveJsonForDebug();
-//Debug();
+// Debug();
