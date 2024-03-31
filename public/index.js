@@ -311,8 +311,12 @@ const bullets = (v) =>
 
 const indented = (s) => `<div style="padding-left: 3vw;">${s}</div>`;
 
+let imgsSrc = {};
+
 function displayCard() {
   $("#card__imgs").empty();
+  $("#card__img-big").empty();
+
   let node;
   for (i = 0; i < data.resultList.length; i++)
     if (data.resultList[i].valid) {
@@ -362,22 +366,32 @@ function displayCard() {
   }
 
   if (node.depictions) {
+    imgsSrc = node.depictions;
     let i = 0;
     for (img of node.depictions) {
       const $html = $(
-        `<img src=${img.thumb} class="card-img__item" data-id=${i}/>`
+        `<img src=${img.thumb} class="card-img__item" data-id="${i}"/>`
       ).appendTo("#card__imgs");
 
-      $html.on("click", (e) => {
-        $(
-          `<img src=${node.depictions[i]} class="card-img__item-big" data-id=${i}/>`
-        ).appendTo("#card__imgs-big");
-      });
       i++;
     }
   }
+
+  // $(".card-img__item").on("click", setBgImg());
+  $("#card__imgs").on("click", setBgImg);
 }
 
+function setBgImg(e) {
+  $("#card__img-big").empty();
+  $el = e.target;
+  i = $el.getAttribute("data-id");
+
+  console.log(imgsSrc);
+
+  const $html = $(
+    `<img src=${imgsSrc[i]["medium"]} class="card-img-big" data-id="${i}"/>`
+  ).appendTo("#card__img-big");
+}
 // Cryptolasma aberrante
 // Gagrella crassitarsis
 // Giljarovia rossica

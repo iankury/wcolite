@@ -534,6 +534,9 @@ body._dark-mode #children_container p:hover {
 #card__img-big{
   height: 200px;
   width: 300px;
+  overflow: hidden;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
 #card__imgs{
