@@ -366,30 +366,52 @@ function displayCard() {
   }
 
   if (node.depictions) {
-    imgsSrc = node.depictions;
-    let i = 0;
-    for (img of node.depictions) {
-      const $html = $(
-        `<img src=${img.thumb} class="card-img__item" data-id="${i}"/>`
-      ).appendTo("#card__imgs");
+    if (node.depictions.length) {
+      console.log("dff");
+      $(".card__img-container").show();
+      console.log(node.depictions.length);
+      imgsSrc = node.depictions;
+      let i = 0;
+      for (img of node.depictions) {
+        i == 0 ? (cls = "card-img__item _active") : (cls = "card-img__item");
+        $(`<img src=${img.thumb} class="${cls}" data-id="${i}"/>`).appendTo(
+          "#card__imgs"
+        );
 
-      i++;
+        i++;
+      }
+      $(
+        `<img src=${imgsSrc[0]["original"]} class="card-img-big" data-id="0"/>`
+      ).appendTo("#card__img-big");
+
+      $("#card__imgs").on("click", setBgImg);
+      $(".card__img-container svg").on("click", setImgFullScreen);
+    } else {
+      $(".card__img-container").hide();
     }
+  } else {
+    $(".card__img-container").hide();
   }
+}
 
-  // $(".card-img__item").on("click", setBgImg());
-  $("#card__imgs").on("click", setBgImg);
+function setImgFullScreen() {
+  const $el = $(".card-img-big")[0];
+  const i = $el.getAttribute("data-id");
+  console.log(i);
 }
 
 function setBgImg(e) {
   $("#card__img-big").empty();
+
   $el = e.target;
-  i = $el.getAttribute("data-id");
 
-  console.log(imgsSrc);
+  $(".card-img__item").removeClass("_active");
 
-  const $html = $(
-    `<img src=${imgsSrc[i]["medium"]} class="card-img-big" data-id="${i}"/>`
+  $el.classList.add("_active");
+  const i = $el.getAttribute("data-id");
+
+  $(
+    `<img src=${imgsSrc[i]["original"]} class="card-img-big" data-id="${i}"/>`
   ).appendTo("#card__img-big");
 }
 // Cryptolasma aberrante

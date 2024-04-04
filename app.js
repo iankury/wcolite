@@ -970,9 +970,9 @@ function Debug() {
 
   LoadedJson();
 
-  for (x of jsonFromApi["depictions"]) {
-    const id = x["depiction_object_id"];
-    console.log(unifiedJson[id]);
+  let count = 0;
+  for (x of jsonFromApi["images"]) {
+    count++;
   }
 }
 
