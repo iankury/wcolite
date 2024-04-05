@@ -323,6 +323,7 @@ function displayCard() {
       node = data.resultList[i];
       break;
     }
+  console.log(node);
   $(".data-card__title").html(`${node.cached_html} ${node.author_year}`);
   $(".data-card__path").html(bullets(node.ancestree));
   $("#valid_species_count").html(node.speciesCount);
@@ -367,22 +368,22 @@ function displayCard() {
 
   if (node.depictions) {
     if (node.depictions.length) {
-      console.log("dff");
       $(".card__img-container").show();
-      console.log(node.depictions.length);
       imgsSrc = node.depictions;
+      console.log(imgsSrc);
       let i = 0;
       for (img of node.depictions) {
         i == 0 ? (cls = "card-img__item _active") : (cls = "card-img__item");
-        $(`<img src=${img.thumb} class="${cls}" data-id="${i}"/>`).appendTo(
+        $(`<img src=${img.src.thumb} class="${cls}" data-id="${i}"/>`).appendTo(
           "#card__imgs"
         );
 
         i++;
       }
       $(
-        `<img src=${imgsSrc[0]["original"]} class="card-img-big" data-id="0"/>`
+        `<img src=${imgsSrc[0]["src"]["original"]} class="card-img-big" data-id="0"/>`
       ).appendTo("#card__img-big");
+      $(".card__img-caption").text(imgsSrc[0]["caption"]);
 
       $("#card__imgs").on("click", setBgImg);
       $(".card__img-container svg").on("click", setImgFullScreen);
@@ -411,8 +412,10 @@ function setBgImg(e) {
   const i = $el.getAttribute("data-id");
 
   $(
-    `<img src=${imgsSrc[i]["original"]} class="card-img-big" data-id="${i}"/>`
+    `<img src=${imgsSrc[i]["src"]["original"]} class="card-img-big" data-id="${i}"/>`
   ).appendTo("#card__img-big");
+
+  $(".card__img-caption").text(imgsSrc[i]["caption"]);
 }
 // Cryptolasma aberrante
 // Gagrella crassitarsis

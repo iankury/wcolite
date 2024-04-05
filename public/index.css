@@ -558,6 +558,7 @@ body._dark-mode .card__img-container{
 
 
 #card__img-big{
+  position: relative;
   height: 400px;
   width: auto;
   overflow: hidden;
@@ -570,6 +571,10 @@ body._dark-mode .card__img-container{
 #card__img-big img{
   height: 100%;
   width: auto;
+}
+
+.card__img-caption{
+  padding: 10px;
 }
 
 #card__imgs{

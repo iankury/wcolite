@@ -360,7 +360,7 @@ function UnifyDepictions() {
       if (!el["depictions"]) el["depictions"] = [];
       else {
         imgId = x["image_id"];
-        el["depictions"].push(imgs[imgId]);
+        el["depictions"].push({ caption: x["caption"], src: imgs[imgId] });
       }
     }
   }
@@ -970,9 +970,8 @@ function Debug() {
 
   LoadedJson();
 
-  let count = 0;
-  for (x of jsonFromApi["images"]) {
-    count++;
+  for (x of jsonFromApi["depictions"]) {
+    console.log(unifiedJson[x["depiction_object_id"]]);
   }
 }
 
