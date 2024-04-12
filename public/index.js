@@ -316,6 +316,7 @@ let imgsSrc = {};
 function displayCard() {
   $("#card__imgs").empty();
   $("#card__img-big").empty();
+  $("#data-card__img-fullscreen").hide();
 
   let node;
   for (i = 0; i < data.resultList.length; i++)
@@ -323,7 +324,7 @@ function displayCard() {
       node = data.resultList[i];
       break;
     }
-  console.log(node);
+
   $(".data-card__title").html(`${node.cached_html} ${node.author_year}`);
   $(".data-card__path").html(bullets(node.ancestree));
   $("#valid_species_count").html(node.speciesCount);
@@ -370,7 +371,7 @@ function displayCard() {
     if (node.depictions.length) {
       $(".card__img-container").show();
       imgsSrc = node.depictions;
-      console.log(imgsSrc);
+
       let i = 0;
       for (img of node.depictions) {
         i == 0 ? (cls = "card-img__item _active") : (cls = "card-img__item");
@@ -396,26 +397,81 @@ function displayCard() {
 }
 
 function setImgFullScreen() {
+  $(".img-fullscreen").empty();
+
   const $el = $(".card-img-big")[0];
   const i = $el.getAttribute("data-id");
-  console.log(i);
+
+  $("#data-card__img-fullscreen").show();
+
+  $(
+    `<div id="img-fullscreen-close"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
+              <path d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z"></path>
+          </svg>
+        </div>
+    <img src=${imgsSrc[i]["src"]["original"]} class="card-img-big" data-id="${i}"/>`
+  ).appendTo(".img-fullscreen");
+  $(".img-fullscreen-caption").text(imgsSrc[i]["caption"]);
+
+  $("#img-fullscreen-close").on("click", () => {
+    $("#data-card__img-fullscreen").hide();
+  });
+
+  $(".img-arrow").on("click", (e) => {
+    const lastIdx = imgsSrc.length - 1;
+
+    const $el = $(".card-img-big")[0];
+    const curIdx = Number($el.getAttribute("data-id"));
+
+    let newIdx;
+
+    if (e.target.classList.contains("arrow-right")) {
+      newIdx = curIdx + 1;
+      if (newIdx > lastIdx) newIdx = 0;
+    } else if (e.target.classList.contains("arrow-left")) {
+      newIdx = curIdx - 1;
+      if (newIdx < 0) newIdx = lastIdx;
+    }
+
+    showImgFullScreen(newIdx);
+  });
+}
+
+function showImgFullScreen(idx) {
+  $(".img-fullscreen").empty();
+  $("#data-card__img-fullscreen").show();
+
+  $(
+    `<div id="img-fullscreen-close"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
+              <path d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z"></path>
+          </svg>
+        </div>
+    <img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}"/>`
+  ).appendTo(".img-fullscreen");
+  $(".img-fullscreen-caption").text(imgsSrc[idx]["caption"]);
+
+  $("#img-fullscreen-close").on("click", () => {
+    $("#data-card__img-fullscreen").hide();
+  });
 }
 
 function setBgImg(e) {
-  $("#card__img-big").empty();
+  if (e.target.classList.contains("card-img__item")) {
+    $("#card__img-big").empty();
 
-  $el = e.target;
+    $el = e.target;
 
-  $(".card-img__item").removeClass("_active");
+    $(".card-img__item").removeClass("_active");
 
-  $el.classList.add("_active");
-  const i = $el.getAttribute("data-id");
+    $el.classList.add("_active");
+    const i = $el.getAttribute("data-id");
 
-  $(
-    `<img src=${imgsSrc[i]["src"]["original"]} class="card-img-big" data-id="${i}"/>`
-  ).appendTo("#card__img-big");
+    $(
+      `<img src=${imgsSrc[i]["src"]["original"]} class="card-img-big" data-id="${i}"/>`
+    ).appendTo("#card__img-big");
 
-  $(".card__img-caption").text(imgsSrc[i]["caption"]);
+    $(".card__img-caption").text(imgsSrc[i]["caption"]);
+  }
 }
 // Cryptolasma aberrante
 // Gagrella crassitarsis

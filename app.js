@@ -315,11 +315,13 @@ function UnifyTaxonNames() {
 
 function UnifyCitations() {
   jsonFromApi["citations"].forEach((x) => {
-    const el = unifiedJson[x.citation_object_id];
-    if (el) {
-      el["pages"] = x.pages;
-      el["is_original"] = x.is_original;
-      el["source"] = sourceMap[x.source_id] || "";
+    if (x.citation_object_type === "TaxonName") {
+      const el = unifiedJson[x.citation_object_id];
+      if (el) {
+        el["pages"] = x.pages;
+        el["is_original"] = x.is_original;
+        el["source"] = sourceMap[x.source_id] || "";
+      }
     }
   });
 }
@@ -409,8 +411,10 @@ function AddValid() {
 
 function MapCitationObjIdToCitation() {
   jsonFromApi["citations"].forEach((x) => {
-    const key = x.citation_object_id;
-    citationMap[key] = x;
+    if (x.citation_object_type === "TaxonName") {
+      const key = x.citation_object_id;
+      citationMap[key] = x;
+    }
   });
 }
 
@@ -970,9 +974,18 @@ function Debug() {
 
   LoadedJson();
 
-  for (x of jsonFromApi["depictions"]) {
-    console.log(unifiedJson[x["depiction_object_id"]]);
-  }
+  // for (x of jsonFromApi["citations"]) {
+  //   if (x.citation_object_id == 327788) console.log(x);
+  // }
+  // for (x of jsonFromApi["sources"]) {
+  //   if (x.id == 111953) console.log(x);
+  // }
+
+  Object.entries(unifiedJson).forEach((x) => {
+    key = x[0];
+    value = x[1];
+    if (value["cached"] === "Bullaepus") console.log(value);
+  });
 }
 
 // SaveJsonForDebug();
