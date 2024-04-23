@@ -555,14 +555,27 @@ body._dark-mode .card__img-container{
 .card__img-container svg:hover{
   opacity: 1;
 }
+.card__img-container._full-screen{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  z-index: 1001;
+  margin: 0;
+  padding: 15px;
+}
+
+.card__img-container._full-screen #card__img-big{
+  height: 100%;
+}
+
 
 body._dark-mode svg {
   fill: #fff;
 }
 
-#data-card__img-fullscreen{
-  
-}
 
 #card__img-big{
   position: relative;
@@ -605,6 +618,14 @@ body._dark-mode svg {
   border: 2px solid #222222;
 }
 
+body._dark-mode #card__imgs img._active {
+  border: 2px solid #fff;
+}
+
+body._dark-mode #card__imgs img:hover {
+  border: 2px solid #fff;
+}
+
 #data-card__img-fullscreen{
   position: fixed;
   top: 0;
@@ -622,26 +643,31 @@ body._dark-mode svg {
   flex-direction: column;
 }
 
-#data-card__img-fullscreen svg.img-arrow{
+.card__img-container svg.img-arrow{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   transition: 0.2s;
   opacity: 0.7;
-  fill: #fff;
+  fill: #393e46;
   right: 50px;
 
-  height: 50px;
-  width: 50px;
+  transition: 0.2s;
+  height: 25px;
+  width: 25px;
   z-index: 10001;
 }
 
-#data-card__img-fullscreen svg.arrow-left{
+body._dark-mode .card__img-container svg.img-arrow{
+  fill: #fff;
+}
+
+.card__img-container svg.arrow-left{
   left: 50px;
 }
 
-#data-card__img-fullscreen svg.img-arrow:hover{
+.card__img-container svg.img-arrow:hover{
   opacity: 1;
 }
 
@@ -696,6 +722,8 @@ body._dark-mode svg {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  display: none;
 }
 
 .data-card__info{

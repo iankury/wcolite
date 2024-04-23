@@ -218,6 +218,9 @@ function queryString(title) {
       page: ++queryPage[title],
     },
   };
+
+  if (title == "images") options["params"]["extend[]"] = "attribution";
+
   if (title == "sources") options["params"]["in_project"] = true;
   else options["params"]["token"] = "W8kIg_iBpBG72j2EZZLhVQ";
   const paramsString = Object.entries(options.params)
@@ -346,6 +349,10 @@ function mapOfImages() {
       medium: x["medium"],
       thumb: x["thumb"],
     };
+
+    if (x["attribution"]) {
+      imgs[x["id"]]["attr"] = x["attribution"].label;
+    }
   }
 
   return imgs;
@@ -353,16 +360,24 @@ function mapOfImages() {
 
 function UnifyDepictions() {
   imgs = mapOfImages();
-  // console.log(imgs);
   for (x of jsonFromApi["depictions"]) {
     const id = x["depiction_object_id"];
+
     if (unifiedJson[id]) {
       const el = unifiedJson[id];
 
-      if (!el["depictions"]) el["depictions"] = [];
-      else {
-        imgId = x["image_id"];
-        el["depictions"].push({ caption: x["caption"], src: imgs[imgId] });
+      if (!el["depictions"]) {
+        el["depictions"] = [];
+      }
+
+      imgId = x["image_id"];
+
+      el["depictions"].push({
+        caption: x["caption"],
+        src: imgs[imgId],
+      });
+      if (id == 327462) {
+        console.log(unifiedJson[id]);
       }
     }
   }
@@ -974,18 +989,16 @@ function Debug() {
 
   LoadedJson();
 
-  // for (x of jsonFromApi["citations"]) {
-  //   if (x.citation_object_id == 327788) console.log(x);
-  // }
-  // for (x of jsonFromApi["sources"]) {
-  //   if (x.id == 111953) console.log(x);
-  // }
+  for (x of jsonFromApi["depictions"]) {
+    if (jsonFromApi["depictions"]["depiction_object_id"] == 327462)
+      console.log(x);
+  }
 
-  Object.entries(unifiedJson).forEach((x) => {
-    key = x[0];
-    value = x[1];
-    if (value["cached"] === "Bullaepus") console.log(value);
-  });
+  // Object.entries(unifiedJson).forEach((x) => {
+  //   key = x[0];
+  //   value = x[1];
+  //   if (value["cached"] === "Pyatan insperatum") console.log(value);
+  // });
 }
 
 // SaveJsonForDebug();

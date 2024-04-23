@@ -381,13 +381,18 @@ function displayCard() {
 
         i++;
       }
-      $(
-        `<img src=${imgsSrc[0]["src"]["original"]} class="card-img-big" data-id="0"/>`
-      ).appendTo("#card__img-big");
-      $(".card__img-caption").text(imgsSrc[0]["caption"]);
 
-      $("#card__imgs").on("click", setBgImg);
-      $(".card__img-container svg").on("click", setImgFullScreen);
+      setBigImg(0);
+      $("#card__imgs").on("click", (e) => {
+        if (e.target.classList.contains("card-img__item")) $el = e.target;
+        const i = $el.getAttribute("data-id");
+        setBigImg(i);
+      });
+
+      $("#set-fullscreen").on("click", setFulscreen);
+      $("#close-fullscreen").hide();
+
+      $(".img-arrow").off("click").on("click", setIdx);
     } else {
       $(".card__img-container").hide();
     }
@@ -396,85 +401,57 @@ function displayCard() {
   }
 }
 
-function setImgFullScreen() {
-  $(".img-fullscreen").empty();
-
+function setIdx(e) {
+  console.log("click");
   const $el = $(".card-img-big")[0];
-  const i = $el.getAttribute("data-id");
 
-  $("#data-card__img-fullscreen").show();
+  let curIdx = Number($el.getAttribute("data-id"));
 
-  $(
-    `<div id="img-fullscreen-close"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
-              <path d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z"></path>
-          </svg>
-        </div>
-    <img src=${imgsSrc[i]["src"]["original"]} class="card-img-big" data-id="${i}"/>`
-  ).appendTo(".img-fullscreen");
-  $(".img-fullscreen-caption").text(imgsSrc[i]["caption"]);
-
-  $("#img-fullscreen-close").on("click", () => {
-    $("#data-card__img-fullscreen").hide();
-  });
-
-  $(".img-arrow").on("click", (e) => {
-    const lastIdx = imgsSrc.length - 1;
-
-    const $el = $(".card-img-big")[0];
-    const curIdx = Number($el.getAttribute("data-id"));
-
-    let newIdx;
-
-    if (e.target.classList.contains("arrow-right")) {
-      newIdx = curIdx + 1;
-      if (newIdx > lastIdx) newIdx = 0;
-    } else if (e.target.classList.contains("arrow-left")) {
-      newIdx = curIdx - 1;
-      if (newIdx < 0) newIdx = lastIdx;
-    }
-
-    showImgFullScreen(newIdx);
-  });
-}
-
-function showImgFullScreen(idx) {
-  $(".img-fullscreen").empty();
-  $("#data-card__img-fullscreen").show();
-
-  $(
-    `<div id="img-fullscreen-close"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
-              <path d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z"></path>
-          </svg>
-        </div>
-    <img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}"/>`
-  ).appendTo(".img-fullscreen");
-  $(".img-fullscreen-caption").text(imgsSrc[idx]["caption"]);
-
-  $("#img-fullscreen-close").on("click", () => {
-    $("#data-card__img-fullscreen").hide();
-  });
-}
-
-function setBgImg(e) {
-  if (e.target.classList.contains("card-img__item")) {
-    $("#card__img-big").empty();
-
-    $el = e.target;
-
-    $(".card-img__item").removeClass("_active");
-
-    $el.classList.add("_active");
-    const i = $el.getAttribute("data-id");
-
-    $(
-      `<img src=${imgsSrc[i]["src"]["original"]} class="card-img-big" data-id="${i}"/>`
-    ).appendTo("#card__img-big");
-
-    $(".card__img-caption").text(imgsSrc[i]["caption"]);
+  const lastIdx = imgsSrc.length - 1;
+  if (e.target.classList.contains("arrow-right")) {
+    curIdx++;
+    if (curIdx > lastIdx) curIdx = 0;
+  } else if (e.target.classList.contains("arrow-left")) {
+    curIdx--;
+    if (curIdx < 0) curIdx = lastIdx;
   }
+
+  setBigImg(curIdx);
 }
-// Cryptolasma aberrante
-// Gagrella crassitarsis
+
+function setBigImg(idx) {
+  $("#card__img-big").empty();
+
+  $(".card-img__item").removeClass("_active");
+
+  thumbs = $(".card-img__item");
+
+  thumbs[idx].classList.add("_active");
+
+  $(
+    `<img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}"/>`
+  ).appendTo("#card__img-big");
+
+  $(".card__img-caption").text(`${imgsSrc[idx]["caption"]}} `);
+  if (imgsSrc[idx]["src"]["attr"])
+    $(`<p>${imgsSrc[idx]["src"]["attr"]}<p/>`).appendTo(".card__img-caption");
+}
+
+function setFulscreen() {
+  $(".card__img-container").addClass("_full-screen");
+  $("#set-fullscreen").hide();
+  $("#close-fullscreen").show();
+
+  $("#close-fullscreen").on("click", removeFullscreen);
+}
+
+function removeFullscreen() {
+  $(".card__img-container").removeClass("_full-screen");
+  $("#set-fullscreen").show();
+  $("#close-fullscreen").hide();
+}
+// Triconobunus horridus
+// Mischonyx parvus
 // Giljarovia rossica
 
 function displayTable() {
