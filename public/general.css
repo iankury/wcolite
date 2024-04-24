@@ -131,7 +131,7 @@ body._lock {
 }
 
 /*-----------------------------------------------------------------------------------------*/
-.preloader {
+.preloader-container {
   position: fixed;
   background-color: #fff;
   display: flex;
@@ -142,127 +142,45 @@ body._lock {
   top: 0;
   left: 0;
   transition: 0.2s;
-  z-index: 1000;
+  z-index: 10000;
+}
+
+body.loaded_hiding .preloader-container {
+  opacity: 0;
+}
+
+body.loaded .preloader-container {
+  display: none;
 }
 
 body._dark-mode .preloader {
   background-color: #121212;
 }
 
-.lds-default {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-  transition: 0.4s;
+body._dark-mode .preloader{
+  --_g: no-repeat radial-gradient(farthest-side, #A6E011 94%, #0000);
 }
 
-.lds-default div {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #1f925b;
-  border-radius: 50%;
-  animation: lds-default 1.2s linear infinite;
-  transition: 0.4s;
+/* HTML: <div class="loader"></div> */
+.preloader {
+  width: 35px;
+  aspect-ratio: 1;
+  --_g: no-repeat radial-gradient(farthest-side, #1F925B 94%, #0000);
+  background:
+    var(--_g) 0 0,
+    var(--_g) 100% 0,
+    var(--_g) 100% 100%,
+    var(--_g) 0 100%;
+  background-size: 40% 40%;
+  animation: l38 .5s infinite;
 }
 
-.lds-default div:nth-child(1) {
-  animation-delay: 0s;
-  top: 37px;
-  left: 66px;
-}
-
-.lds-default div:nth-child(2) {
-  animation-delay: -0.1s;
-  top: 22px;
-  left: 62px;
-}
-
-.lds-default div:nth-child(3) {
-  animation-delay: -0.2s;
-  top: 11px;
-  left: 52px;
-}
-
-.lds-default div:nth-child(4) {
-  animation-delay: -0.3s;
-  top: 7px;
-  left: 37px;
-}
-
-.lds-default div:nth-child(5) {
-  animation-delay: -0.4s;
-  top: 11px;
-  left: 22px;
-}
-
-.lds-default div:nth-child(6) {
-  animation-delay: -0.5s;
-  top: 22px;
-  left: 11px;
-}
-
-.lds-default div:nth-child(7) {
-  animation-delay: -0.6s;
-  top: 37px;
-  left: 7px;
-}
-
-.lds-default div:nth-child(8) {
-  animation-delay: -0.7s;
-  top: 52px;
-  left: 11px;
-}
-
-.lds-default div:nth-child(9) {
-  animation-delay: -0.8s;
-  top: 62px;
-  left: 22px;
-}
-
-.lds-default div:nth-child(10) {
-  animation-delay: -0.9s;
-  top: 66px;
-  left: 37px;
-}
-
-.lds-default div:nth-child(11) {
-  animation-delay: -1s;
-  top: 62px;
-  left: 52px;
-}
-
-.lds-default div:nth-child(12) {
-  animation-delay: -1.1s;
-  top: 52px;
-  left: 62px;
-}
-
-@keyframes lds-default {
-  0% {
-    opacity: 0.2;
-  }
-
-  0%,
-  20%,
-  80%,
+@keyframes l38 {
   100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.5);
+    background-position: 100% 0, 100% 100%, 0 100%, 0 0
   }
 }
 
-body.loaded_hiding .preloader {
-  opacity: 0;
-}
-
-body.loaded .preloader {
-  display: none;
-}
 
 
 /* SCROLLBAR ---------*/
@@ -288,3 +206,52 @@ body.loaded .preloader {
       z-index: 110;
     }
 }
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  height: 15px;
+  aspect-ratio: 5;
+  --_g: no-repeat radial-gradient(farthest-side, #000 94%, #0000);
+  background: var(--_g), var(--_g), var(--_g), var(--_g);
+  background-size: 20% 100%;
+  animation:
+    l40-1 .75s infinite alternate,
+    l40-2 1.5s infinite alternate;
+}
+
+@keyframes l40-1 {
+
+  0%,
+  10% {
+    background-position: 0 0, 0 0, 0 0, 0 0
+  }
+
+  33% {
+    background-position: 0 0, calc(100%/3) 0, calc(100%/3) 0, calc(100%/3) 0
+  }
+
+  66% {
+    background-position: 0 0, calc(100%/3) 0, calc(2*100%/3) 0, calc(2*100%/3) 0
+  }
+
+  90%,
+  100% {
+    background-position: 0 0, calc(100%/3) 0, calc(2*100%/3) 0, 100% 0
+  }
+}
+
+@keyframes l40-2 {
+
+  0%,
+  49.99% {
+    transform: scale(1)
+  }
+
+  50%,
+  100% {
+    transform: scale(-1)
+  }
+}
+
+

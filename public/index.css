@@ -571,6 +571,34 @@ body._dark-mode .card__img-container{
   height: 100%;
 }
 
+.loader-img-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.2s;
+}
+
+.loader-img-container .preloader{
+  opacity: 0.3;
+  
+}
+
+.loader-img-container.loaded_hiding{
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.loader-img-container.loaded {
+  display: none;
+}
+
 
 body._dark-mode svg {
   fill: #fff;

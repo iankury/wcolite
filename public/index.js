@@ -118,6 +118,14 @@ function loadedTree() {
   addTreeRightClick();
   addBrowseRightClick();
 
+  hideLoader();
+}
+
+function showLoader() {
+  $("body").removeClass("loaded");
+}
+
+function hideLoader() {
   $("body").addClass("loaded_hiding");
   $("body").addClass("loaded");
   $("body").removeClass("loaded_hiding");
@@ -421,6 +429,7 @@ function setIdx(e) {
 
 function setBigImg(idx) {
   $("#card__img-big").empty();
+  // showLoaderImg();
 
   $(".card-img__item").removeClass("_active");
 
@@ -429,12 +438,25 @@ function setBigImg(idx) {
   thumbs[idx].classList.add("_active");
 
   $(
-    `<img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}"/>`
+    `<img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}" />`
   ).appendTo("#card__img-big");
 
-  $(".card__img-caption").text(`${imgsSrc[idx]["caption"]}} `);
+  $(".card__img-caption").text(`${imgsSrc[idx]["caption"]}`);
   if (imgsSrc[idx]["src"]["attr"])
     $(`<p>${imgsSrc[idx]["src"]["attr"]}<p/>`).appendTo(".card__img-caption");
+}
+
+function showLoaderImg() {
+  $(`<div class="loader-img-container">
+              <div class="preloader">
+              </div>
+            </div>`).appendTo("#card__img-big");
+}
+
+function hideLoaderImg() {
+  $(".loader-img-container").addClass("loaded_hiding");
+  $(".loader-img-container").addClass("loaded");
+  $(".loader-img-container").removeClass("loaded_hiding");
 }
 
 function setFulscreen() {
@@ -450,6 +472,7 @@ function removeFullscreen() {
   $("#set-fullscreen").show();
   $("#close-fullscreen").hide();
 }
+
 // Triconobunus horridus
 // Mischonyx parvus
 // Giljarovia rossica

@@ -318,7 +318,7 @@ function UnifyTaxonNames() {
 
 function UnifyCitations() {
   jsonFromApi["citations"].forEach((x) => {
-    if (x.citation_object_type === "TaxonName") {
+    if (x.citation_object_type != "AssertedDistribution") {
       const el = unifiedJson[x.citation_object_id];
       if (el) {
         el["pages"] = x.pages;
@@ -426,7 +426,7 @@ function AddValid() {
 
 function MapCitationObjIdToCitation() {
   jsonFromApi["citations"].forEach((x) => {
-    if (x.citation_object_type === "TaxonName") {
+    if (x.citation_object_type != "AssertedDistribution") {
       const key = x.citation_object_id;
       citationMap[key] = x;
     }
@@ -989,17 +989,18 @@ function Debug() {
 
   LoadedJson();
 
-  for (x of jsonFromApi["depictions"]) {
-    if (jsonFromApi["depictions"]["depiction_object_id"] == 327462)
-      console.log(x);
-  }
+  // for (x of jsonFromApi["citations"]) {
+  //   if (x["citation_object_id"] == 327785) console.log(x);
+  // }
 
-  // Object.entries(unifiedJson).forEach((x) => {
-  //   key = x[0];
-  //   value = x[1];
-  //   if (value["cached"] === "Pyatan insperatum") console.log(value);
-  // });
+  Object.entries(unifiedJson).forEach((x) => {
+    key = x[0];
+    value = x[1];
+    if (value["cached"] === "Bristoweia") console.log(value);
+  });
 }
 
 // SaveJsonForDebug();
 // Debug();
+
+// 327785;
