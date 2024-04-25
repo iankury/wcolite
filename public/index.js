@@ -323,7 +323,6 @@ let imgsSrc = {};
 
 function displayCard() {
   $("#card__imgs").empty();
-  $("#card__img-big").empty();
   $("#data-card__img-fullscreen").hide();
 
   let node;
@@ -375,6 +374,9 @@ function displayCard() {
     $("#children_container").html(tempChildren);
   }
 
+  console.log(node);
+  console.log(node.depictions);
+
   if (node.depictions) {
     if (node.depictions.length) {
       $(".card__img-container").show();
@@ -410,7 +412,6 @@ function displayCard() {
 }
 
 function setIdx(e) {
-  console.log("click");
   const $el = $(".card-img-big")[0];
 
   let curIdx = Number($el.getAttribute("data-id"));
@@ -428,8 +429,7 @@ function setIdx(e) {
 }
 
 function setBigImg(idx) {
-  $("#card__img-big").empty();
-  // showLoaderImg();
+  $("#card__img-big .card-img-big").remove();
 
   $(".card-img__item").removeClass("_active");
 
@@ -438,25 +438,12 @@ function setBigImg(idx) {
   thumbs[idx].classList.add("_active");
 
   $(
-    `<img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}" />`
+    `<img src=${imgsSrc[idx]["src"]["medium"]} class="card-img-big" data-id="${idx}" />`
   ).appendTo("#card__img-big");
 
   $(".card__img-caption").text(`${imgsSrc[idx]["caption"]}`);
   if (imgsSrc[idx]["src"]["attr"])
     $(`<p>${imgsSrc[idx]["src"]["attr"]}<p/>`).appendTo(".card__img-caption");
-}
-
-function showLoaderImg() {
-  $(`<div class="loader-img-container">
-              <div class="preloader">
-              </div>
-            </div>`).appendTo("#card__img-big");
-}
-
-function hideLoaderImg() {
-  $(".loader-img-container").addClass("loaded_hiding");
-  $(".loader-img-container").addClass("loaded");
-  $(".loader-img-container").removeClass("loaded_hiding");
 }
 
 function setFulscreen() {

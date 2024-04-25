@@ -372,15 +372,23 @@ function UnifyDepictions() {
 
       imgId = x["image_id"];
 
-      el["depictions"].push({
-        caption: x["caption"],
-        src: imgs[imgId],
-      });
-      if (id == 327462) {
-        console.log(unifiedJson[id]);
-      }
+      depictionEl = { caption: x["caption"], src: imgs[imgId] };
+
+      el["depictions"].push(depictionEl);
+
+      AddDepictionToParent(depictionEl, el["parent_id"]);
     }
   }
+}
+
+function AddDepictionToParent(el, parentId) {
+  if (!unifiedJson[parentId]["depictions"])
+    unifiedJson[parentId]["depictions"] = [];
+
+  unifiedJson[parentId]["depictions"].push(el);
+
+  if (unifiedJson[parentId]["parent_id"])
+    AddDepictionToParent(el, unifiedJson[parentId]["parent_id"]);
 }
 
 function Unify() {
@@ -751,6 +759,14 @@ function AddChildren() {
       }
       node.children_ids.push(key);
       node.children_names.push(value["cached_html"]);
+
+      // if (!node["depictions"]) node["depictions"] = [];
+
+      // if (value["depictions"]) {
+      //   value.depictions.forEach((el) => {
+      //     node["depictions"].push(el);
+      //   });
+      // }
     }
   });
   Object.values(unifiedJson).forEach((x) => {
@@ -763,6 +779,7 @@ function AddChildren() {
 
 function BuildTree(u) {
   const node = unifiedJson[u];
+
   if (!node) return null;
   let speciesCount = node.rank == "species" ? 1 : 0;
   const ans = {
@@ -993,14 +1010,12 @@ function Debug() {
   //   if (x["citation_object_id"] == 327785) console.log(x);
   // }
 
-  Object.entries(unifiedJson).forEach((x) => {
-    key = x[0];
-    value = x[1];
-    if (value["cached"] === "Bristoweia") console.log(value);
-  });
+  // Object.entries(unifiedJson).forEach((x) => {
+  //   key = x[0];
+  //   value = x[1];
+  //   if (key == 761006) console.log(value);
+  // });
 }
 
 // SaveJsonForDebug();
 // Debug();
-
-// 327785;

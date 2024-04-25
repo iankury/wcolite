@@ -571,35 +571,6 @@ body._dark-mode .card__img-container{
   height: 100%;
 }
 
-.loader-img-container{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  transition: 0.2s;
-}
-
-.loader-img-container .preloader{
-  opacity: 0.3;
-  
-}
-
-.loader-img-container.loaded_hiding{
-  opacity: 0;
-  transition: 0.2s;
-}
-
-.loader-img-container.loaded {
-  display: none;
-}
-
-
 body._dark-mode svg {
   fill: #fff;
 }
@@ -614,6 +585,7 @@ body._dark-mode svg {
   position: relative;
   display: flex;
   justify-content: center;
+  padding: 0px 30px;
 }
 
 #card__img-big img{
@@ -636,6 +608,8 @@ body._dark-mode svg {
   border: 2px solid transparent;
   cursor: pointer;
   object-fit: cover;
+
+  height: 100px;
 }
 
 #card__imgs img._active {
@@ -679,12 +653,12 @@ body._dark-mode #card__imgs img:hover {
   transition: 0.2s;
   opacity: 0.7;
   fill: #393e46;
-  right: 50px;
+  right: 15px;
 
   transition: 0.2s;
   height: 25px;
   width: 25px;
-  z-index: 10001;
+  z-index: 1;
 }
 
 body._dark-mode .card__img-container svg.img-arrow{
@@ -692,7 +666,7 @@ body._dark-mode .card__img-container svg.img-arrow{
 }
 
 .card__img-container svg.arrow-left{
-  left: 50px;
+  left: 15px;
 }
 
 .card__img-container svg.img-arrow:hover{
@@ -705,27 +679,6 @@ body._dark-mode .card__img-container svg.img-arrow{
   height: 100%;
   position: relative;
 }
-
-#img-fullscreen-close {
-  position: absolute;
-  top: 0px;
-  right: -50px;
-  fill: #fff;
-  cursor: pointer;
-  transition: 0.2s;
-  opacity: 0.7;
-}
-
-#img-fullscreen-close:hover{
-  opacity: 1;
-}
-
-#img-fullscreen-close svg {
-  height: 30px;
-  width: 30px;
-  
-}
-
 
 
 .img-fullscreen img{
