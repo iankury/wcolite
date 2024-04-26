@@ -3,8 +3,8 @@ const Chart = (mode = "normal") => {
   wheight = window.innerHeight;
   const mb = wheight > wwidth;
   const treeFontSize = 0.0013 * wheight;
-  // dx = wheight / (mb ? 500 : 340);
-  // dy = wwidth / (mb ? 100 : 50);
+  dx = wheight / (mb ? 500 : 440);
+  dy = wwidth / (mb ? 40 : 140);
   dy = 15;
   dx = 2;
 

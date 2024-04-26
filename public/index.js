@@ -341,9 +341,6 @@ function displayCard() {
     );
   else $("#lsid_div").html("Coming soon...");
 
-  if (node.asserted_distributions) {
-    console.log(node.asserted_distributions);
-  }
   logonymyText = "";
 
   node.protonyms.sort((a, b) => {
@@ -374,9 +371,6 @@ function displayCard() {
     $("#children_container").html(tempChildren);
   }
 
-  console.log(node);
-  console.log(node.depictions);
-
   if (node.depictions) {
     if (node.depictions.length) {
       $(".card__img-container").show();
@@ -385,9 +379,9 @@ function displayCard() {
       let i = 0;
       for (img of node.depictions) {
         i == 0 ? (cls = "card-img__item _active") : (cls = "card-img__item");
-        $(`<img src=${img.src.thumb} class="${cls}" data-id="${i}"/>`).appendTo(
-          "#card__imgs"
-        );
+        $(
+          `<img src=${img.src.thumb} class="${cls} slider__item" data-id="${i}"/>`
+        ).appendTo("#card__imgs");
 
         i++;
       }
@@ -413,7 +407,6 @@ function displayCard() {
 
 function setIdx(e) {
   const $el = $(".card-img-big")[0];
-
   let curIdx = Number($el.getAttribute("data-id"));
 
   const lastIdx = imgsSrc.length - 1;
@@ -424,8 +417,18 @@ function setIdx(e) {
     curIdx--;
     if (curIdx < 0) curIdx = lastIdx;
   }
-
   setBigImg(curIdx);
+}
+
+function checkBordersSlider() {
+  $(".img-arrow").removeClass("_blocked");
+
+  const $el = $(".card-img-big")[0];
+  let curIdx = Number($el.getAttribute("data-id"));
+  const lastIdx = imgsSrc.length - 1;
+
+  if (curIdx == lastIdx) $(".arrow-right").addClass("_blocked");
+  if (curIdx == 0) $(".arrow-left").addClass("_blocked");
 }
 
 function setBigImg(idx) {
@@ -437,17 +440,32 @@ function setBigImg(idx) {
 
   thumbs[idx].classList.add("_active");
 
-  $(
-    `<img src=${imgsSrc[idx]["src"]["medium"]} class="card-img-big" data-id="${idx}" />`
-  ).appendTo("#card__img-big");
+  $(".slider-wrapper").animate(
+    { scrollLeft: $(thumbs[idx]).position().left },
+    400
+  );
+
+  $(".card__img-container").hasClass("_full-screen")
+    ? (html = `<img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}" />`)
+    : (html = `<img src=${imgsSrc[idx]["src"]["medium"]} class="card-img-big" data-id="${idx}" />`);
+
+  $(html).appendTo("#card__img-big");
 
   $(".card__img-caption").text(`${imgsSrc[idx]["caption"]}`);
   if (imgsSrc[idx]["src"]["attr"])
     $(`<p>${imgsSrc[idx]["src"]["attr"]}<p/>`).appendTo(".card__img-caption");
+
+  checkBordersSlider();
 }
 
 function setFulscreen() {
   $(".card__img-container").addClass("_full-screen");
+
+  const $el = $(".card-img-big")[0];
+  let curIdx = Number($el.getAttribute("data-id"));
+
+  setBigImg(curIdx);
+
   $("#set-fullscreen").hide();
   $("#close-fullscreen").show();
 

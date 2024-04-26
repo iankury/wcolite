@@ -26,7 +26,7 @@ const fetchQueue = [
   "tags",
   "images",
   "depictions",
-  "asserted_distributions",
+  // "asserted_distributions",
 ];
 
 const secret = fs.readFileSync("secret.txt").toString();
@@ -329,16 +329,16 @@ function UnifyCitations() {
   });
 }
 
-function UnifyAssertedDistributions() {
-  for (x of jsonFromApi["asserted_distributions"]) {
-    const id = x["otu"]["taxon_name_id"];
-    if (unifiedJson[id]) {
-      const el = unifiedJson[id];
-      if (!el["asserted_distributions"]) el["asserted_distributions"] = [];
-      else el["asserted_distributions"].push(x["geographic_area"]);
-    }
-  }
-}
+// function UnifyAssertedDistributions() {
+//   for (x of jsonFromApi["asserted_distributions"]) {
+//     const id = x["otu"]["taxon_name_id"];
+//     if (unifiedJson[id]) {
+//       const el = unifiedJson[id];
+//       if (!el["asserted_distributions"]) el["asserted_distributions"] = [];
+//       else el["asserted_distributions"].push(x["geographic_area"]);
+//     }
+//   }
+// }
 
 function mapOfImages() {
   imgs = new Map();
@@ -394,7 +394,6 @@ function AddDepictionToParent(el, parentId) {
 function Unify() {
   UnifyTaxonNames();
   UnifyCitations();
-  UnifyAssertedDistributions();
   UnifyDepictions();
 }
 

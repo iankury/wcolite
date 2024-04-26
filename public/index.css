@@ -519,19 +519,27 @@ body._dark-mode #children_container p:hover {
 .data-card__row {
   display: flex;
   overflow: hidden;
+  width: 100%;
+  gap: 15px;
+}
+
+.data-card__column{
+  flex: 0 0 calc(50% - 15px);
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
 }
 
 .card__img-container {
   background-color: #fff;
-  margin:15px 15px 15px 0px;
   border-radius: 5px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-  min-width: 50%;
+  width: 100%;
   position: relative;
-  flex: 1 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  align-self: flex-start;
 }
 
 body._dark-mode .card__img-container{
@@ -568,7 +576,7 @@ body._dark-mode .card__img-container{
 }
 
 .card__img-container._full-screen #card__img-big{
-  height: 100%;
+  height: calc(100% - 150px);
 }
 
 body._dark-mode svg {
@@ -578,55 +586,50 @@ body._dark-mode svg {
 
 #card__img-big{
   position: relative;
-  height: 400px;
-  width: auto;
+  height: 300px;
+
   overflow: hidden;
   margin-bottom: 10px;
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 0px 30px;
+  
+
 }
 
 #card__img-big img{
   height: 100%;
+  max-width: 100%;
   width: auto;
 }
 
 .card__img-caption{
   padding: 10px;
+  font-size: 12px;
 }
 
 #card__imgs{
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
-
 }
 
 #card__imgs img {
-  border: 2px solid transparent;
   cursor: pointer;
   object-fit: cover;
-
-  height: 100px;
+  height: 80px;
+  transition: 0.2s;
 }
 
 #card__imgs img._active {
-  border: 2px solid #222222;
+  transform: scale(1.1);
+  /* border: 2px solid #222222; */
 }
 
 #card__imgs img:hover{
-  border: 2px solid #222222;
+  /* border: 2px solid #222222; */
+  transform: scale(1.1);
 }
 
-body._dark-mode #card__imgs img._active {
-  border: 2px solid #fff;
-}
-
-body._dark-mode #card__imgs img:hover {
-  border: 2px solid #fff;
-}
 
 #data-card__img-fullscreen{
   position: fixed;
@@ -654,11 +657,17 @@ body._dark-mode #card__imgs img:hover {
   opacity: 0.7;
   fill: #393e46;
   right: 15px;
+  user-select: none;
 
   transition: 0.2s;
   height: 25px;
   width: 25px;
   z-index: 1;
+}
+
+.card__img-container svg.img-arrow._blocked{
+  opacity: 0.2;
+  pointer-events: none;
 }
 
 body._dark-mode .card__img-container svg.img-arrow{
@@ -674,46 +683,13 @@ body._dark-mode .card__img-container svg.img-arrow{
 }
 
 
-.img-fullscreen{
-  width: auto;
-  height: 100%;
-  position: relative;
-}
-
-
-.img-fullscreen img{
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-}
-
-.img-fullscreen-caption{
-  margin: 20px 0px;
-  color: #fff;
-  font-size: 25px;
-}
-
-.card__map-container{
-  margin: 15px 0px 15px 15px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-  min-width: 50%;
-  background-color: #fff;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  display: none;
-}
 
 .data-card__info{
-  flex: 1 0;
   background-color: #fff;
-  margin: 15px 0px;
   /* padding: 30px; */
   border-radius: 5px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .data-card__info .qlink{
@@ -724,8 +700,6 @@ body._dark-mode .card__img-container svg.img-arrow{
 .qlink._valid{
   display: flex;
 }
-
-
 
 
 
@@ -745,8 +719,7 @@ body._dark-mode .data-card__info{
 
 .data-card__info-label{
   font-family: Rbold;
-  min-width: 150px !important;
-  margin-right: 15px;
+  margin-bottom: 10px;
 }
 
 .LSID a{
@@ -756,17 +729,16 @@ body._dark-mode .LSID a {
   color: #B5E92F;
 }
 
-.card__info-row{
-  display: flex;
-  margin: 30px 0px;
+.card__info-row{ 
   position: relative;
-  padding: 0px 30px;
+  padding:  15px;
+  margin-bottom: 15px;
 }
 
 .card__info-row:after{
   content: "";
   position: absolute;
-  bottom: -15px;
+  bottom: -10px;
   left: 0;
   width: 100%;
   height: 0.5px;
@@ -783,7 +755,6 @@ body._dark-mode .LSID a {
 
 
 .qlink._valid{
-
   cursor: pointer;
   /* text-decoration: underline; */
 }
@@ -810,19 +781,20 @@ body._dark-mode .card__info-row:after{
 
 .data-card__references{
   background-color: #fff;
-    margin: 15px 0px;
-    
-    border-radius: 5px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+  width: 100%;
+ 
 }
 
 .data-card__references-label{
-  padding: 30px;
+  padding:  20px;
 }
 
 #references li{
   position: relative;
-  padding: 15px 30px;
+  padding: 15px 20px;
 }
 
 #references li:after {
@@ -1093,6 +1065,12 @@ body._dark-mode .help-content__item span {
 
 
 @media (max-width: 1100px) {
+  .data-card__references{
+    order: 1;
+  }
+  .card__img-container {
+    order: 2;
+  }
 
   #data-card__container,
   #data-table__container,
@@ -1323,6 +1301,11 @@ body._dark-mode .help-content__item span {
       flex: 1 1 auto;
       
     }
+
+
+    .data-card__row {
+      flex-direction: column;
+    }
 }
 
 @media (max-width: 770px){
@@ -1371,3 +1354,67 @@ body._dark-mode .help-content__item span {
     margin-bottom: 15px;
   }
 }
+
+
+
+
+/* -------------------- SLIDER */
+
+.slider-wrapper{
+  position: relative;
+  width: 100%;
+  height: 100px;
+  overflow-x: auto;
+  display: inline-block;
+
+}
+
+#card__imgs{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.slider-wrapper::-webkit-scrollbar {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  z-index: 110;
+  width: 100%;
+
+  border-radius: 30px;
+}
+
+.slider-wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+
+.slider-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(31, 146, 91, 1);
+  border-radius: 30px;
+  transition: 0.2s;
+
+  cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.slider-wrapper::-webkit-scrollbar-thumb:active{
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+body._dark-mode .slider-wrapper::-webkit-scrollbar{
+  background-color: #393e46;
+}
+body._dark-mode .slider-wrapper::-webkit-scrollbar-thumb {
+  background-color: #A6E011;
+}
+
+ /* Siphonophorae Eschscholtz */
