@@ -601,6 +601,7 @@ body._dark-mode svg {
   height: 100%;
   max-width: 100%;
   width: auto;
+  object-fit: contain;
 }
 
 .card__img-caption{
@@ -615,7 +616,7 @@ body._dark-mode svg {
 
 #card__imgs img {
   cursor: pointer;
-  object-fit: cover;
+  object-fit: contain;
   height: 80px;
   transition: 0.2s;
 }
@@ -663,6 +664,19 @@ body._dark-mode svg {
   height: 25px;
   width: 25px;
   z-index: 1;
+  
+}
+.card__img-container svg{
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  height: 25px;
+    width: 25px;
+}
+
+body._dark-mode .card__img-container svg{
+  background-color: #222222;
+  fill:#fff;
 }
 
 .card__img-container svg.img-arrow._blocked{
@@ -1417,4 +1431,23 @@ body._dark-mode .slider-wrapper::-webkit-scrollbar-thumb {
   background-color: #A6E011;
 }
 
- /* Siphonophorae Eschscholtz */
+
+.loader-img-container{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+
+  display: none;
+}
+
+.loader-img-container._hiding{
+  opacity: 0;
+}

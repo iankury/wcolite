@@ -162,7 +162,9 @@ body._dark-mode .preloader{
 }
 
 /* HTML: <div class="loader"></div> */
-.preloader {
+
+
+.preloader, .loader-img {
   width: 35px;
   aspect-ratio: 1;
   --_g: no-repeat radial-gradient(farthest-side, #1F925B 94%, #0000);
