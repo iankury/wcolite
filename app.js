@@ -533,13 +533,14 @@ function AddLogonymy() {
   let familyGroupOriginalFormMap = {};
   let familyGroupOriginalFormMapInverted = {};
   jsonFromApi["taxon_name_relationships"].forEach((x) => {
+    if(x["subject_status_tag"] == "type species by original designation of") x["subject_status_tag"] = "type species by original designation"
     const relationshipId = x["id"];
     const subjectId = x["subject_taxon_name_id"];
     const objectId = x["object_taxon_name_id"];
     const subjectTag = x["subject_status_tag"];
     if (subjectTag) {
       const tagType = ResolveTagType(subjectTag);
-      if (tagType == "type species") {
+      if (tagType == "type species") {      
         const speciesObj = unifiedJson[subjectId];
         const genusObj = unifiedJson[objectId];
         if (speciesObj && genusObj) {
@@ -549,6 +550,7 @@ function AddLogonymy() {
           genusObj["type_species"] =
             genusObj["type_species"].charAt(0).toUpperCase() +
             genusObj["type_species"].slice(1);
+            
         }
       } else if (tagType == "family-group name original form") {
         unifiedJson[objectId]["type"] = "Aponym";
@@ -583,7 +585,7 @@ function AddLogonymy() {
         x.aponyms.push({ id: x["id"], msg: formattedAponym });
         originalFormId = familyGroupOriginalFormMap[x["id"]];
         if (originalFormId) {
-          if (!x["protonyms"]) x["protonyms"] = [];
+          if (!x["protonyms"]) x["protonyms"] = [];  
           x["protonyms"].push(makeProtonymObject(unifiedJson[originalFormId]));
         }
       }
@@ -693,6 +695,7 @@ function AddLogonymy() {
   Object.values(unifiedJson).forEach((x) => {
     x["references"] = Array.from(x["references"]).sort();
   });
+
 }
 
 function AddParentHtml() {
@@ -1035,7 +1038,6 @@ function BuildSecretList() {
     }
   }
 
-  console.log(onlyCountries)
   sortedCountries = Object.entries(countries);
 
   // Sort by count, decreasing, and secondarily by endemic count
@@ -1103,12 +1105,15 @@ function Debug() {
   //   if (x["citation_object_id"] == 327785) console.log(x);
   // }
 
-  // Object.entries(unifiedJson).forEach((x) => {
-  //   key = x[0];
-  //   value = x[1];
-  //   if (key == 761006) console.log(value);
-  // });
+  Object.entries(unifiedJson).forEach((x) => {
+    key = x[0];
+    value = x[1];
+    if (value["cached"] == "Shearogovea") console.log(value);
+  });
 }
 
  // SaveJsonForDebug();
  // Debug();
+
+
+ // Shearogovea
