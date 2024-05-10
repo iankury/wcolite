@@ -8,7 +8,7 @@ function Initialize() {
 
 const homeComputer =
   process.env.COMPUTERNAME == "PINHATA" ||
-  process.env.COMPUTERNAME == "MARIAKURY";
+  process.env.COMPUTERNAME == "TURBOTYULYA";
 const express = require("express"),
   app = express();
 const fs = require("fs");
@@ -344,6 +344,7 @@ function mapOfImages() {
   imgs = new Map();
 
   for (x of jsonFromApi["images"]) {
+    
     imgs[x["id"]] = {
       original: x["original"],
       medium: x["medium"],
@@ -372,7 +373,7 @@ function UnifyDepictions() {
 
       imgId = x["image_id"];
 
-      depictionEl = { caption: x["caption"], src: imgs[imgId] };
+      depictionEl = { caption: x["caption"], src: imgs[imgId], date: x["updated_at"]};
 
       el["depictions"].push(depictionEl);
 
@@ -938,8 +939,14 @@ function BuildSecretList() {
     }
   }
 
+  let onlyCountries = JSON.parse(JSON.stringify(countries));;
+  let taxaGroupedByTagCountries = {}
+
+
+  // zlist---------------
   for ([k, v] of Object.entries(taxaGroupedByTag)) {
     processedTag = k;
+
     if (k.includes("-")) processedTag = k.split("-")[0];
     if (processedTag in countries) {
       countries[processedTag]["count"] += v.length;
@@ -952,7 +959,85 @@ function BuildSecretList() {
     }
   }
 
+
+
+  // zcount------------
+
+  for ([k, v] of Object.entries(taxaGroupedByTag)){
+    if(k.includes("BR-") || k.includes("BRA")){
+      if(!taxaGroupedByTagCountries["BR"]){
+        taxaGroupedByTagCountries["BR"] = new Set()
+        v.forEach(el =>{taxaGroupedByTagCountries["BR"].add(el)})  
+      }
+      else{
+        v.forEach(el =>{taxaGroupedByTagCountries["BR"].add(el)})
+      }
+    }
+    else if(k.includes("US-")){
+      if(!taxaGroupedByTagCountries["US"]){
+        taxaGroupedByTagCountries["US"] = new Set()
+        v.forEach(el =>{taxaGroupedByTagCountries["US"].add(el)})  
+      }
+      else{
+        v.forEach(el =>{taxaGroupedByTagCountries["US"].add(el)})
+      }
+    }
+    else if(k.includes("VE-")){
+      if(!taxaGroupedByTagCountries["VE"]){
+        taxaGroupedByTagCountries["VE"] = new Set()
+        v.forEach(el =>{taxaGroupedByTagCountries["VE"].add(el)})  
+      }
+      else{
+        v.forEach(el =>{taxaGroupedByTagCountries["VE"].add(el)})
+      }
+    }
+    else if(k.includes("ID-")){
+      if(!taxaGroupedByTagCountries["ID"]){
+        taxaGroupedByTagCountries["ID"] = new Set()
+        v.forEach(el =>{taxaGroupedByTagCountries["ID"].add(el)})  
+      }
+      else{
+        v.forEach(el =>{taxaGroupedByTagCountries["ID"].add(el)})
+      }
+    }
+    else{
+      if(!taxaGroupedByTagCountries[k]) {
+        taxaGroupedByTagCountries[k] = new Set()
+        v.forEach(el =>{ taxaGroupedByTagCountries[k].add(el)})
+      } else{
+        v.forEach(el =>{taxaGroupedByTagCountries[k].add(el)})
+      }
+    }
+  }
+
+  for ([k, v] of Object.entries(taxaGroupedByTagCountries)){
+    
+    let array = [];
+    v.forEach(el => array.push(el));
+    taxaGroupedByTagCountries[k] = [...array]
+  }
+
+
+  for ([k, v] of Object.entries(taxaGroupedByTagCountries)) {
+    processedTag = k;
+ 
+
+    if (k.includes("-")) processedTag = k.split("-")[0];
+    if (processedTag in onlyCountries) {
+      
+      onlyCountries[processedTag]["count"] += v.length;
+      onlyCountries[processedTag]["endemicCount"] += v.filter((vx) => {
+        if (tagCountPerTaxon[vx] == 1) {
+          return true;
+        }
+        return false;
+      }).length;
+    }
+  }
+
+  console.log(onlyCountries)
   sortedCountries = Object.entries(countries);
+
   // Sort by count, decreasing, and secondarily by endemic count
   sortedCountries.sort((a, b) => {
     if (a[1].count < b[1].count) return 1;
@@ -962,8 +1047,17 @@ function BuildSecretList() {
     return 0;
   });
 
+  sortedOnlyCountries = Object.entries(onlyCountries);
+  sortedOnlyCountries.sort((a,b) =>{
+    if (a[1].count < b[1].count) return 1;
+    if (a[1].count > b[1].count) return -1;
+    if (a[1].endemicCount < b[1].endemicCount) return 1;
+    if (a[1].endemicCount > b[1].endemicCount) return -1;
+    return 0;
+  })
+
   secretCountToWrite.push("<h1>Ranking by country</h1>");
-  for (x of sortedCountries) {
+  for (x of sortedOnlyCountries) {
     secretCountToWrite.push(
       `<p>${x[1]["name"]} ${x[0]}: ${x[1]["count"]} (${x[1]["endemicCount"]} **)</p>`
     );
@@ -1016,5 +1110,5 @@ function Debug() {
   // });
 }
 
-// SaveJsonForDebug();
-// Debug();
+ // SaveJsonForDebug();
+ // Debug();

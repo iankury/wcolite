@@ -373,6 +373,8 @@ function displayCard() {
 
   if (node.depictions) {
     if (node.depictions.length) {
+      node.depictions.reverse()
+
       $(".card__img-container").show();
       imgsSrc = node.depictions;
 
@@ -386,7 +388,6 @@ function displayCard() {
         i++;
       }
 
-      // loadedImgs();
 
       setBigImg(0);
       $("#card__imgs").on("click", (e) => {
@@ -405,32 +406,6 @@ function displayCard() {
   } else {
     $(".card__img-container").hide();
   }
-}
-
-function loadedImgs() {
-  Promise.all(
-    Array.from($(".card-img__item")).map((img) => {
-      if (img.complete)
-        if (img.naturalHeight !== 0) return Promise.resolve();
-        else return Promise.reject(img);
-      return new Promise((resolve, reject) => {
-        img.addEventListener("load", resolve);
-        img.addEventListener("error", () => reject(img));
-      });
-    })
-  ).then(
-    () => {
-      $(".loader-img-container").addClass("_hiding");
-      setTimeout(() => {
-        $(".loader-img-container").hide();
-        $(".loader-img-container").removeClass("_hiding");
-      }, 1000);
-    },
-    (badImg) => {
-      console.log("some image failed to load, others may still be loading");
-      console.log("first broken image:", badImg);
-    }
-  );
 }
 
 function setIdx(e) {
