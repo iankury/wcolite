@@ -773,10 +773,15 @@ body._dark-mode .LSID a {
   /* text-decoration: underline; */
 }
 
+#logonymy .qlink{
+  cursor: pointer;
+  text-decoration: underline
+}
 
 .qlink._valid:hover{
   color:#1F925B;
 }
+
 
 #logonymy li span{
   position: relative;
