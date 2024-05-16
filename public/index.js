@@ -636,6 +636,7 @@ function sendMessage(pageNum) {
   if (lastQuery) {
     const encodedMessage = encode(`${pageNum}${lastQuery.toLowerCase()}`);
     $.get(`/q/${encodedMessage}`, receiveData);
+    
   }
 }
 
@@ -645,6 +646,7 @@ function receiveData(x) {
   else {
     displayData();
     addLinkHandler();
+    console.log(data)
   }
 }
 

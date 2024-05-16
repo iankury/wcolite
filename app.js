@@ -1108,12 +1108,20 @@ function Debug() {
   Object.entries(unifiedJson).forEach((x) => {
     key = x[0];
     value = x[1];
-    if (value["cached"] == "Shearogovea") console.log(value);
+    // if (value["cached"] == "Liops") console.log(value);
+    // if (value["cached"] == "Mochlus") console.log(value);
+    // if (value["cached"] == "Oxyrhina") console.log(value);
+     if (value["cached"] == "Leiobuninae") console.log(value);
   });
 }
 
  // SaveJsonForDebug();
- // Debug();
+// Debug();
 
 
- // Shearogovea
+ // Defeitos
+ // Liops
+ // Mochlus
+
+ // Oxyrhina
+ // Belemnus

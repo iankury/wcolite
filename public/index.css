@@ -524,7 +524,7 @@ body._dark-mode #children_container p:hover {
 }
 
 .data-card__column{
-  flex: 0 0 calc(50% - 15px);
+  flex: 0 0 calc(50% - 15px) !important;
   display: flex;
   flex-direction: column;
   gap: 15px; 
@@ -587,21 +587,19 @@ body._dark-mode svg {
 #card__img-big{
   position: relative;
   height: 300px;
-
   overflow: hidden;
   margin-bottom: 10px;
   position: relative;
   display: flex;
   justify-content: center;
-  
-
 }
 
-#card__img-big img{
+#card__img-big img{ 
   height: 100%;
   max-width: 100%;
   width: auto;
   object-fit: contain;
+  align-self: center;
 }
 
 .card__img-caption{
@@ -802,18 +800,27 @@ body._dark-mode .card__info-row:after{
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-  align-self: flex-start;
   width: 100%;
- 
+  overflow: hidden;
+  position: relative;
 }
 
 .data-card__references-label{
   padding:  20px;
 }
 
+#references ul{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+}
+
 #references li{
   position: relative;
   padding: 15px 20px;
+  max-width: 100%;
+  word-break: break-all;
 }
 
 #references li:after {
