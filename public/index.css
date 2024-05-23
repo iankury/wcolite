@@ -820,7 +820,7 @@ body._dark-mode .card__info-row:after{
   position: relative;
   padding: 15px 20px;
   max-width: 100%;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 #references li:after {

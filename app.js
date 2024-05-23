@@ -77,6 +77,8 @@ const supportedRelationships = [
   "homonym",
   "unnecessary replacement for",
   "family-group name original form",
+  "invalid due to homonymy of type genus",
+  "Incertae sedis"
 ];
 
 function ShortRefFromObj(x, type) {
@@ -534,6 +536,7 @@ function AddLogonymy() {
   let familyGroupOriginalFormMapInverted = {};
   jsonFromApi["taxon_name_relationships"].forEach((x) => {
     if(x["subject_status_tag"] == "type species by original designation of") x["subject_status_tag"] = "type species by original designation"
+    if(x["subject_status_tag"] == "type species by original monotypy of") x["subject_status_tag"] = "type species by original monotypy"
     const relationshipId = x["id"];
     const subjectId = x["subject_taxon_name_id"];
     const objectId = x["object_taxon_name_id"];
@@ -1101,22 +1104,23 @@ function Debug() {
 
   LoadedJson();
 
-  // for (x of jsonFromApi["citations"]) {
-  //   if (x["citation_object_id"] == 327785) console.log(x);
+  // for (x of jsonFromApi["taxon_name_relationships"]) {
+  //   if(x["object_name"] == "Sarasinicinae Roewer, 1923") console.log(x);
+  //   if(x["subject_name"] == "Sarasinicinae Roewer, 1923") console.log(x);
   // }
 
-  Object.entries(unifiedJson).forEach((x) => {
-    key = x[0];
-    value = x[1];
-    // if (value["cached"] == "Liops") console.log(value);
-    // if (value["cached"] == "Mochlus") console.log(value);
-    // if (value["cached"] == "Oxyrhina") console.log(value);
-     if (value["cached"] == "Leiobuninae") console.log(value);
-  });
+  // Object.entries(unifiedJson).forEach((x) => {
+  //   key = x[0];
+  //   value = x[1];
+  //   // if (value["cached"] == "Liops") console.log(value);
+  //   // if (value["cached"] == "Mochlus") console.log(value);
+  //   // if (value["cached"] == "Oxyrhina") console.log(value);
+  //    if (value["cached"] == "Sarasinicinae") console.log(value);
+  // });
 }
 
- // SaveJsonForDebug();
-// Debug();
+// SaveJsonForDebug();
+ // Debug();
 
 
  // Defeitos
