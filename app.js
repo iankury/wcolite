@@ -77,8 +77,8 @@ const supportedRelationships = [
   "homonym",
   "unnecessary replacement for",
   "family-group name original form",
-  "invalid due to homonymy of type genus",
-  "Incertae sedis"
+  "incertae sedis",
+  // "invalid due to homonymy of type genus",
 ];
 
 function ShortRefFromObj(x, type) {
@@ -455,6 +455,7 @@ function AddRelationship(
   relationshipId,
   subjectTag
 ) {
+   
   const juniorObj = unifiedJson[subjectId];
   const seniorObj = unifiedJson[objectId];
   let citationObj = citationMap[relationshipId] || { pages: 0 };
@@ -485,9 +486,13 @@ function AddRelationship(
         interpolation = "is an ";
         receiver = seniorObj;
         break;
+      case "incertae sedis":
+        interpolation = "";
+        receiver = juniorObj;
+        break;
     }
     if (!receiver["valid"])
-      receiver = unifiedJson[receiver["valid_taxon_name_id"]];
+        receiver = unifiedJson[receiver["valid_taxon_name_id"]];
     const msg = `<span class=\"relationship_tag\">relationship</span> ${NameAuthorYearLink(
       juniorObj
     )} ${interpolation}${subjectTag} ${NameAuthorYearLink(
@@ -499,6 +504,7 @@ function AddRelationship(
       year: receiver.year,
     });
     receiver["references"].add(ref);
+    if(tagType == "incertae sedis") console.log(receiver)
   }
 }
 
