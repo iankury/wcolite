@@ -78,6 +78,7 @@ const supportedRelationships = [
   "unnecessary replacement for",
   "family-group name original form",
   "incertae sedis",
+  "nomen nudum: no type fixation after 1930",
   // "invalid due to homonymy of type genus",
 ];
 
@@ -490,6 +491,9 @@ function AddRelationship(
         interpolation = "";
         receiver = juniorObj;
         break;
+      case "nomen nudum: no type fixation after 1930":
+        interpolation = "";
+        receiver = juniorObj;
     }
     if (!receiver["valid"])
         receiver = unifiedJson[receiver["valid_taxon_name_id"]];
@@ -543,6 +547,7 @@ function AddLogonymy() {
   jsonFromApi["taxon_name_relationships"].forEach((x) => {
     if(x["subject_status_tag"] == "type species by original designation of") x["subject_status_tag"] = "type species by original designation"
     if(x["subject_status_tag"] == "type species by original monotypy of") x["subject_status_tag"] = "type species by original monotypy"
+    if(x["subject_status_tag"] == "type species by subsequent designation of") x["subject_status_tag"] = "type species by subsequent designation"
     const relationshipId = x["id"];
     const subjectId = x["subject_taxon_name_id"];
     const objectId = x["object_taxon_name_id"];
@@ -1126,7 +1131,7 @@ function Debug() {
 }
 
 // SaveJsonForDebug();
- // Debug();
+// Debug();
 
 
  // Defeitos
