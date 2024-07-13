@@ -334,7 +334,7 @@ function displayCard() {
 
   $(".data-card__title").html(`${node.cached_html} ${node.author_year}`);
   $(".data-card__path").html(bullets(node.ancestree));
-  $("#valid_species_count").html(node.speciesCount);
+  $("#valid_species_count").html(node.species_count);
   if (node.lsid_url)
     $("#lsid_div").html(
       `<a target="_blank" class="brown_link" href="${node.lsid_url}">${node.lsid_urn}</a>`
@@ -350,15 +350,16 @@ function displayCard() {
   for (protonym of node.protonyms) {
     logonymyText +=
       (protonym["type_species"]
-        ? indented(bullets([protonym["msg"]]))
-        : bullets([protonym["msg"]])) +
+        ? indented(bullets([protonym["message"]]))
+      : bullets([protonym["message"]])) +
       indented(
         bullets(protonym["aponyms"]) + bullets(protonym["relationships"])
       );
   }
   $("#logonymy").html(logonymyText + bullets(node["unmatched"]));
   $("#references").html(bullets(node.references));
-  if (!node.children_names) $("#children_container").html("None");
+  if (!node.children_names || node.children_names.length == 0)
+    $("#children_container").html("None");
   else {
     let tempChildren = "";
     const last = node.children_names.length - 1;
@@ -382,7 +383,7 @@ function displayCard() {
       for (img of node.depictions) {
         i == 0 ? (cls = "card-img__item _active") : (cls = "card-img__item");
         $(
-          `<img src=${img.src.thumb} class="${cls} slider__item" data-id="${i}" loading="lazy"/>`
+          `<img src=${img.source.thumb} class="${cls} slider__item" data-id="${i}" loading="lazy"/>`
         ).appendTo("#card__imgs");
 
         i++;
@@ -449,14 +450,14 @@ function setBigImg(idx) {
   );
 
   $(".card__img-container").hasClass("_full-screen")
-    ? (html = `<img src=${imgsSrc[idx]["src"]["original"]} class="card-img-big" data-id="${idx}" />`)
-    : (html = `<img src=${imgsSrc[idx]["src"]["medium"]} class="card-img-big" data-id="${idx}" />`);
+    ? (html = `<img src=${imgsSrc[idx]["source"]["original"]} class="card-img-big" data-id="${idx}" />`)
+    : (html = `<img src=${imgsSrc[idx]["source"]["medium"]} class="card-img-big" data-id="${idx}" />`);
 
   $(html).appendTo("#card__img-big");
 
   $(".card__img-caption").text(`${imgsSrc[idx]["caption"]}`);
-  if (imgsSrc[idx]["src"]["attr"])
-    $(`<p>${imgsSrc[idx]["src"]["attr"]}<p/>`).appendTo(".card__img-caption");
+  if (imgsSrc[idx]["source"]["attribution"])
+    $(`<p>${imgsSrc[idx]["source"]["attribution"]}<p/>`).appendTo(".card__img-caption");
 
   checkBordersSlider();
 }
@@ -646,7 +647,6 @@ function receiveData(x) {
   else {
     displayData();
     addLinkHandler();
-    console.log(data)
   }
 }
 
