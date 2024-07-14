@@ -334,7 +334,10 @@ function displayCard() {
 
   $(".data-card__title").html(`${node.cached_html} ${node.author_year}`);
   $(".data-card__path").html(bullets(node.ancestree));
-  $("#valid_species_count").html(node.species_count);
+  validSpeciesCount = node.species_count;
+  if (validSpeciesCount == 0 && !JSON.stringify(node.ancestree).includes("Opiliones"))
+    validSpeciesCount = "n/a";
+  $("#valid_species_count").html(validSpeciesCount);
   if (node.lsid_url)
     $("#lsid_div").html(
       `<a target="_blank" class="brown_link" href="${node.lsid_url}">${node.lsid_urn}</a>`
