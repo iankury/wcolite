@@ -16,9 +16,15 @@ async function Initialize() {
       else res.status(201).send(Process(decodedQuery));
     }
   });
-  app.get("/t", (req, res) =>
-    res.status(201).send(jsonTree)
-  );
+  app.get("/t", (req, res) => {
+    res.status(201).send(jsonTree);
+  });
+  app.get(update_data_pwd, (req, res) => {
+    ReadUnifiedJson();
+    ReadTree();
+    BuildQueryToNode();
+    res.sendFile("public/updating.html", { root: __dirname });
+  });
 }
 
 const express = require("express"),
@@ -41,6 +47,7 @@ const StripAuthorship = (s) => s.replace(/[,()&]/g, "");
 const IsDigitCode = (n) => n >= "0".charCodeAt(0) && n <= "9".charCodeAt(0);
 
 const db_pwd = fs.readFileSync("db_pwd.txt").toString();
+const update_data_pwd = fs.readFileSync("update_data_pwd.txt").toString();
 const mysqlConnection = GetMysqlConnection();
 const mysqlQuery = util.promisify(mysqlConnection.query).bind(mysqlConnection);
 
@@ -152,6 +159,8 @@ function GetMysqlConnection() {
 
 async function ReadUnifiedJson() {
   const jsonArray = await mysqlQuery("SELECT * FROM unified_json;");
+
+  unifiedJson = {}
   for (jsonObject of jsonArray) {
     if (!jsonObject["id"]) continue;
 
