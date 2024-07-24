@@ -527,7 +527,7 @@ function displayTable() {
 }
 
 function addLinkToValid(x) {
-  const processedName = `<p class="qlink _valid">${x.validName}</p>`;
+  const processedName = `<p class="qlink _valid">${x.valid_name}</p>`;
   if (x.type == "Combination") {
     return `${x.original_html}<div class ="valid-name-table">(protonym: ${processedName})</div>`;
   }
@@ -535,7 +535,7 @@ function addLinkToValid(x) {
 }
 
 // function addValidName(x) {
-//   const processedName = `<p class="qlink _valid">${x.validName}</p>`;
+//   const processedName = `<p class="qlink _valid">${x.valid_name}</p>`;
 
 //   return `${x.original_html}<div class ="valid-name-table">(valid: ${processedName})</div>`;
 // }
