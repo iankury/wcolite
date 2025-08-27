@@ -52,7 +52,7 @@
     </div>     
 
     <div class="content-variable">
-      <div class="content-variable__sidebar">
+      <div class="content-variable__sidebar"> 
         <div class="dark-mode-button">
               <svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <title>dark-mode</title>
@@ -64,7 +64,7 @@
       </div>
       <div class="variable__container">
         <section class="variable__first-screen">
-          
+          <div class="cite-btn">How to cite</div>
           <div class="about">
             <h2 class="about__title">WCO-Lite: a fresh look at the harvest-spiders (Arachnida: Opiliones)</h2>
             <p>
@@ -84,7 +84,7 @@
         <section class="cite">
           <div class="cite__title section__title">How to cite</div>
           <div class="cite__text">Kury, A.B., Mendes, A.C., Cardoso, L., Kury, M.S., Granado, A.de A. Giribet, G., Cruz-López J.A., Longhorn, S.J., Medrano, M., Oliveira, A.B.R. de, Kury, I.S. & Souza-Kury, M.A. (2023) World Catalogue of Opiliones. WCO-Lite version 2.6. Online at: <a href="https://wcolite.com/">https://wcolite.com/</a>.</div>
-          <div class="cite__text"> <span>Short citation:</span> Kury, A.B. et al. (2020 onward). WCO-Lite. Available at wcolite.com. (Accessed on [date])</div>
+          <div class="cite__text"> <b>Short citation:</b> Kury, A.B. et al. (2020 onward). WCO-Lite. Available at wcolite.com. (Accessed on [date])</div>
         </section>
 
         <!-- <section class="modules">
@@ -523,9 +523,9 @@
         </div>       
       </footer>
     </div>
-    <div class="popup-about">
-      <div class="popup-about__container">
-        <div class="popup-about__close">
+    <div id="popup-about" class="popup">
+      <div class="popup__container">
+        <div class="popup__close">
           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             x="0px" y="0px" viewBox="0 0 340.8 340.8" style="enable-background:new 0 0 340.8 340.8;"
             xml:space="preserve">
@@ -536,8 +536,8 @@
                 s4.4-0.8,6-2.4c3.2-3.2,3.2-8.8,0-12L182.4,169.6z" />
           </svg>
         </div>
-        <div class="popup-aboout__title">What is WCO-Lite</div>
-        <div class="popup-about__text">
+        <div class="popup__title">What is WCO-Lite</div>
+        <div class="popup__text">
           <p>The WCO project started with an annotated catalogue of the New World Laniatores (Kury 2003). Then it has
             been expanded
             to include all suborders of harvestmen and all Earth realms, instead of only the Nearctic and Neotropical,
@@ -610,6 +610,26 @@
       </div>
     </div>
 
+    <div id="popup-cite" class="popup">
+      <div class="popup__container">
+        <div class="popup__close">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 340.8 340.8" style="enable-background:new 0 0 340.8 340.8;"
+            xml:space="preserve">
+            <path d="M170.4,0C76.4,0,0,76.4,0,170.4s76.4,170.4,170.4,170.4s170.4-76.4,170.4-170.4S264.4,0,170.4,0z M170.4,323.6
+                c-84.4,0-153.2-68.8-153.2-153.2S86,17.2,170.4,17.2S323.6,86,323.6,170.4S254.8,323.6,170.4,323.6z" />
+            <path d="M182.4,169.6l50-50c3.2-3.2,3.2-8.8,0-12c-3.2-3.2-8.8-3.2-12,0l-50,50l-50-50c-3.2-3.2-8.8-3.2-12,0
+                c-3.2,3.2-3.2,8.8,0,12l50,50l-50,49.6c-3.2,3.2-3.2,8.8,0,12c1.6,1.6,4,2.4,6,2.4s4.4-0.8,6-2.4l50-50l50,50c1.6,1.6,4,2.4,6,2.4
+                s4.4-0.8,6-2.4c3.2-3.2,3.2-8.8,0-12L182.4,169.6z" />
+          </svg>
+        </div>
+        <div class="popup__title">How to cite</div>
+        <div class="popup__text cite__text">
+          <p>Kury, A.B., Mendes, A.C., Cardoso, L., Kury, M.S., Granado, A.de A. Giribet, G., Cruz-López J.A., Longhorn, S.J., Medrano, M., Oliveira, A.B.R. de, Kury, I.S. & Souza-Kury, M.A. (2023) World Catalogue of Opiliones. WCO-Lite version 2.6. Online at: <span>https://wcolite.com/</span>.</p>
+          <p><b>Short citation:</b> Kury, A.B. et al. (2020 onward). WCO-Lite. Available at wcolite.com. (Accessed on [date])</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="jquery.js"></script>

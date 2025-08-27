@@ -16,13 +16,25 @@ $(document).ready(() => {
 });
 
 $(".about__button").click(() => {
-  $(".popup-about").addClass("_active");
+  $("#popup-about").addClass("_active");
   $("body").addClass("_lock");
 });
 
-$(".popup-about__close").click(() => {
-  $(".popup-about").removeClass("_active");
+$(".cite-btn").click(() => {
+  $("#popup-cite").addClass("_active");
+  $("body").addClass("_lock");
+});
+
+$(".popup__close").click(() => {
+  $(".popup").removeClass("_active");
   $("body").removeClass("_lock");
+});
+
+$(".popup").click(function (e) {
+  if (e.target === this) {
+    $(this).removeClass("_active");
+    $("body").removeClass("_lock");
+  }
 });
 
 $(".arrow._down").click(() => {
