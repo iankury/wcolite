@@ -665,7 +665,7 @@ function displayData() {
   if (mode == "table") displayTable();
   else if (mode == "browse");
   else if (mode == "card") {
-    if (data.resultList[0].valid) displayCard();
+	if (data.resultList.some((r) => r.valid)) displayCard();
     else {
       setMode("table");
       updateRadio();
