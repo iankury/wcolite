@@ -17,14 +17,33 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      text-align: center;
+      padding: 0 5vw;
     }
     p {
       font-family: sans-serif;
-      font-size: 10vw;
+      font-size: 6vw;
     }
   </style>
 </head>
 <body>
-  <p>Updating</p>
+  <p id="status">Atualizando...</p>
+  <script>
+    function poll() {
+      fetch("/update-status")
+        .then((res) => res.json())
+        .then((data) => {
+          var el = document.getElementById("status");
+          el.textContent = data.status;
+          if (data.status !== "Concluído" && data.status.indexOf("Erro") !== 0) {
+            setTimeout(poll, 1000);
+          }
+        })
+        .catch(() => {
+          setTimeout(poll, 1000);
+        });
+    }
+    poll();
+  </script>
 </body>
 </html>
