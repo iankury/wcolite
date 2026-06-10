@@ -19,11 +19,26 @@ async function Initialize() {
   app.get("/t", (req, res) => {
     res.status(201).send(jsonTree);
   });
-  app.get(update_data_pwd, (req, res) => {
-    ReadUnifiedJson();
-    ReadTree();
-    BuildQueryToNode();
+  app.get("/update-status", (req, res) => {
+    res.status(200).json({ status: updateStatus });
+  });
+  app.get(update_data_pwd, async (req, res) => {
     res.sendFile("public/updating.html", { root: __dirname });
+    if (updateInProgress) return;
+    updateInProgress = true;
+    try {
+      updateStatus = "Lendo dados do MySQL...";
+      await ReadUnifiedJson();
+      updateStatus = "Lendo a árvore...";
+      await ReadTree();
+      updateStatus = "Construindo índice de busca...";
+      BuildQueryToNode();
+      updateStatus = "Concluído";
+    } catch (e) {
+      updateStatus = "Erro: " + e.message;
+    } finally {
+      updateInProgress = false;
+    }
   });
 }
 
@@ -56,6 +71,8 @@ const cache = new LRU(10000);
 let unifiedJson = {};
 let jsonTree;
 let queryToNode = {};
+let updateStatus = "Pronto";
+let updateInProgress = false;
 
 const kPageSize = 15;
 
@@ -129,6 +146,7 @@ function AddToTable(key, x) {
 }
 
 function BuildQueryToNode() {
+  queryToNode = {};
   Object.values(unifiedJson).forEach((x) => {
     if (x["cached"] && x["author_year"]) {
       const sciname = x["cached"].toLowerCase();
